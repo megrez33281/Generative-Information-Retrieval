@@ -1,0 +1,3240 @@
+query_id,query
+1,"Connection to peer handler.
+
+        We send bgp open message to peer and initialize related attributes."
+2,"Permanently delete user. User should be softly deleted first.
+        Zendesk API `Reference <https://developer.zendesk.com/rest_api/docs/core/users#permanently-delete-user>`__.
+
+        Note: This endpoint does not support multiple ids or list of `User` objects.
+
+        :param user: User object or id.
+        :return: User object with `permanently_deleted` status"
+3,Start a new paragraph.
+4,"r""""""
+        Draw a random value from this Parameter's distribution.
+
+        If ``value`` was not initialised with a ``scipy.stats`` object, then
+        the scalar/ndarray value is returned.
+
+        Parameters
+        ----------
+        random_state : None, int or RandomState, optional
+            random seed
+
+        Returns
+        -------
+        ndarray :
+            of size ``self.shape``, a random draw from the distribution, or
+            ``self.value`` if not initialised with a ``scipy.stats`` object.
+
+        Note
+        ----
+        Random draws are *clipped* to the bounds, and so it is up to the user
+        to input a sensible sampling distribution!"
+5,"Fetches the FeinCMS Page object that the path points to.
+
+        Override this to deal with different types of object from Page."
+6,"Monitor the queue for items, and ask the handler to deal with them.
+
+        This method runs on a separate, internal thread.
+        The thread will terminate if it sees a sentinel object in the queue."
+7,"Attempts to load tasks from a given path.
+        :param path: Path to tasks.
+        :return: None."
+8,"Return enforced ascii string
+        éko=>ko"
+9,"Do extra work to fetch a complete set of attributes for this entity.
+
+        For more information, see `Bugzilla #1235377
+        <https://bugzilla.redhat.com/show_bug.cgi?id=1235377>`_."
+10,insert object before index
+11,"(Copied from implementation in
+        https://github.com/greenelab/adage-server/blob/master/adage/analyze/api.py)
+
+        Handle an incoming POST as a GET to work around URI length limitations"
+12,"The default encryption function for storing emails in the database. This
+    uses AES and the encryption key defined in the applications configuration.
+
+    :param email:
+        The email address."
+13,"Get list of free object defined in database with name
+        matching the specified filter
+
+        :param argin: The filter
+        :type: tango.DevString
+        :return: Object name list
+        :rtype: tango.DevVarStringArray"
+14,"Reads a value from the configuration file.
+
+    Args:
+      keypath: str
+        Specifies the key for which the value is desired.  It can be a
+        hierarchical path.  Example: ""section1.subsection.key1""
+      configfile: str
+        Path to the config file to read.  Defaults to None, in which case
+        the application's default config file is used.
+
+    Returns:
+      value from configuration file"
+15,"Preprocess the excel sheet
+
+    :param filepath: filepath of the excel data
+    :return: df: pandas dataframe with excel data
+    :rtype: pandas.DataFrame"
+16,"Connect ``slot`` to this singal.
+
+        Args:
+            slot (callable): Callable object wich accepts keyword arguments.
+
+        Raises:
+            InvalidSlot: If ``slot`` doesn't accept keyword arguments."
+17,"Enable/Disable snmp
+        :param snmp_parameters:
+        :return:
+        :rtype: SnmpContextManager"
+18,"The amount due for this invoice. Takes into account all entities in the invoice.
+        Can be < 0 if the invoice was overpaid."
+19,Get an instance of Api Neighbor services facade.
+20,Populate variables used to build popovers.
+21,"Return genetic data when all alleles called on same line.
+
+    Returns an array containing one item, a tuple of five items:
+        (string) chromosome
+        (string) start position (1-based)
+        (array of strings) matching dbSNP entries
+        (string) reference allele sequence
+        (array of strings) the genome's allele sequences"
+22,Collect the available wlan interfaces.
+23,Ensures :attr:`subject` is equal to *other*.
+24,"Returns the absolutely absolute path. Calls os.(
+        normpath, normcase, expandvars and expanduser)."
+25,"Saves the current model state to a Python object. It also
+        saves to disk but does not return the checkpoint path.
+
+        Returns:
+            Object holding checkpoint data."
+26,"Determine the beam in pixels at the given location in pixel coordinates.
+
+        Parameters
+        ----------
+        x , y : float
+            The pixel coordinates at which the beam is determined.
+
+        Returns
+        -------
+        beam : :class:`AegeanTools.fits_image.Beam`
+            A beam object, with a/b/pa in pixel coordinates."
+27,"Report any information as a Prometheus metric.
+        This will create a `Gauge` with the initial value of 1.
+
+        The easiest way to use it is:
+
+            metrics = PrometheusMetrics(app)
+            metrics.info(
+                'app_info', 'Application info',
+                version='1.0', major=1, minor=0
+            )
+
+        If the order of the labels matters:
+
+            metrics = PrometheusMetrics(app)
+            metrics.info(
+                'app_info', 'Application info',
+                ('version', 'major', 'minor'),
+                ('1.0', 1, 0)
+            )
+
+        :param name: the name of the metric
+        :param description: the description of the metric
+        :param labelnames: the names of the labels
+        :param labelvalues: the values of the labels
+        :param labels: the names and values of the labels
+        :return: the newly created `Gauge` metric"
+28,"Validate a single loan result record against the filters
+
+        Parameters
+        ----------
+        loan : dict
+            A single loan note record
+
+        Returns
+        -------
+        boolean
+            True or raises FilterValidationError
+
+        Raises
+        ------
+        FilterValidationError
+            If the loan does not match the filter criteria"
+29,"Create new metadata tags for the specified resource ids.
+
+        :type resource_ids: list
+        :param resource_ids: List of strings
+
+        :type tags: dict
+        :param tags: A dictionary containing the name/value pairs.
+                     If you want to create only a tag name, the
+                     value for that tag should be the empty string
+                     (e.g. '')."
+30,Load metadata about a bioassembly (such as chains and their transformations) from a structure file.
+31,r'[a-zA-Z_][a-zA-Z0-9_]*
+32,"Load java messages that can be ignored pickle file into a dict structure g_ok_java_messages.
+
+    :return: none"
+33,"Load in the template file, and run through the parser
+        :return none:"
+34,"Build Betfair JSON-RPC payload.
+
+    :param str base: Betfair base (""Sports"" or ""Account"")
+    :param str method: Betfair endpoint
+    :param dict params: Request parameters"
+35,"Read tf.Records and prepare them for ingestion by dual_net.
+
+    See `read_tf_records` for parameter documentation.
+
+    Returns a dict of tensors (see return value of batch_parse_tf_example)"
+36,Return all countries with a level set
+37,"List  available layers, or infos on a given layer"
+38,"Split *sql* into single statements.
+
+    :param sql: A string containing one or more SQL statements.
+    :param encoding: The encoding of the statement (optional).
+    :returns: A list of strings."
+39,"Check for get_data and get_affine method in an object
+
+    Parameters
+    ----------
+    obj: any object
+        Tested object
+
+    Returns
+    -------
+    is_img: boolean
+        True if get_data and get_affine methods are present and callable,
+        False otherwise."
+40,"Factory to make an abstract dist object.
+
+    Preconditions: Either an editable req with a source_dir, or satisfied_by or
+    a wheel link, or a non-editable req with a source_dir.
+
+    :return: A concrete DistAbstraction."
+41,"Attempts to serialize values from a dictionary, 
+    skipping private attrs.
+
+    :param d: A dictionary of params to serialize, 
+            typically cls.__dict__"
+42,"Mark points determined to be foothills as globbed, so that they are not included in
+        future searches. Also searches neighboring points to foothill points to determine
+        if they should also be considered foothills.
+
+        Args:
+            q_data: Quantized data
+            marked: Marked
+            bin_num: Current bin being searched
+            bin_lower: Next bin being searched
+            centers: dictionary of local maxima considered to be object centers
+            foothills: List of foothill points being removed."
+43,"Build a list of dicts, by calling :meth:`Node.dump`
+        on each item.
+
+        Each keyword provides a function that extracts a value
+        from a Node.
+
+        Examples:
+
+            >>> c = Collection([Scalar(1), Scalar(2)])
+            >>> c.dump(x2=Q*2, m1=Q-1).val()
+            [{'x2': 2, 'm1': 0}, {'x2': 4, 'm1': 1}]"
+44,"Write a type 2 segment to an SPK file.
+
+    http://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/cspice/spkw02_c.html
+
+    :param handle: Handle of an SPK file open for writing.
+    :type handle: int
+    :param body: Body code for ephemeris object.
+    :type body: int
+    :param center: Body code for the center of motion of the body.
+    :type center: int
+    :param inframe: The reference frame of the states.
+    :type inframe: str
+    :param first: First valid time for which states can be computed.
+    :type first: float
+    :param last: Last valid time for which states can be computed.
+    :type last: float
+    :param segid: Segment identifier.
+    :type segid: str
+    :param intlen: Length of time covered by logical record.
+    :type intlen: float
+    :param n: Number of coefficient sets.
+    :type n: int
+    :param polydg: Chebyshev polynomial degree.
+    :type polydg: int
+    :param cdata: Array of Chebyshev coefficients.
+    :type cdata: Array of floats
+    :param btime: Begin time of first logical record.
+    :type btime: float"
+45,"Collects values from the knowledge base.
+
+    Args:
+      knowledge_base (KnowledgeBase): to fill with preprocessing information.
+
+    Raises:
+      PreProcessFail: if the preprocessing fails."
+46,"Searches for the parameter on the estimator that contains the array of
+        alphas that was used to produce the error selection. If it cannot find
+        the parameter then a YellowbrickValueError is raised."
+47,"Clone
+
+	Clone is used to clone one or many DBs/Tables from one host to another
+
+	Args:
+		source (dict): Data specifying the source instance
+			A dictionary with the following possible elements: host, port, user,
+			password, timeout, ssl (see rethinkdb python api)
+
+		destination (dict): Date specifying the destination instance
+			Works the same as source, but for the destination host
+
+		dbs (list|dict): A list of DBs
+			This is the list of Databases that will be cloned. If the value is a
+			list, all tables in each DB with be cloned. If the value is a dict,
+			it is assumed the keys are the names of the DBs, and the value (a
+			list) is the tables that will be cloned from each DB
+
+		verbose (bool): Optional verbose flag
+			If true the function will print out details about what it's doing.
+			Defaults to False
+
+	Returns:
+		bool: Returns true on success
+
+	Raises:
+		ValueError: If any arguments are incorrect a ValueError will be raised"
+48,Subclasses may override this method.
+49,Telnet login: can be username/password or just password.
+50,Return all GOs which match the user regex pattern.
+51,"Get text or value from element based on locator with optional parameters.
+
+        :param locator: element identifier
+        :param params: (optional) locator parameters
+        :param timeout: (optional) time to wait for text (default: None)
+        :param visible: should element be visible before getting text (default: True)
+        :return: element text, value or empty string"
+52,":param val: value of python type int or None
+        :param typeObj: instance of Integer
+        :param vldMask: None vldMask is resolved from val,
+            if is 0 value is invalidated
+            if is 1 value has to be valid"
+53,"NOTE: use refresh() instead of this, if you are just needing to refresh the alerts list
+        Gets raw xml (cap) from the Alerts feed, throws it into the parser
+        and ends up with a list of alerts object, which it stores to self._alerts"
+54,:return: A pyrsistent field reflecting this attribute and its type model.
+55,"Calls the `perform()` method defined by subclasses and stores the
+        result in a `results` deque.
+
+        After the result is determined the `results` deque is analyzed to see
+        if the `passing` flag should be updated.  If the check was considered
+        passing and the previous `self.fall` number of checks failed, the check
+        is updated to not be passing.  If the check was not passing and the
+        previous `self.rise` number of checks passed, the check is updated to
+        be considered passing."
+56,Returns SplitGenerators.
+57,Continuously checks for iLO firmware update to complete.
+58,"Run or aggregate a query fragment
+
+        Concat the fragment to any stored fragments. If they form a complete
+        query, run it and return the result. If not, store them and return
+        None."
+59,"Renders a javascript snippet suitable for use as a mapbox-gl fill paint entry
+
+        Returns:
+            A dict that can be converted to a mapbox-gl javascript paint snippet"
+60,"Compute the L1-norm (Manhattan) distance between two points.
+
+    The distance is rounded to the closest integer, for compatibility
+    with the TSPLIB convention.
+
+    The two points are located on coordinates (x1,y1) and (x2,y2),
+    sent as parameters"
+61,datagrid的默认模板
+62,Close the socket and context
+63,"Returns an instance of the runner capable of running Lambda functions locally
+
+        :return samcli.commands.local.lib.local_lambda.LocalLambdaRunner: Runner configured to run Lambda functions
+            locally"
+64,"Finds optimal angles with the quantum variational eigensolver method.
+
+        Stored VQE result
+
+        :returns: A tuple of the beta angles and the gamma angles for the optimal solution."
+65,Update the count number using the estimation of the unset ratio
+66,"Google Analytics tracking template tag.
+
+    Renders Javascript code to track page visits.  You must supply
+    your website property ID (as a string) in the
+    ``GOOGLE_ANALYTICS_JS_PROPERTY_ID`` setting."
+67,"Reserve and deploys the vagrant boxes.
+
+        Args:
+            force_deploy (bool): True iff new machines should be started"
+68,"print the name = values of any passed in variables
+
+    this prints out the passed in name, the value, and the file:line where the v()
+    method was called so you can easily find it and remove it later
+
+    example -- 
+        foo = 1
+        bar = [1, 2, 3]
+        out.v(foo, bar)
+        """""" prints out:
+        foo = 1
+
+        bar = 
+        [
+            0: 1,
+            1: 2,
+            2: 3
+        ]
+
+        (/file:line)
+        """"""
+
+    *args -- list -- the variables you want to see pretty printed for humans"
+69,Format the return value of a query for humans
+70,"Create and return a new reftrack node
+
+        :returns: the new reftrack node
+        :rtype: str
+        :raises: None"
+71,"Returns a numeric snowflake pretending to be created at the given date.
+
+    When using as the lower end of a range, use time_snowflake(high=False) - 1 to be inclusive, high=True to be exclusive
+    When using as the higher end of a range, use time_snowflake(high=True) + 1 to be inclusive, high=False to be exclusive
+
+    Parameters
+    -----------
+    datetime_obj
+        A timezone-naive datetime object representing UTC time.
+    high: :class:`bool`
+        Whether or not to set the lower 22 bit to high or low."
+72,"Loads the match config into internal data structures, which prepares us to later
+        launch bot processes and start the match.
+
+        This is an alternative to the load_config method; they accomplish the same thing."
+73,"Returns a list of tuples (baseGlyph, transform) of nested component."
+74,Before call strategy that logs to some logger the attempt.
+75,"Get the Miller index of a plane from a list of site coordinates.
+
+    A minimum of 3 sets of coordinates are required. If more than 3 sets of
+    coordinates are given, the best plane that minimises the distance to all
+    points will be calculated.
+
+    Args:
+        lattice (list or Lattice): A 3x3 lattice matrix or `Lattice` object (for
+            example obtained from Structure.lattice).
+        coords (iterable): A list or numpy array of coordinates. Can be
+            cartesian or fractional coordinates. If more than three sets of
+            coordinates are provided, the best plane that minimises the
+            distance to all sites will be calculated.
+        coords_are_cartesian (bool, optional): Whether the coordinates are
+            in cartesian space. If using fractional coordinates set to False.
+        round_dp (int, optional): The number of decimal places to round the
+            miller index to.
+        verbose (bool, optional): Whether to print warnings.
+
+    Returns:
+        (tuple): The Miller index."
+76,All elections on an election day.
+77,"r""""""
+        Add a display page to the display.
+
+        :param page:  Page to be added
+        :type display_id: ``DisplayPage``
+
+        :param default: True if this page should be shown upon initialization.
+            
+        :type name: ``bool``"
+78,"Shutdown the client and all of its managed resources:
+
+        - the workers
+        - the scheduler threads
+
+        :return: None"
+79,"Gets IP address of the default docker machine
+    Returns None if no docker-machine executable
+    in the PATH and if there no Docker machine
+    with name default present"
+80,"Randomly generate a symbolic integral dataset sample.
+
+  Given an input expression, produce the indefinite integral.
+
+  Args:
+    vlist: Variable list. List of chars that can be used in the expression.
+    ops: List of ExprOp instances. The allowed operators for the expression.
+    min_depth: Expression trees will not have a smaller depth than this. 0 means
+        there is just a variable. 1 means there is one operation.
+    max_depth: Expression trees will not have a larger depth than this. To make
+        all trees have the same depth, set this equal to `min_depth`.
+    functions: Defines special functions. A dict mapping human readable string
+        names, like ""log"", ""exp"", ""sin"", ""cos"", etc., to single chars. Each
+        function gets a unique token, like ""L"" for ""log"".
+
+  Returns:
+    sample: String representation of the input. Will be of the form
+        'var:expression'.
+    target: String representation of the solution."
+81,"Helper method to set a redirect response.
+
+        Args:
+            url (:obj:`str`): URL to redirect to
+            status (:obj:`str`, optional): Status code of the response"
+82,"Filter in the 'proerty' context
+
+        :parameter str feature: name of the feature (optional)
+        :parameter **kwargs: any other tags to do the filter
+            (except component or context)
+        :return: :class:`phoebe.parameters.parameters.ParameterSet`"
+83,"Iterating all icon dirs, try to find a file called like the node's
+        extension / mime subtype / mime type (in that order).
+        For instance, for an MP3 file (""audio/mpeg""), this would look for:
+        ""mp3.png"" / ""audio/mpeg.png"" / ""audio.png"""
+84,"Add a new table to your account.  The table name must be unique
+        among those associated with the account issuing the request.
+        This request triggers an asynchronous workflow to begin creating
+        the table.  When the workflow is complete, the state of the
+        table will be ACTIVE.
+
+        :type table_name: str
+        :param table_name: The name of the table to create.
+        
+        :type schema: dict
+        :param schema: A Python version of the KeySchema data structure
+            as defined by DynamoDB
+
+        :type provisioned_throughput: dict
+        :param provisioned_throughput: A Python version of the
+            ProvisionedThroughput data structure defined by
+            DynamoDB."
+85,http://www.django-rest-framework.org/topics/3.0-announcement/#using-is_validraise_exceptiontrue
+86,Adds the executable bit to the file at filepath `fp`
+87,"Retrieve the Worker registered under the given name.
+
+		If the given name does not exists in the Worker list, an Exception is raised.
+
+		Parameters
+		----------
+		name: string
+			Name of the Worker to retrieve"
+88,"Run on osd node, writes the bootstrap key if not there yet."
+89,"This function updates the paths in the HMET card file to the new
+    location of the HMET data. This is necessary because the file paths
+    are absolute and will need to be updated if moved.
+
+    Args:
+        hmet_card_file_path(str): Location of the file used for the HMET_ASCII card.
+        new_hmet_data_path(str): Location where the HMET ASCII files are currently.
+
+    Example::
+
+        new_hmet_data_path = ""E:\\GSSHA\\new_hmet_directory""
+        hmet_card_file_path = ""E:\\GSSHA\\hmet_card_file.txt""
+
+        update_hmet_card_file(hmet_card_file_path, new_hmet_data_path)"
+90,"Get a single domain
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt '*' keystoneng.domain_get name=domain1
+        salt '*' keystoneng.domain_get name=b62e76fbeeff4e8fb77073f591cf211e"
+91,"Finds a substring that looks like an assignment.
+
+    :param data: Source to search in.
+    :param varname: Name of the variable for which an assignment should be
+                    found."
+92,"Calculate the powerset of any iterable.
+
+    For a range of integers up to the length of the given list,
+    make all possible combinations and chain them together as one object.
+    From https://docs.python.org/3/library/itertools.html#itertools-recipes"
+93,"Russian strftime, formats date with given format.
+
+    Value is a date (supports datetime.date and datetime.datetime),
+    parameter is a format (string). For explainings about format,
+    see documentation for original strftime:
+    http://docs.python.org/lib/module-time.html
+
+    Examples::
+        {{ some_date|ru_strftime:""%d %B %Y, %A"" }}"
+94,"Get the RDD's current storage level.
+
+        >>> rdd1 = sc.parallelize([1,2])
+        >>> rdd1.getStorageLevel()
+        StorageLevel(False, False, False, False, 1)
+        >>> print(rdd1.getStorageLevel())
+        Serialized 1x Replicated"
+95,"Get data for this channel from frames or NDS
+
+        Parameters
+        ----------
+        channel : `str`, `~gwpy.detector.Channel`
+            the name of the channel to read, or a `Channel` object.
+
+        start : `~gwpy.time.LIGOTimeGPS`, `float`, `str`
+            GPS start time of required data,
+            any input parseable by `~gwpy.time.to_gps` is fine
+
+        end : `~gwpy.time.LIGOTimeGPS`, `float`, `str`
+            GPS end time of required data,
+            any input parseable by `~gwpy.time.to_gps` is fine
+
+        bits : `Bits`, `list`, optional
+            definition of bits for this `StateVector`
+
+        pad : `float`, optional
+            value with which to fill gaps in the source data, only used if
+            gap is not given, or ``gap='pad'`` is given
+
+        dtype : `numpy.dtype`, `str`, `type`, or `dict`
+            numeric data type for returned data, e.g. `numpy.float`, or
+            `dict` of (`channel`, `dtype`) pairs
+
+        nproc : `int`, optional, default: `1`
+            number of parallel processes to use, serial process by
+            default.
+
+        verbose : `bool`, optional
+            print verbose output about NDS progress.
+
+        **kwargs
+            other keyword arguments to pass to either
+            :meth:`.find` (for direct GWF file access) or
+            :meth:`.fetch` for remote NDS2 access
+
+        See Also
+        --------
+        StateVector.fetch
+            for grabbing data from a remote NDS2 server
+        StateVector.find
+            for discovering and reading data from local GWF files"
+96,"Yields N x M rectangular tiles for a region of interest.
+
+    Parameters
+    ----------
+    roi : GeoVector
+        Region of interest
+    num_tiles : tuple
+        Tuple (horizontal_tiles, vertical_tiles)
+
+    Yields
+    ------
+    ~telluric.vectors.GeoVector"
+97,This function makes a tree from folders and files.
+98,Manage the action for the current stat.
+99,"Set key policy condition.
+
+        :param key: set key name."
+100,"Checks to see if commands in list are available using ``which``.
+
+        returns the first available command.
+
+        If a string is passed then that command will be checked for."
+101,Write the first sections file.
+102,Checks if the system is deadlocked running service jobs.
+103,"Translates the value stored in the imported datasource to an
+        appropriate Python object and returns it."
+104,"change internal state, return action"
+105,Generates the report HTML.
+106,"(*Type does NOT consider inherited class)
+        Matcher.mtest(...) will return True if type(...) == expected_type
+        Return: Matcher
+        Raise: matcher_type_error"
+107,Print fatal errors that occurred during validation runs.
+108,Update times for all keys in the layout.
+109,"Do everything needed when a task is closed
+
+        Params:
+            task_name (str): name of the task that is finishing
+            record (logging.LogRecord): log record with all the info
+
+        Returns:
+            None"
+110,"Mutate a sequence by substituting given `alt` at instead of `ref` at the
+    given `position`.
+
+    Parameters
+    ----------
+    sequence : sequence
+        String of amino acids or DNA bases
+
+    offset : int
+        Base 0 offset from start of `sequence`
+
+    ref : sequence or str
+        What do we expect to find at the position?
+
+    alt : sequence or str
+        Alternate sequence to insert"
+111,Convenience function that makes a summary of the cycling data.
+112,decorator factory for retrieval queries from query params
+113,Get an app's directory
+114,"Get aliases of all parameters.
+
+    Parameters
+    ----------
+    infos : list
+        Content of the config header file.
+
+    Returns
+    -------
+    pairs : list
+        List of tuples (param alias, param name)."
+115,"The basic idea is simple: start from a specific point, try to construct
+        functions as much as we can, and maintain a function distribution graph
+        and a call graph simultaneously. Repeat searching until we come to the
+        end that there is no new function to be found.
+        A function should start with:
+            # some addresses that a call exit leads to, or
+            # certain instructions. They are recoreded in SimArch.
+
+        For a better performance, instead of blindly scanning the entire process
+        space, we first try to search for instruction patterns that a function
+        may start with, and start scanning at those positions. Then we try to
+        decode anything that is left."
+116,Dowload repodata.
+117,"Create a new dictionary from two dictionaries by averaging values
+
+    Args:
+        dictin1 (DictUpperBound): First input dictionary
+        dictin2 (DictUpperBound): Second input dictionary
+        dropmissing (bool): Whether to drop keys missing in one dictionary. Defaults to True.
+
+    Returns:
+        Dict: Dictionary with values being average of 2 input dictionaries"
+118,"Gets a ``RelationshipList`` corresponding to the given peer ``Id``.
+
+        arg:    destination_id (osid.id.Id): a peer ``Id``
+        return: (osid.relationship.RelationshipList) - the relationships
+        raise:  NullArgument - ``destination_id`` is ``null``
+        raise:  OperationFailed - unable to complete request
+        raise:  PermissionDenied - authorization failure
+        *compliance: mandatory -- This method must be implemented.*"
+119,Starts streaming the feed using the provided session and feed options.
+120,"Evaluate a model by the given metrics.
+        :param x: ndarray or list of ndarray for local mode.
+                  RDD[Sample] for distributed mode
+        :param y: ndarray or list of ndarray for local mode and would be None for cluster mode.
+        :param batch_size
+        :param is_distributed: run in local mode or distributed mode.
+               NB: if is_distributed=true, x should be RDD[Sample] and y should be None
+        :return:"
+121,"Return all ancestors of specified node.
+
+        The default implementation is to use networkx, but some
+        implementations of the Ontology class may use a database or
+        service backed implementation, for large graphs.
+
+        Arguments
+        ---------
+        node : str
+            identifier for node in ontology
+        reflexive : bool
+            if true, return query node in graph
+        relations : list
+             relation (object property) IDs used to filter
+
+        Returns
+        -------
+        list[str]
+            ancestor node IDs"
+122,"Synchronize local po files with translations on GDocs Spreadsheet.
+        Downloads two csv files, merges them and converts into po files
+        structure. If new msgids appeared in po files, this method creates
+        new ods with appended content and sends it to GDocs."
+123,"Accepts a message pack string or a file object, renders said data back to
+    a python dict.
+
+    .. note:
+        This renderer is NOT intended for use in creating sls files by hand,
+        but exists to allow for data backends to serialize the highdata
+        structure in an easily transportable way. This is to allow for more
+        fluid fileserver backends that rely on pure data sources.
+
+    :rtype: A Python data structure"
+124,review_date : REVIEW_DATE DATE
+125,"Utility method to return the default parsers able to parse an object from a file.
+    Note that MultifileObjectParser is not provided in this list, as it is already added in a hardcoded way in
+    RootParser
+    :return:"
+126,Method to pretty print controls.
+127,"r""""""Return all values associated to the given ``key`` property
+        in sequence.
+
+        :param key: The property entity.
+        :type key: :class:`Entity`
+        :return: A sequence of all values associated to the given ``key``
+                 property.  It can be empty if nothing is associated to
+                 the property.
+        :rtype: :class:`~typing.Sequence`\ [:class:`object`]"
+128,"Style is a dict maping key to values.
+        Valid keys are: background, format, alignment, border
+
+        The values for keys are lists of tuples containing (attribute,
+        value) pairs to set on model instances..."
+129,Add a group to the inventory after initialization
+130,"Calculate the batched KL divergence KL(a || b) with a and b Laplace.
+
+  Args:
+    a: instance of a Laplace distribution object.
+    b: instance of a Laplace distribution object.
+    name: (optional) Name to use for created operations.
+      default is ""kl_laplace_laplace"".
+
+  Returns:
+    Batchwise KL(a || b)"
+131,Find the dependencies of the CWL document.
+132,Load the noise texture data into the current texture unit
+133,"List all private images.
+
+        :param string guid: filter based on GUID
+        :param string name: filter based on name
+        :param dict \\*\\*kwargs: response-level options (mask, limit, etc.)"
+134,"Update the password policy for the AWS account.
+
+    .. versionadded:: 2015.8.0
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt myminion boto_iam.update_account_password_policy True"
+135,Restarts an agent when it is cancelled
+136,method updates job record with a new unit_of_work and new state
+137,"Unregister the FilteredImage subclass currently assigned to attr_name.
+
+        If a FilteredImage subclass isn't already registered to filters.
+        `attr_name` NotRegistered will raise."
+138,"Add a teardown websocket function to the Blueprint.
+
+        This is designed to be used as a decorator, and has the same
+        arguments as :meth:`~quart.Quart.teardown_websocket`. It
+        applies only to requests that are routed to an endpoint in
+        this blueprint. An example usage,
+
+        .. code-block:: python
+
+            blueprint = Blueprint(__name__)
+            @blueprint.teardown_websocket
+            def teardown():
+                ..."
+139,"Parameters
+        ----------
+        file_ref: str
+            reference of file.
+            Available references:  'idf', 'epw', 'eio', 'eso', 'mtr', 'mtd', 'mdd', 'err', 'summary_table'
+            See EnergyPlus documentation for more information.
+
+        Returns
+        -------
+        Boolean"
+140,"Calculate the mass of a peptide from its mz and charge.
+
+    :param mz: float, mass to charge ratio (Dalton / charge)
+    :param charge: int, charge state
+
+    :returns: non protonated mass (charge = 0)"
+141,Returns the keyword arguments for instantiating the form.
+142,Combine the pair.
+143,Get a distribute lock
+144,"Fallback to the first available output when the active layout
+        was composed of only one output.
+
+        This allows us to avoid cases where you get stuck with a black sreen
+        on your laptop by switching back to the integrated screen
+        automatically !"
+145,"'home', 'popover', 'get', 'scroll', 'paginate',
+            'sleep', 'git', 'browser', 'bug',
+            'end', 'right', 'wrong', 'save', 'main', 'raw'
+
+        - font support: https://github.com/ryanoasis/nerd-fonts"
+146,"Finalize written chunk
+        :param Downloader self: this
+        :param blobxfer.models.download.Descriptor dd: download descriptor
+        :param blobxfer.models.download.Offsets offsets: offsets"
+147,clears maximum match_key term values
+148,"Fringe matrix in Y
+
+    :param theta: fringe angle, in [rad]
+    :param rho: bend radius, in [m]
+    :return: 2x2 numpy array"
+149,Check if SSH is available on a host.
+150,"Emits the itemTrashed signal, data contained in drag 
+        operation left to be garbage collected"
+151,"Delete an instance.
+
+        This method performs the DeleteInstance operation
+        (see :term:`DSP0200`). See :ref:`WBEM operations` for a list of all
+        methods performing such operations.
+
+        If the operation succeeds, this method returns.
+        Otherwise, this method raises an exception.
+
+        Parameters:
+
+          InstanceName (:class:`~pywbem.CIMInstanceName`):
+            The instance path of the instance to be deleted.
+            If this object does not specify a namespace, the default namespace
+            of the connection is used.
+            Its `host` attribute will be ignored.
+
+          **extra :
+            Additional keyword arguments are passed as additional operation
+            parameters to the WBEM server.
+            Note that :term:`DSP0200` does not define any additional parameters
+            for this operation.
+
+        Raises:
+
+            Exceptions described in :class:`~pywbem.WBEMConnection`."
+152,"Iterate over the subclasses of the class.
+
+        This function is the Python equivalent
+        of the CLIPS class-subclasses command."
+153,"Obtains a generic description of the volume, containing the file system type, index, label and NTFS version.
+        If *with_size* is provided, the volume size is also included."
+154,Setup proxy model filter parameters
+155,A view that allows the user to download a certificate bundle in PEM format.
+156,"Make a sequential palette from the cubehelix system.
+
+    This produces a colormap with linearly-decreasing (or increasing)
+    brightness. That means that information will be preserved if printed to
+    black and white or viewed by someone who is colorblind.  ""cubehelix"" is
+    also availible as a matplotlib-based palette, but this function gives the
+    user more control over the look of the palette and has a different set of
+    defaults.
+
+    Parameters
+    ----------
+    n_colors : int
+        Number of colors in the palette.
+    start : float, 0 <= start <= 3
+        The hue at the start of the helix.
+    rot : float
+        Rotations around the hue wheel over the range of the palette.
+    gamma : float 0 <= gamma
+        Gamma factor to emphasize darker (gamma < 1) or lighter (gamma > 1)
+        colors.
+    hue : float, 0 <= hue <= 1
+        Saturation of the colors.
+    dark : float 0 <= dark <= 1
+        Intensity of the darkest color in the palette.
+    light : float 0 <= light <= 1
+        Intensity of the lightest color in the palette.
+    reverse : bool
+        If True, the palette will go from dark to light.
+    as_cmap : bool
+        If True, return a matplotlib colormap instead of a list of colors.
+
+    Returns
+    -------
+    palette : list or colormap
+
+    References
+    ----------
+    Green, D. A. (2011). ""A colour scheme for the display of astronomical
+    intensity images"". Bulletin of the Astromical Society of India, Vol. 39,
+    p. 289-295."
+157,Attach to OS Window message handler
+158,Asynchronous function that processes queue until None is posted in queue
+159,"Return the attributes values from this DicomFile
+
+        Parameters
+        ----------
+        attributes: str or list of str
+         DICOM field names
+
+        default: str
+         Default value if the attribute does not exist.
+
+        Returns
+        -------
+        Value of the field or list of values."
+160,Add new data fields to this struct instance
+161,"Get if character (or character code point) is contained by any range on
+        this range group.
+
+        :param character: character or unicode code point to look for
+        :type character: str or int
+        :returns: True if character is contained by any range, False otherwise
+        :rtype: bool"
+162,"Use input modality, vocab, and space id for target."
+163,":returns: ``True`` if the node if a descendant of another node given
+            as an argument, else, returns ``False``"
+164,"Helper method to build the url to query to access the object
+        passed as parameter
+
+        :raises TypeError: if the object type is invalid"
+165,Write url_data.name.
+166,"Add a list of Metric ingredients to the query. These can either be
+        Metric objects or strings representing metrics on the shelf.
+
+        The Metric expression will be added to the query's select statement.
+        The metric value is a property of each row of the result.
+
+        :param metrics: Metrics to add to the recipe. Metrics can
+                         either be keys on the ``shelf`` or
+                         Metric objects
+        :type metrics: list"
+167,"Called if a job, before trying to run it, has not the ""waiting"" status,
+        or, after run, if its status was set to ""canceled"""
+168,"Get International HapMap Consortium HapMap Phase II genetic map for Build 37.
+
+        Returns
+        -------
+        dict
+            dict of pandas.DataFrame HapMapII genetic maps if loading was successful, else None"
+169,"Download file from URL
+
+        Manually is not required action. You can send urls instead!
+
+        :param url: target URL
+        :param filename: optional. set custom file name
+        :param chunk_size:
+
+        :return: InputFile"
+170,"Called by the observation code, we are interested in
+        __setitem__"
+171,"发送模板消息
+
+        详情请参考
+        https://mp.weixin.qq.com/wiki?id=mp1445241432&lang=zh_CN
+
+        :param user_id: 用户 ID 。 就是你收到的 `Message` 的 source
+        :param template_id: 模板 ID。在公众平台线上模板库中选用模板获得
+        :param url: 链接地址
+        :param data: 模板消息数据
+        :param mini_program: 跳小程序所需数据, 如：`{'appid': 'appid', 'pagepath': 'index?foo=bar'}`
+        :return: 返回的 JSON 数据包"
+172,"Check whether an option with a given name exists and has been set.
+
+    :param name: the name of the option to check; can be short or long name.
+    :return: true if an option matching the given name exists and it has had
+             it's value set by the user"
+173,"Return a list of all of the agents from a list of statements.
+
+    Only agents that are not None and have a TEXT entry are returned.
+
+    Parameters
+    ----------
+    stmts : list of :py:class:`indra.statements.Statement`
+
+    Returns
+    -------
+    agents : list of :py:class:`indra.statements.Agent`
+        List of agents that appear in the input list of indra statements."
+174,Returns all the applications from the store
+175,"yield file like objects per 'leaf' node in the xml file that exists.
+    This is for not trying to create a record with partial data in case the
+    record was removed in the database."
+176,"Create a new dataset
+
+        :param owner_id: Username of the owner of the new dataset
+        :type owner_id: str
+        :param title: Dataset title (will be used to generate dataset id on
+            creation)
+        :type title: str
+        :param description: Dataset description
+        :type description: str, optional
+        :param summary: Dataset summary markdown
+        :type summary: str, optional
+        :param tags: Dataset tags
+        :type tags: list, optional
+        :param license: Dataset license
+        :type license: {'Public Domain', 'PDDL', 'CC-0', 'CC-BY', 'ODC-BY',
+            'CC-BY-SA', 'ODC-ODbL', 'CC BY-NC', 'CC BY-NC-SA', 'Other'}
+        :param visibility: Dataset visibility
+        :type visibility: {'OPEN', 'PRIVATE'}
+        :param files: File name as dict, source URLs, description and labels()
+        as properties
+        :type files: dict, optional
+            *Description and labels are optional*
+        :returns: Newly created dataset key
+        :rtype: str
+        :raises RestApiException: If a server error occurs
+
+        Examples
+        --------
+        >>> import datadotworld as dw
+        >>> api_client = dw.api_client()
+        >>> url = 'http://www.acme.inc/example.csv'
+        >>> api_client.create_dataset(
+        ...     'username', title='Test dataset', visibility='PRIVATE',
+        ...     license='Public Domain',
+        ...     files={'dataset.csv':{'url': url}})  # doctest: +SKIP"
+177,"First order derivative derivative of loglikelihood wrt r:shape parameter
+
+        :param link_f: latent variables link(f)
+        :type link_f: Nx1 array
+        :param y: data
+        :type y: Nx1 array
+        :param Y_metadata: Y_metadata which is not used in gamma distribution
+        :returns: third derivative of likelihood evaluated at points f
+        :rtype: Nx1 array"
+178,"Backwards compatible version of SERIAL_UDB_EXTRA - F2: Part B
+
+                sue_time                  : Serial UDB Extra Time (uint32_t)
+                sue_pwm_input_1           : Serial UDB Extra PWM Input Channel 1 (int16_t)
+                sue_pwm_input_2           : Serial UDB Extra PWM Input Channel 2 (int16_t)
+                sue_pwm_input_3           : Serial UDB Extra PWM Input Channel 3 (int16_t)
+                sue_pwm_input_4           : Serial UDB Extra PWM Input Channel 4 (int16_t)
+                sue_pwm_input_5           : Serial UDB Extra PWM Input Channel 5 (int16_t)
+                sue_pwm_input_6           : Serial UDB Extra PWM Input Channel 6 (int16_t)
+                sue_pwm_input_7           : Serial UDB Extra PWM Input Channel 7 (int16_t)
+                sue_pwm_input_8           : Serial UDB Extra PWM Input Channel 8 (int16_t)
+                sue_pwm_input_9           : Serial UDB Extra PWM Input Channel 9 (int16_t)
+                sue_pwm_input_10          : Serial UDB Extra PWM Input Channel 10 (int16_t)
+                sue_pwm_output_1          : Serial UDB Extra PWM Output Channel 1 (int16_t)
+                sue_pwm_output_2          : Serial UDB Extra PWM Output Channel 2 (int16_t)
+                sue_pwm_output_3          : Serial UDB Extra PWM Output Channel 3 (int16_t)
+                sue_pwm_output_4          : Serial UDB Extra PWM Output Channel 4 (int16_t)
+                sue_pwm_output_5          : Serial UDB Extra PWM Output Channel 5 (int16_t)
+                sue_pwm_output_6          : Serial UDB Extra PWM Output Channel 6 (int16_t)
+                sue_pwm_output_7          : Serial UDB Extra PWM Output Channel 7 (int16_t)
+                sue_pwm_output_8          : Serial UDB Extra PWM Output Channel 8 (int16_t)
+                sue_pwm_output_9          : Serial UDB Extra PWM Output Channel 9 (int16_t)
+                sue_pwm_output_10         : Serial UDB Extra PWM Output Channel 10 (int16_t)
+                sue_imu_location_x        : Serial UDB Extra IMU Location X (int16_t)
+                sue_imu_location_y        : Serial UDB Extra IMU Location Y (int16_t)
+                sue_imu_location_z        : Serial UDB Extra IMU Location Z (int16_t)
+                sue_flags                 : Serial UDB Extra Status Flags (uint32_t)
+                sue_osc_fails             : Serial UDB Extra Oscillator Failure Count (int16_t)
+                sue_imu_velocity_x        : Serial UDB Extra IMU Velocity X (int16_t)
+                sue_imu_velocity_y        : Serial UDB Extra IMU Velocity Y (int16_t)
+                sue_imu_velocity_z        : Serial UDB Extra IMU Velocity Z (int16_t)
+                sue_waypoint_goal_x        : Serial UDB Extra Current Waypoint Goal X (int16_t)
+                sue_waypoint_goal_y        : Serial UDB Extra Current Waypoint Goal Y (int16_t)
+                sue_waypoint_goal_z        : Serial UDB Extra Current Waypoint Goal Z (int16_t)
+                sue_memory_stack_free        : Serial UDB Extra Stack Memory Free (int16_t)"
+179,"Return the least signifiant bit
+            O(N) in the worst case"
+180,List Users.
+181,Return a list of all the directories on the path.
+182,"r""""""
+        Convert Pauli to a sparse matrix representation (CSR format).
+
+        Order is q_{n-1} .... q_0, i.e., $P_{n-1} \otimes ... P_0$
+
+        Returns:
+            scipy.sparse.csr_matrix: a sparse matrix with CSR format that
+            represnets the pauli."
+183,...
+184,"Called when data first received
+
+        :param data: Received data
+        :param unique_id: Unique id
+        :return: True if error present"
+185,Return a iter consisting of two byte chars from a string.
+186,Auto Generated Code
+187,"This decorator allows for PyMC arguments of various types to be passed to
+    the plotting functions. It identifies the type of object and locates its
+    trace(s), then passes the data to the wrapped plotting function."
+188,"Create item under file system with its path.
+
+        Returns:
+            True if its path does not exist, False otherwise."
+189,Are there unwanted Apple tables?
+190,Returns the default name of the configuration file.
+191,"splits a key in a tuple, one of:
+           ( [ 'N', 'n', '$' ],  0,   bignameid )
+           ( [ 'N', 'n', '$' ],  name  )
+           ( '-',  id )
+           ( '.',  id )
+           ( '.',  id,  tag )
+           ( '.',  id,  tag, value )
+           ( '.',  id,  'H', name  )"
+192,Keep annotaion if it passes potentially modified selection.
+193,"The input is a list of [token, tag]-items.
+        The output is a list of [token, tag, chunk]-items:
+        The/DT nice/JJ fish/NN is/VBZ dead/JJ ./. =>
+        The/DT/B-NP nice/JJ/I-NP fish/NN/I-NP is/VBZ/B-VP dead/JJ/B-ADJP ././O"
+194,"Exports the inputed item to the given Excel worksheet for the
+        given visible columns.
+        
+        :param      sheet | <xlwt.WorkSheet>
+                    cols  | [<int>, ..]
+                    item  | <QTreeWidgetItem>"
+195,"Given PQ-codes, reconstruct original D-dimensional vectors
+        approximately by fetching the codewords.
+
+        Args:
+            codes (np.ndarray): PQ-cdoes with shape=(N, M) and dtype=self.code_dtype.
+                Each row is a PQ-code
+
+        Returns:
+            np.ndarray: Reconstructed vectors with shape=(N, D) and dtype=np.float32"
+196,"Check the validity of :class:`rtcclient.project_area.ProjectArea` id
+
+        :param projectarea_id: the :class:`rtcclient.project_area.ProjectArea`
+            id
+        :param archived: (default is False) whether the project area is
+            archived
+        :return: `True` or `False`
+        :rtype: bool"
+197,Sets the value of an attribute.
+198,"Computes the mean Silhouette Coefficient of all samples (implicit evaluation)
+
+        :param data: The data that the clusters are generated from
+        :param metric: the pairwise distance metric
+        :param sample_size: the size of the sample to use computing the Silhouette Coefficient
+        :param random_state: If an integer is given then it fixes its seed otherwise random.
+        :param kwds: any further parameters that are passed to the distance function
+        :return: the mean Silhouette Coefficient of all samples"
+199,Return columns for each public attribute on an object.
+200,"Keep listening for events forever.
+        Args:
+            timeout_ms: How long to poll the Home Server for before retrying.
+            exception_handler: Optional exception handler function which can
+                be used to handle exceptions in the caller thread.
+            bad_sync_timeout: Base time to wait after an error before retrying.
+                Will be increased according to exponential backoff."
+201,Create a github3 client per repo/installation.
+202,"A dictionary of the paths of the urls to be mocked with this service and
+        the handlers that should be called in their place"
+203,Retrieve values for graphs.
+204,Set pygments syntax highlighting style.
+205,"This function will find the times for which the segment_summary is set
+    for the flag given by segmentName.
+
+    Parameters
+    -----------
+    scienceFile : SegFile
+        The segment file that we want to use to determine this.
+    segmentName : string
+        The DQ flag to search for times in the segment_summary table.
+
+    Returns
+    ---------
+    summSegList : ligo.segments.segmentlist
+        The times that are covered in the segment summary table."
+206,"It is used to close TCP connection and unregister
+    the Spin instance from untwisted reactor.
+
+    Diagram:
+
+    lose -> (int:err | socket.error:err) -> CLOSE_ERR"
+207,implementation details
+208,"Find the supplementary row factor scores.
+
+		ncols: The number of singular vectors to retain.
+		If both are passed, cols is given preference."
+209,"returns the bounding box for the segment in the form
+        (xmin, xmax, ymin, ymax)."
+210,"Create a ``DataSpec`` dict that applies a client-side
+    ``CategoricalPatternMapper`` transformation to a ``ColumnDataSource``
+    column.
+
+    Args:
+        field_name (str) : a field name to configure ``DataSpec`` with
+
+        patterns (seq[string]) : a list of hatch patterns to use to map to
+
+        factors (seq) : a sequences of categorical factors corresponding to
+            the palette
+
+        start (int, optional) : a start slice index to apply when the column
+            data has factors with multiple levels. (default: 0)
+
+        end (int, optional) : an end slice index to apply when the column
+            data has factors with multiple levels. (default: None)
+
+    Returns:
+        dict
+
+    Added in version 1.1.1"
+211,Kills the process with the specified PID (if possible)
+212,"Decorator function casts wrapped arguments to A1 notation
+    in range method calls."
+213,"deserialize object from the file.
+
+        auto detect format by file extension name if `format` is None.
+        for example, `.json` will detect as `json`.
+
+        * raise `FormatNotFoundError` on unknown format.
+        * raise `SerializeError` on any serialize exceptions."
+214,the main routine
+215,"Starts and executes the GUI
+    Reads data from a Queue and displays the data to the window
+    Returns when the user exits / closes the window
+        (that means it does NOT return until the user exits the window)
+    :param gui_queue: Queue the GUI should read from
+    :return:"
+216,Removes comments from the element and its children.
+217,Get the sources of economic data.
+218,Device attribute setter
+219,"Get VLAN by its identifier.
+
+        :param id_vlan: VLAN identifier.
+
+        :return: Following dictionary:
+
+        ::
+
+          {'vlan': {'id': < id_vlan >,
+          'nome': < nome_vlan >,
+          'num_vlan': < num_vlan >,
+          'id_ambiente': < id_ambiente >,
+          'id_tipo_rede': < id_tipo_rede >,
+          'rede_oct1': < rede_oct1 >,
+          'rede_oct2': < rede_oct2 >,
+          'rede_oct3': < rede_oct3 >,
+          'rede_oct4': < rede_oct4 >,
+          'bloco': < bloco >,
+          'mascara_oct1': < mascara_oct1 >,
+          'mascara_oct2': < mascara_oct2 >,
+          'mascara_oct3': < mascara_oct3 >,
+          'mascara_oct4': < mascara_oct4 >,
+          'broadcast': < broadcast >,
+          'descricao': < descricao >,
+          'acl_file_name': < acl_file_name >,
+          'acl_valida': < acl_valida >,
+          'ativada': < ativada >}
+          OR {'id': < id_vlan >,
+          'nome': < nome_vlan >,
+          'num_vlan': < num_vlan >,
+          'id_tipo_rede': < id_tipo_rede >,
+          'id_ambiente': < id_ambiente >,
+          'bloco1': < bloco1 >,
+          'bloco2': < bloco2 >,
+          'bloco3': < bloco3 >,
+          'bloco4': < bloco4 >,
+          'bloco5': < bloco5 >,
+          'bloco6': < bloco6 >,
+          'bloco7': < bloco7 >,
+          'bloco8': < bloco8 >,
+          'bloco': < bloco >,
+          'mask_bloco1': < mask_bloco1 >,
+          'mask_bloco2': < mask_bloco2 >,
+          'mask_bloco3': < mask_bloco3 >,
+          'mask_bloco4': < mask_bloco4 >,
+          'mask_bloco5': < mask_bloco5 >,
+          'mask_bloco6': < mask_bloco6 >,
+          'mask_bloco7': < mask_bloco7 >,
+          'mask_bloco8': < mask_bloco8 >,
+          'broadcast': < broadcast >,
+          'descricao': < descricao >,
+          'acl_file_name': < acl_file_name >,
+          'acl_valida': < acl_valida >,
+          'acl_file_name_v6': < acl_file_name_v6 >,
+          'acl_valida_v6': < acl_valida_v6 >,
+          'ativada': < ativada >}}
+
+        :raise VlanNaoExisteError: VLAN does not exist.
+        :raise InvalidParameterError: VLAN id is none or invalid.
+        :raise DataBaseError: Networkapi failed to access the database.
+        :raise XMLError: Networkapi failed to generate the XML response."
+220,"Get a single bookmark represented by `bookmark_id`.
+
+        The requested bookmark must belong to the current user.
+
+        :param bookmark_id: ID of the bookmark to retrieve."
+221,"Select cell under cursor in the visible portion of the file
+        cell = group of lines separated by CELL_SEPARATORS
+        returns
+         -the textCursor
+         -a boolean indicating if the entire file is selected
+         -a boolean indicating if the entire visible portion of the file is selected"
+222,Look up the urls we need to post to
+223,"Create an instance (a recordset) corresponding to `ids` and
+        attached to `env`.
+
+        `from_record` parameter is used when the recordset is related to a
+        parent record, and as such can take the value of a tuple
+        (record, field). This is useful to update the parent record when the
+        current recordset is modified.
+
+        `iterated` can take the value of an iterated recordset, and no extra
+        RPC queries are made to generate the resulting record (recordset and
+        its record share the same values)."
+224,"Parse test results out of common test harnesses.
+
+        Currently supported are:
+
+         * Plone
+         * Nose
+         * Trial
+         * Something mitchell wrote in Java"
+225,"Read a specific section from a ConfigParser() object and return
+    a dict() of all key-value pairs in that section"
+226,"Creates a bit-vector symbol (i.e., a variable). Other keyword parameters are passed directly on to the
+        constructor of claripy.ast.BV.
+
+        :param name:            The name of the symbol.
+        :param size:            The size (in bits) of the bit-vector.
+        :param min:             The minimum value of the symbol. Note that this **only** work when using VSA.
+        :param max:             The maximum value of the symbol. Note that this **only** work when using VSA.
+        :param stride:          The stride of the symbol. Note that this **only** work when using VSA.
+        :param uninitialized:   Whether this value should be counted as an ""uninitialized"" value in the course of an
+                                analysis.
+        :param explicit_name:   Set to True to prevent an identifier from appended to the name to ensure uniqueness.
+        :param key:             Set this to a tuple of increasingly specific identifiers (for example,
+                                ``('mem', 0xffbeff00)`` or ``('file', 4, 0x20)`` to cause it to be tracked, i.e.
+                                accessable through ``solver.get_variables``.
+        :param eternal:         Set to True in conjunction with setting a key to cause all states with the same
+                                ancestry to retrieve the same symbol when trying to create the value. If False, a
+                                counter will be appended to the key.
+        :param inspect:         Set to False to avoid firing SimInspect breakpoints
+        :param events:          Set to False to avoid generating a SimEvent for the occasion
+
+        :return:                A BV object representing this symbol."
+227,Request available methods for the service.
+228,"Send the message via pytgbot.
+
+        :param sender: The bot instance to send with.
+        :type  sender: pytgbot.bot.Bot
+
+        :rtype: PytgbotApiMessage"
+229,"Return new filename with extension that points to an extension with a
+        valid WCS.
+
+        Returns
+        =======
+        extnum : str, None
+            Value of extension name as a string either as provided by the user
+            or based on the extension number for the first extension which
+            contains a valid HSTWCS object.  Returns None if no extension can be
+            found with a valid WCS.
+
+        Notes
+        =====
+        The return value from this function can be used as input to
+            create another HSTWCS with the syntax::
+
+                `HSTWCS('{}[{}]'.format(filename,extnum))"
+230,Extract the argument documentation from the endpoint.
+231,"Draws the cloud of words representation
+
+        :param path_to_bog: path to bag of words
+        :param cluster_no: the number of document to be visualized
+        :param image_path: path to the image file for the masking, None if no masking is needed"
+232,"Check if the contents of `self` is a subset of the contents of
+        `other.`
+
+        Args:
+            other (:class:`FrameSet`):
+
+        Returns:
+            bool:
+            :class:`NotImplemented`: if `other` fails to convert to a :class:`FrameSet`"
+233,"NON-BLOCKING POP IN QUEUE, IF ANY"
+234,"Set of architectural experiments - language model on wikipedia on a 2x2.
+
+  1 epoch = ~180k steps at batch size 32 - we may never finish an epoch!
+
+  Returns:
+    a hparams"
+235,"Build messages in the inbound queue.
+
+        :param bool break_on_empty: Should we break the loop when there are
+                                    no more messages in our inbound queue.
+
+                                    This does not guarantee that the upstream
+                                    queue is empty, as it's possible that if
+                                    messages are consumed faster than
+                                    delivered, the inbound queue will then be
+                                    emptied and the consumption will be broken.
+        :param bool to_tuple: Should incoming messages be converted to a
+                              tuple before delivery.
+        :param bool auto_decode: Auto-decode strings when possible.
+
+        :raises AMQPChannelError: Raises if the channel encountered an error.
+        :raises AMQPConnectionError: Raises if the connection
+                                     encountered an error.
+
+        :rtype: :py:class:`generator`"
+236,calcules for every slave it's average over the desired observable
+237,checks if vagrant plugin is installed
+238,"Performs matched selection.
+        :param event: QMouseEvent"
+239,Generate definitions to be converted to swagger schema.
+240,"Callback decorator to require HTTP auth (basic).
+        TODO: Add route(check_auth=...) parameter."
+241,"A Geometric random variate
+    
+    Parameters
+    ----------
+    p : scalar
+        The probability of success"
+242,Set the percentage of free space to use.
+243,"Load all files from a folder recursively.
+
+        Depending on :meth:`chooses_path` some paths may not be loaded.
+        Every loaded path is processed and returned part of the returned list.
+
+        :param str folder: the folder to load the files from
+        :rtype: list
+        :return: a list of the results of the processing steps of the loaded
+          files"
+244,"Connect to an entity matching server and check the service status.
+
+    Use ""-"" to output status to stdout."
+245,return the file name for Galprop merged gasmaps
+246,"Reads data from the remote end of this stream.
+
+    Internally, this data will have been contained in AdbMessages, but
+    users of streams shouldn't need to care about the transport mechanism.
+
+    Args:
+      length: If provided, the number of bytes to read, otherwise all available
+        data will be returned (at least one byte).
+      timeout_ms: Time to wait for a message to come in for this stream, in
+        milliseconds (or as a PolledTimeout object).
+
+    Returns:
+      Data that was read, or None if the end of the stream was reached.
+
+    Raises:
+      AdbProtocolError: Received an unexpected wonky non-stream packet (like a
+        CNXN ADB message).
+      AdbStreamClosedError: The stream is already closed.
+      AdbTimeoutError: Timed out waiting for a message."
+247,"Get the contents of an entry.
+
+           NAME is an entry name.
+           Return the tuple (ispkg, contents).
+           For non-Python resoures, ispkg is meaningless (and 0).
+           Used by the import mechanism."
+248,"Build an MACSignatureKeyInformation struct from a dictionary.
+
+        Args:
+            value (dict): A dictionary containing the key/value pairs for a
+                MACSignatureKeyInformation struct.
+
+        Returns:
+            MACSignatureInformation: a MACSignatureKeyInformation struct
+
+        Raises:
+            TypeError: if the input argument is invalid"
+249,"Converts linear and angular velocity of a point in frame A to the equivalent in frame B.
+
+    Args:
+        vel_A: 3-dim iterable for linear velocity in A
+        ang_vel_A: 3-dim iterable for angular velocity in A
+        pose_A_in_B: numpy array of shape (4,4) corresponding to the pose of A in frame B
+
+    Returns:
+        vel_B, ang_vel_B: two numpy arrays of shape (3,) for the velocities in B"
+250,Fetch child nodes for a given Zookeeper path.
+251,Make the X-Axis title
+252,"Encodes YAML representation.
+
+    This is a mixin method for writing enum values to YAML. It needs to be added to the enum
+    as a classmethod. See the module docstring for further information on this approach and how
+    to implement it.
+
+    This method writes whatever is used in the string representation of the YAML value.
+    Usually, this will be the unique name of the enumeration value. If the name is used,
+    the corresponding ``EnumFromYAML`` mixin can be used to recreate the value. If the name
+    isn't used, more care may be necessary, so a ``from_yaml`` method for that particular
+    enumeration may be necessary.
+
+    Note:
+        This method assumes that the name of the enumeration value should be stored as a scalar node.
+
+    Args:
+        representer: Representation from YAML.
+        data: Enumeration value to be encoded.
+    Returns:
+        Scalar representation of the name of the enumeration value."
+253,"TODO: improve this!
+
+    Returns True if the given string is considered a regular expression,
+    False otherwise.
+    It will be considered a regex if starts with a non alphabetic character
+    and then correctly compiled by re.compile
+
+    :param string: str"
+254,"points --> list of (x,y) coordinates"
+255,"Sets the current value of the field
+
+        :param value: value to set
+        :return: rendered value"
+256,Use presets for length of the window.
+257,"Generate network configuration files for guest vm
+        :param list guest_networks:  a list of network info for the guest.
+               It has one dictionary that contain some of the below keys for
+               each network, the format is:
+               {'ip_addr': (str) IP address,
+               'dns_addr': (list) dns addresses,
+               'gateway_addr': (str) gateway address,
+               'cidr': (str) cidr format
+               'nic_vdev': (str) VDEV of the nic}
+
+               Example for guest_networks:
+               [{'ip_addr': '192.168.95.10',
+               'dns_addr': ['9.0.2.1', '9.0.3.1'],
+               'gateway_addr': '192.168.95.1',
+               'cidr': ""192.168.95.0/24"",
+               'nic_vdev': '1000'},
+               {'ip_addr': '192.168.96.10',
+               'dns_addr': ['9.0.2.1', '9.0.3.1'],
+               'gateway_addr': '192.168.96.1',
+               'cidr': ""192.168.96.0/24"",
+               'nic_vdev': '1003}]"
+258,Decorator for making error handling on AWS Lambda easier
+259,"Parse configuration options out of a YAML configuration file.
+
+        Inputs: configManager - Our parent ConfigManager instance which is constructing the Config object.
+                config        - The _Config object containing configuration options populated thus far.
+
+        Outputs: A dictionary of new configuration options to add to the Config object."
+260,Save model in the logging directory
+261,Page for viewing all releases in a build.
+262,geometrica
+263,"You can use a different encoding from UTF-8 by putting a specially-formatted
+    comment as the first or second line of the source code."
+264,Cleanup a remotely merged branch.
+265,"Leaves a specific group
+
+        :param group_jid: The JID of the group to leave"
+266,"Annotate the input bed file using one of the annotation beds.
+        Parameters
+        ----------
+        bt : pybedtools.BedTool
+            BedTool for either one of the anchors, the loops,
+            or the loop inners.
+        
+        name : str
+            The key for the annoation bed file in annot_beds. 
+        
+        col_name : str
+            Used to name the columns that will be made.
+            
+        complete : bool
+            If True, this method will check whether the features in the
+            annotation bed are completely contained by the features in the input
+            bed.
+            
+        df_col : str
+            If the name for bt isn't the index of self.df, this specifies
+            which column of self.df contains the names for bt. For instance,
+            if bt is the anchor1 BedTool, the df_col='anchor11'."
+267,"Send an image to specified recipient using URL.
+        Image must be PNG or JPEG or GIF (more might be supported).
+        https://developers.facebook.com/docs/messenger-platform/send-api-reference/image-attachment
+        Input:
+            recipient_id: recipient id to send to
+            image_url: url of image to be sent
+        Output:
+            Response from API as <dict>"
+268,Instantiates an instance of this InputReader for the given shard spec.
+269,"Apply ``self.span_tokenize()`` to each element of ``strings``.  I.e.:
+            return iter((self.span_tokenize(s) for s in strings))
+        :rtype: iter(list(tuple(int, int)))"
+270,"Returns the end date of the set of intervals, or ``None`` if empty."
+271,"Make predictions using fitted size distribution models.
+        Args:
+            model_names: Name of the models for predictions
+            input_columns: Data columns used for input into ML models
+            output_columns: Names of output columns
+            metadata_cols: Columns from input data that should be included in the data frame with the predictions.
+            data_mode: Set of data used as input for prediction models
+            location: Value of fixed location parameter
+        Returns:
+            Predictions in dictionary of data frames grouped by group type"
+272,Load the configuration from specified files.
+273,"Return True if deck spawn pays to p2th in vout[0] and if the P2TH address
+    is correct. Otherwise raises InvalidDeckSpawn."
+274,Update package(s) (in an environment) by name.
+275,"Create a dict with all kwargs of the `copy_file` or `link_file` method of the super class and add it to
+        the queue for later processing."
+276,"r""""""Map to cube
+
+    This method transforms the input data from a 2D map with given layout to
+    a 3D cube
+
+    Parameters
+    ----------
+    data_map : np.ndarray
+        Input data map, 2D array
+    layout : tuple
+        2D layout of 2D images
+
+    Returns
+    -------
+    np.ndarray 3D cube
+
+    Raises
+    ------
+    ValueError
+        For invalid layout
+
+    Examples
+    --------
+    >>> from modopt.base.transform import map2cube
+    >>> a = np.array([[0, 1, 4, 5], [2, 3, 6, 7], [8, 9, 12, 13],
+    [10, 11, 14, 15]])
+    >>> map2cube(a, (2, 2))
+    array([[[ 0,  1],
+            [ 2,  3]],
+
+           [[ 4,  5],
+            [ 6,  7]],
+
+           [[ 8,  9],
+            [10, 11]],
+
+           [[12, 13],
+            [14, 15]]])"
+277,"Estimate supercell matrix from conventional cell
+
+    Diagonal supercell matrix is estimated from basis vector lengths
+    and maximum number of atoms to be accepted. Supercell is assumed
+    to be made from the standardized cell and to be closest to sphere
+    under keeping lattice symmetry. For triclinic, monoclinic, and
+    orthorhombic cells, multiplicities for a, b, c are not constrained
+    by symmetry. For tetragonal and hexagonal cells, multiplicities
+    for a and b are chosen to be the same, and for cubic cell, those
+    of a, b, c are the same.
+
+    Parameters
+    ----------
+    spglib_dataset : tuple
+        Spglib symmetry dataset
+    max_num_atoms : int, optional
+        Maximum number of atoms in created supercell to be tolerated.
+
+    Returns
+    -------
+    list of three integer numbers
+        Multiplicities for a, b, c basis vectors, respectively."
+278,"Setup a mask where unmasked pixels are within an elliptical annulus of input inner and outer arc second \
+        major-axis and centre.
+
+        Parameters
+        ----------
+        shape: (int, int)
+            The (y,x) shape of the mask in units of pixels.
+        pixel_scale: float
+            The arc-second to pixel conversion factor of each pixel.
+        inner_major_axis_radius_arcsec : float
+            The major-axis (in arc seconds) of the inner ellipse within which pixels are masked.
+        inner_axis_ratio : float
+            The axis-ratio of the inner ellipse within which pixels are masked.
+        inner_phi : float
+            The rotation angle of the inner ellipse within which pixels are masked, (counter-clockwise from the \
+            positive x-axis).
+        outer_major_axis_radius_arcsec : float
+            The major-axis (in arc seconds) of the outer ellipse within which pixels are unmasked.
+        outer_axis_ratio : float
+            The axis-ratio of the outer ellipse within which pixels are unmasked.
+        outer_phi : float
+            The rotation angle of the outer ellipse within which pixels are unmasked, (counter-clockwise from the \
+            positive x-axis).
+        centre: (float, float)
+            The centre of the elliptical annuli used to mask pixels."
+279,"Acknowldge sucess or failure of a flexifunction command
+
+                target_system             : System ID (uint8_t)
+                target_component          : Component ID (uint8_t)
+                directory_type            : 0=inputs, 1=outputs (uint8_t)
+                start_index               : index of first directory entry to write (uint8_t)
+                count                     : count of directory entries to write (uint8_t)
+                directory_data            : Settings data (int8_t)"
+280,Recursively get the tree below the given key
+281,"Access the cumulative_statistics
+
+        :returns: twilio.rest.taskrouter.v1.workspace.workflow.workflow_cumulative_statistics.WorkflowCumulativeStatisticsList
+        :rtype: twilio.rest.taskrouter.v1.workspace.workflow.workflow_cumulative_statistics.WorkflowCumulativeStatisticsList"
+282,"Figure out solc binary and version.
+
+        Only proper versions are supported. No nightlies, commits etc (such as available in remix)."
+283,Decorator for :class:`TVDBClient` methods that require authentication
+284,"A function to find 2 engines per hostname on the ipyclient.
+    We'll assume that the CPUs are hyperthreaded, which is why
+    we grab two. If they are not then no foul. Two multi-threaded
+    jobs will be run on each of the 2 engines per host."
+285,Generate a Telegram URL for this bot.
+286,"int crs; //.......................................................... RECOMMENDED - A container variable storing information about the grid_mapping. All the attributes within a grid_mapping variable are described in http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#appendix-grid-mappings. For all the measurements based on WSG84, the default coordinate system used for GPS measurements, the values shown here should be used.
+                crs:grid_mapping_name = ""latitude_longitude""; //............. RECOMMENDED
+                crs:epsg_code = ""EPSG:4326"" ; //............................. RECOMMENDED - European Petroleum Survey Group code for the grid mapping name.
+                crs:semi_major_axis = 6378137.0 ; //......................... RECOMMENDED
+                crs:inverse_flattening = 298.257223563 ; //.................. RECOMMENDED"
+287,/*      Calculate Temperature and Density Profiles for lower atmos.  */
+288,Get a listing of all private rooms with their names and IDs
+289,checks if a given package is installed on pip
+290,Geant 4.10.0 model for 2 GeV < Tp < 5 GeV
+291,"Resolves an ip adres to a range object, creating it if it doesn't exists."
+292,"GetBranch.
+        Get a single branch hierarchy at the given path with parents or children as specified.
+        :param str path: Full path to the branch.  Default: $/ Examples: $/, $/MyProject, $/MyProject/SomeFolder.
+        :param str project: Project ID or project name
+        :param bool include_parent: Return the parent branch, if there is one. Default: False
+        :param bool include_children: Return child branches, if there are any. Default: False
+        :rtype: :class:`<TfvcBranch> <azure.devops.v5_0.tfvc.models.TfvcBranch>`"
+293,"for doctests kwargs
+
+    SeeAlso:
+        ut.exec_func_src
+        ut.argparse_funckw"
+294,"Clear DCNM out partition information.
+
+        Clear the DCNM OUT partition service node IP address and update
+        the result"
+295,statement : RELATE instance_name TO instance_name ACROSS rel_id USING instance_name
+296,Execute a quick search.
+297,"Query the Forest 2.0 server for a list of underlying QPU devices.
+
+    NOTE: These can't directly be used to manufacture pyQuil Device objects, but this gives a list
+          of legal values that can be supplied to list_lattices to filter its (potentially very
+          noisy) output.
+
+    :return: A list of device names."
+298,"Parse input yaml file and substitute {tokens} from context.
+
+    Loads yaml into memory to do parsing, so be aware of big files.
+
+    Args:
+        context: pypyr.context.Context. Mandatory.
+        - fileFormatYaml
+            - in. mandatory.
+              str, path-like, or an iterable (list/tuple) of
+              strings/paths. Each str/path can be a glob, relative or
+              absolute path.
+            - out. optional. path-like.
+              Can refer to a file or a directory.
+              will create directory structure if it doesn't exist. If
+              in-path refers to >1 file (e.g it's a glob or list), out
+              path can only be a directory - it doesn't make sense to
+              write >1 file to the same single file (this is not an
+              appender.) To ensure out_path is read as a directory and
+              not a file, be sure to have the path separator (/) at the
+              end.
+              If out_path is not specified or None, will in-place edit
+              and overwrite the in-files.
+
+    Returns:
+        None.
+
+    Raises:
+        FileNotFoundError: take a guess
+        pypyr.errors.KeyNotInContextError: fileFormatYaml or
+            fileFormatYaml['in'] missing in context.
+        pypyr.errors.KeyInContextHasNoValueError: fileFormatYaml or
+            fileFormatYaml['in'] exists but is None."
+299,Commit deferred writes to file.
+300,"Add a condor command to the submit file that allows variable (macro)
+    arguments to be passes to the executable."
+301,Removes XML elements from an ElementTree content tree
+302,"Search element and wait until it has stopped moving
+
+        :param element: PageElement or element locator as a tuple (locator_type, locator_value) to be found
+        :param times: number of iterations checking the element's location that must be the same for all of them
+        in order to considering the element has stopped
+        :returns: the web element if the element is stopped
+        :rtype: selenium.webdriver.remote.webelement.WebElement or appium.webdriver.webelement.WebElement
+        :raises TimeoutException: If the element does not stop after the timeout"
+303,"Returns a tuple (visible, reason) stating if the data should be visible.
+
+    Args:
+      path: A dot separated path that represents a package, class, method or
+      variable.  The format is identical to pythons ""import"" statement.
+
+    Returns:
+      (visible, reason) where visible is a boolean that is True if the data
+      should be visible.  Reason is a string reason that can be displayed
+      to the user and indicates why data is visible or not visible."
+304,Apply slices to the area_extent and size of the area.
+305,"Create OpenVZ containers.
+
+    + ctid: CTID of the container to create"
+306,"Constructs a TaskQueueContext
+
+        :param sid: The sid
+
+        :returns: twilio.rest.taskrouter.v1.workspace.task_queue.TaskQueueContext
+        :rtype: twilio.rest.taskrouter.v1.workspace.task_queue.TaskQueueContext"
+307,"This renders the form or, if needed, does the http redirects."
+308,"Allows to edit group permissions for the considered forum.
+
+        The view displays a form to define which permissions are granted for the given group for the
+        considered forum."
+309,"Request validation email
+
+        :return: result
+        :rtype: :class:`.EResult`"
+310,"Returns a pseudo-randomly generated Local Unique prefix. Function
+    follows recommandation of Section 3.2.2 of RFC 4193 for prefix
+    generation."
+311,"Get the name of the file containing configuration overrides
+    from the provided environment variable."
+312,Parse categories.
+313,"Sphinx role for referencing a JIRA ticket with ticket numbers
+    enclosed in parentheses. Useful for changelogs.
+
+    Examples::
+
+        :jirap:`DM-6181` -> (DM-6181)
+        :jirap:`DM-6181,DM-6181` -> (DM-6180, DM-6181)
+        :jirap:`DM-6181,DM-6181,DM-6182` -> (DM-6180, DM-6181, DM-6182)"
+314,"Return single model object instance matching given criteria
+       :param path: tuple or dpath expression representing the hierarchy/chain of parent keys
+       :param values: single value or list of values to match. If exact is False then .contains method is used as filter
+       :param raise_absent: if True then raise exception if no match is found
+       :return: matching object from cache if already created or new if not"
+315,"Compute cross product between list of 3D vectors
+
+    Much faster than np.cross() when the number of cross products
+    becomes large (>500). This is because np.cross() methods become
+    less memory efficient at this stage.
+
+    Parameters
+    ----------
+    x : array
+        Input array 1.
+    y : array
+        Input array 2.
+
+    Returns
+    -------
+    z : array
+        Cross product of x and y.
+
+    Notes
+    -----
+    x and y must both be 2D row vectors. One must have length 1, or both
+    lengths must match."
+316,":raises ValueError:
+        :raises pytablereader.error.ValidationError:"
+317,Generates a logger that outputs messages in the same format as default Flask applications.
+318,Create CodeGovProject object from GitLab Repository
+319,"This gets a new API key from the specified LCC-Server.
+
+    NOTE: this only gets an anonymous API key. To get an API key tied to a user
+    account (and associated privilege level), see the `import_apikey` function
+    below.
+
+    Parameters
+    ----------
+
+    lcc_server : str
+        The base URL of the LCC-Server from where the API key will be fetched.
+
+    Returns
+    -------
+
+    (apikey, expiry) : tuple
+        This returns a tuple with the API key and its expiry date."
+320,":py:func:`asyncio.coroutine`
+
+        Complex method for getting command.
+
+        :param stream: connection steram
+        :type stream: :py:class:`asyncio.StreamIO`
+
+        :return: (code, rest)
+        :rtype: (:py:class:`str`, :py:class:`str`)"
+321,"Сериализация JSON хедера rsb.
+
+    @params -- параметры в формате JSON (dfparser.def_values.DEF_RSH_PARAMS)
+    @return -- бинарный хедер (2048 bytes)"
+322,"Return sha, lazily compute if not done yet."
+323,"Add bouncer goodness to the model.  This is a class decorator, when added to your User model if will add
+        ``can`` and ``cannot`` methods to the class
+    :param original_class:  the User class to be decorated"
+324,Main function
+325,"Gets a ``ProficiencyList`` corresponding to the given ``IdList``.
+
+        arg:    proficiency_ids (osid.id.IdList): the list of ``Ids`` to
+                retrieve
+        return: (osid.learning.ProficiencyList) - the returned
+                ``Proficiency`` list
+        raise:  NotFound - an ``Id`` was not found
+        raise:  NullArgument - ``proficiency_ids`` is ``null``
+        raise:  OperationFailed - unable to complete request
+        raise:  PermissionDenied - authorization failure
+        *compliance: mandatory -- This method must be implemented.*"
+326,"Create Fourier term features
+
+        When an ARIMA is fit with an exogenous array, it must be forecasted
+        with one also. Since at ``predict`` time in a pipeline we won't have
+        ``y`` (and we may not yet have an ``exog`` array), we have to know how
+        far into the future for which to compute Fourier terms (hence
+        ``n_periods``).
+
+        This method will compute the Fourier features for a given frequency and
+        ``k`` term. Note that the ``y`` values are not used to compute these,
+        so this does not pose a risk of data leakage.
+
+        Parameters
+        ----------
+        y : array-like or None, shape=(n_samples,)
+            The endogenous (time-series) array. This is unused and technically
+            optional for the Fourier terms, since it uses the pre-computed
+            ``n`` to calculate the seasonal Fourier terms.
+
+        exogenous : array-like or None, shape=(n_samples, n_features), optional
+            The exogenous array of additional covariates. If specified, the
+            Fourier terms will be column-bound on the right side of the matrix.
+            Otherwise, the Fourier terms will be returned as the new exogenous
+            array.
+
+        n_periods : int, optional (default=0)
+            The number of periods in the future to forecast. If ``n_periods``
+            is 0, will compute the Fourier features for the training set.
+            ``n_periods`` corresponds to the number of samples that will be
+            returned."
+327,"Add an observer to this event.
+
+        Args:
+            callback: A function or coroutine callback to call when the event
+                is fired.
+
+        Raises:
+            ValueError: If the callback has already been added."
+328,"Filter insignificant words for key noun phrase extraction.
+
+        determiners, relative pronouns, reflexive pronouns
+        In general, pronouns are not useful, as you need context to know what they refer to.
+        Most of the pronouns, however, are filtered out by blob.noun_phrase method's
+        np length (>1) filter
+
+        :param list extracted_list: A list of noun phrases extracted from parser output."
+329,"Set the agl handler where the media player should render its video output.
+    @param p_mi: the Media Player.
+    @param drawable: the agl handler."
+330,"Returns a Drive instance
+
+        :param drive_id: the drive_id to be retrieved
+        :return: Drive for the id
+        :rtype: Drive"
+331,Plots the observed recurrence taking into account the completeness
+332,"Return a list of matched results for a given project ID.
+
+    :param project_id: PYBOSSA Project ID
+    :type project_id: integer
+    :param kwargs: PYBOSSA Results members
+    :type info: dict
+    :rtype: list
+    :returns: A list of results that match the kwargs"
+333,"Create a python function that interprets that action of a BridgePoint class
+    operation."
+334,"Creates an ASSETS_KEY collection in the GraphDefs in saved_model_proto.
+
+  Adds an ASSETS_KEY collection to the GraphDefs in the SavedModel and returns
+  a map from original asset filename to filename when exporting the SavedModel
+  to `export_path`.
+
+  This is roughly the inverse operation of `_merge_assets_key_collection`.
+
+  Args:
+    saved_model_proto: SavedModel proto to be modified.
+    export_path: string with path where the saved_model_proto will be exported.
+
+  Returns:
+    A map from original asset filename to asset filename when exporting the
+    SavedModel to path.
+
+  Raises:
+    ValueError: on unsuported/unexpected SavedModel."
+335,"Set Cache-Control headers for no caching
+
+    Will generate proxy-revalidate, no-cache, no-store, must-revalidate,
+    max-age=0."
+336,"Add a subtype segment
+
+        Args:
+            subtype (str): May be one of ``['a', 'c', 'r']``. See the
+                `Reference Definition <https://elections.democracyclub.org.uk/reference_definition>`_.
+                for valid election type/subtype combinations.
+
+        Returns:
+            IdBuilder
+
+        Raises:
+            ValueError"
+337,"Check route validity according to technical constraints (voltage and current rating)
+        
+        It considers constraints as
+        
+        * current rating of cable/line
+        * voltage stability at all nodes
+
+        Notes
+        -----
+            The validation is done for every tested MV grid configuration during CVRP algorithm. The current rating is
+            checked using load factors from [#]_. Due to the high amount of steps the voltage rating cannot be checked
+            using load flow calculation. Therefore we use a simple method which determines the voltage change between
+            two consecutive nodes according to [#]_.
+            Furthermore it is checked if new route has got more nodes than allowed (typ. 2*10 according to [#]_).
+
+        References
+        ----------
+            
+        .. [#] Deutsche Energie-Agentur GmbH (dena), ""dena-Verteilnetzstudie. Ausbau- und Innovationsbedarf der
+            Stromverteilnetze in Deutschland bis 2030."", 2012
+        .. [#] M. Sakulin, W. Hipp, ""Netzaspekte von dezentralen Erzeugungseinheiten,
+            Studie im Auftrag der E-Control GmbH"", TU Graz, 2004
+        .. [#] Klaus Heuck et al., ""Elektrische Energieversorgung"", Vieweg+Teubner, Wiesbaden, 2007
+        .. [#] FGH e.V.: ""Technischer Bericht 302: Ein Werkzeug zur Optimierung der Störungsbeseitigung
+            für Planung und Betrieb von Mittelspannungsnetzen"", Tech. rep., 2008"
+338,"Wraps a function that has a connection passed such that everything that
+    happens on the connection is logged using the given logger.
+
+    :type  logger: Logger
+    :param logger: The logger that handles the logging."
+339,"Fit two molecules.
+
+        Args:
+            mol1: First molecule. OpenBabel OBMol or pymatgen Molecule object
+            mol2: Second molecule. OpenBabel OBMol or pymatgen Molecule object
+
+        Returns:
+            A boolean value indicates whether two molecules are the same."
+340,"Cleans and returns the given value, or raises a ParameterNotValidError exception"
+341,Get the results Range from the AR
+342,"Print out the current version, and at least try to fetch the latest from
+    PyPi to print alongside it.
+
+    It may seem odd that this isn't in globus_cli.version , but it's done this
+    way to separate concerns over printing the version from looking it up."
+343,"Return a binary mask containing only points that are regional maxima
+    
+    image     - image to be transformed
+    mask      - mask of relevant pixels
+    structure - binary structure giving the neighborhood and connectivity
+                in which to search for maxima. Default is 8-connected.
+    ties_are_ok - if this is true, then adjacent points of the same magnitude
+                  are rated as maxima. 
+    
+    Find locations for which all neighbors as defined by the structure have
+    lower values. The algorithm selects only one of a set of adjacent locations
+    with identical values, first using a distance transform to find the
+    innermost location, then, among equals, selected randomly.
+    
+    A location cannot be a local maximum if it is touching the edge or a
+    masked pixel."
+344,"Reimplements the :meth:`QTabWidget.dropEvent` method.
+
+        :param event: QEvent.
+        :type event: QEvent"
+345,Add a Rule to a PySB model and handle duplicate component errors.
+346,"Splits a large CSS file into several smaller files, each one
+    containing less than the IE 4096 selector limit."
+347,"Add common constrain for every token type, like ""is_required""
+        Args:
+            token_lst: List[Dict]
+            d: Dict
+
+        Returns: List[Dict]"
+348,"An internal method to fetch a single file from the ISO and write it out
+        to the file object.
+
+        Parameters:
+         outfp - The file object to write data to.
+         blocksize - The number of bytes in each transfer.
+         iso_path - The absolute ISO9660 path to lookup on the ISO (exclusive
+                    with rr_path and joliet_path).
+         rr_path - The absolute Rock Ridge path to lookup on the ISO (exclusive
+                   with iso_path and joliet_path).
+         joliet_path - The absolute Joliet path to lookup on the ISO (exclusive
+                       with iso_path and rr_path).
+        Returns:
+         Nothing."
+349,"Request URL, scrape response and return an EntityList."
+350,"Collect fields.
+
+        Given a selection_set, adds all of the fields in that selection to the passed in
+        map of fields, and returns it at the end.
+
+        collect_fields requires the ""runtime type"" of an object. For a field which
+        returns an Interface or Union type, the ""runtime type"" will be the actual
+        Object type returned by that field."
+351,"Given a deserialized witness script stack (i.e. the input-specific witness, as an array of
+    Nones, ints, and strings), turn it back into a hex-encoded script"
+352,"Creates edge document.
+
+            :param from_doc Document from which the edge comes
+            :param to_doc Document to which the edge goes
+            :param edge_data Extra data for the edge
+
+            :returns Document"
+353,"dot-text = 1*atext *(""."" 1*atext)"
+354,"Return a list of given length from a scalar parameter.
+
+    The typical use case is when a single value or a sequence of
+    values is accepted as input. This function makes a list from
+    a given sequence or a list of identical elements from a single
+    value, with cast to a given parameter type if desired.
+
+    To distinguish a parameter sequence from a single parameter, the
+    following rules are applied:
+
+    * If ``param`` is not a sequence, it is treated as a single
+      parameter (e.g. ``1``).
+    * If ``len(param) == length == 1``, then ``param`` is interpreted
+      as a single parameter (e.g. ``[1]`` or ``'1'``).
+    * If ``len(param) == length != 1``, then ``param`` is interpreted as
+      sequence of parameters.
+    * Otherwise, ``param`` is interpreted as a single parameter.
+
+    Note that this function is not applicable to parameters which are
+    themselves iterable (e.g. ``'abc'`` with ``length=3`` will be
+    interpreted as equivalent to ``['a', 'b', 'c']``).
+
+    Parameters
+    ----------
+    param :
+        Input parameter to turn into a list.
+    length : nonnegative int
+        Desired length of the output list.
+    param_conv : callable, optional
+        Conversion applied to each list element. ``None`` means no conversion.
+    keep_none : bool, optional
+        If ``True``, ``None`` is not converted.
+    return_nonconv : bool, optional
+        If ``True``, return also the list where no conversion has been
+        applied.
+
+    Returns
+    -------
+    plist : list
+        Input parameter turned into a list of length ``length``.
+    nonconv : list
+        The same as ``plist``, but without conversion. This is only
+        returned if ``return_nonconv == True``.
+
+    Examples
+    --------
+    Turn input into a list of given length, possibly by broadcasting.
+    By default, no conversion is performed.
+
+    >>> normalized_scalar_param_list((1, 2, 3), 3)
+    [1, 2, 3]
+    >>> normalized_scalar_param_list((1, None, 3.0), 3)
+    [1, None, 3.0]
+
+    Single parameters are broadcast to the given length.
+
+    >>> normalized_scalar_param_list(1, 3)
+    [1, 1, 1]
+    >>> normalized_scalar_param_list('10', 3)
+    ['10', '10', '10']
+    >>> normalized_scalar_param_list(None, 3)
+    [None, None, None]
+
+    List entries can be explicitly converted using ``param_conv``. If
+    ``None`` should be kept, set ``keep_none`` to ``True``:
+
+    >>> normalized_scalar_param_list(1, 3, param_conv=float)
+    [1.0, 1.0, 1.0]
+    >>> normalized_scalar_param_list('10', 3, param_conv=int)
+    [10, 10, 10]
+    >>> normalized_scalar_param_list((1, None, 3.0), 3, param_conv=int,
+    ...                              keep_none=True)  # default
+    [1, None, 3]
+
+    The conversion parameter can be any callable:
+
+    >>> def myconv(x):
+    ...     return False if x is None else bool(x)
+    >>> normalized_scalar_param_list((0, None, 3.0), 3, param_conv=myconv,
+    ...                              keep_none=False)
+    [False, False, True]"
+355,"Setter method for mpls_adjust_bandwidth_lsp, mapped from YANG variable /brocade_mpls_rpc/mpls_adjust_bandwidth_lsp (rpc)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_mpls_adjust_bandwidth_lsp is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_mpls_adjust_bandwidth_lsp() directly."
+356,">>> len(list(watching(True, 1, 0)))
+    1
+    >>> len(list(watching(True, 1, 1)))
+    2
+    >>> len(list(watching(True, None, 0)))
+    1"
+357,"Flip the shape in the x direction, in-place.
+
+        Parameters
+        ----------
+        center : array-like, optional
+            Point about which to flip.
+            If not passed, the center of the shape will be used."
+358,Write fixed bagit header.
+359,"Scikit-learn required: Computes the feature importance scores from the training data.
+
+        Parameters
+        ----------
+        X: array-like {n_samples, n_features}
+            Training instances to compute the feature importance scores from
+        y: array-like {n_samples}
+            Training labels
+
+        Returns
+        -------
+        Copy of the ReliefF instance"
+360,"Reparses the specified module file from disk, overwriting any
+        cached representations etc. of the module."
+361,"Fetch a MediaInstance
+
+        :returns: Fetched MediaInstance
+        :rtype: twilio.rest.api.v2010.account.message.media.MediaInstance"
+362,"Updates all objects with details given if they match a set of conditions supplied.
+
+        This method updates each object individually, to fire callback methods and ensure
+        validations are run.
+
+        Returns the number of objects matched (which may not be equal to the number of objects
+            updated if objects rows already have the new value)."
+363,"Given arbitrary sheet coordinates, return the sheet coordinates
+        of the center of the closest unit."
+364,Send email and syslog by default ...
+365,"Sets the bin centers (x values)
+
+        :param bins: time bin centers
+        :type bins: numpy.ndarray"
+366,"Changes orientation of each contig to match the reference, when possible.
+           Returns a set of names of contigs that had hits in both orientations to the reference"
+367,Read only name tag
+368,"Run feature detection on ffmpeg, returns True if ffmpeg supports
+    the loudnorm filter"
+369,Clear the hub buffer
+370,"Returns information about the features available for the CPC of this
+        partition.
+
+        Authorization requirements:
+
+        * Object-access permission to this partition.
+
+        Returns:
+
+          :term:`iterable`:
+            An iterable where each item represents one feature that is
+            available for the CPC of this partition.
+
+            Each item is a dictionary with the following items:
+
+            * `name` (:term:`unicode string`): Name of the feature.
+            * `description` (:term:`unicode string`): Short description of
+              the feature.
+            * `state` (bool): Enablement state of the feature (`True` if the
+              enabled, `False` if disabled).
+
+        Raises:
+
+          :exc:`ValueError`: Features are not supported on the HMC.
+          :exc:`~zhmcclient.HTTPError`
+          :exc:`~zhmcclient.ParseError`
+          :exc:`~zhmcclient.AuthError`
+          :exc:`~zhmcclient.ConnectionError`"
+371,"Detect if we get a class or a name, convert a name to a class."
+372,"Loads the plugin
+
+        :param laser_plugin: plugin that will be loaded in the symbolic virtual machine"
+373,"Converts the tree into a flat json representation.
+
+    The json repr will be a list of hashes, each hash having 2 fields:
+      - package
+      - dependencies: list of dependencies
+
+    :param dict tree: dependency tree
+    :param int indent: no. of spaces to indent json
+    :returns: json representation of the tree
+    :rtype: str"
+374,"Implements the stackdriver cell magic for ipython notebooks.
+
+  Args:
+    line: the contents of the storage line.
+  Returns:
+    The results of executing the cell."
+375,items : items item
+376,Display / set / update the readme template file.
+377,"Return an unordered storage system based on the specified config.
+
+    The canonical example of such a storage container is
+    ``defaultdict(set)``. Thus, the return value of this method contains
+    keys and values. The values are unordered sets.
+
+    Args:
+        config (dict): Defines the configurations for the storage.
+            For in-memory storage, the config ``{'type': 'dict'}`` will
+            suffice. For Redis storage, the type should be ``'redis'`` and
+            the configurations for the Redis database should be supplied
+            under the key ``'redis'``. These parameters should be in a form
+            suitable for `redis.Redis`. The parameters may alternatively
+            contain references to environment variables, in which case
+            literal configuration values should be replaced by dicts of
+            the form::
+
+                {'env': 'REDIS_HOSTNAME',
+                 'default': 'localhost'}
+
+            For a full example, see :ref:`minhash_lsh_at_scale`
+
+        name (bytes, optional): A reference name for this storage container.
+            For dict-type containers, this is ignored. For Redis containers,
+            this name is used to prefix keys pertaining to this storage
+            container within the database."
+378,"*move template to destination*
+
+        **Key Arguments:**
+            # -
+
+        **Return:**
+            - None
+
+        .. todo::
+
+            - @review: when complete, clean _move_template_to_destination method
+            - @review: when complete add logging"
+379,Execute UNDEF instruction.
+380,"Converts a string to an array of integer values according to the
+    base specified (int numbers must be whitespace delimited).\n
+    Example: ""13 a3 3c"" => [0x13, 0xa3, 0x3c]
+
+    :return: [int]"
+381,"This method provides support for Frontiers production using base zipfiles
+    as the input for ePub creation. It expects a valid pathname for one of the
+    two zipfiles, and that both zipfiles are present in the same directory."
+382,this doesn't allow raw_keys for now
+383,"Add the consequences found for a variant
+
+            Args:
+                variant_obj (puzzle.models.Variant)
+                raw_variant_line (str): A raw vcf variant line"
+384,Adds all of the users of the Rocket.Chat server to the channel.
+385,Reads from the VMware VMX file corresponding to this VM.
+386,"Get the size of each columns from the header.
+
+        :param header:
+            The header template we have to get the size from.
+        :type header: dict
+
+        :return: The maximal size of the each data to print.
+        :rtype: list"
+387,"Remove all table records with the supplied upload_id
+
+        :param conn: sql connection
+        :param table: table to modify
+        :param sourcesystem_cd: target sourcesystem code
+        :return: number of records removed"
+388,"Runs one step of pipelined CORDIC
+        Returned phase is in 1 to -1 range"
+389,"Generate a table to convert a whole byte to binary.
+    This code was taken from the Python Cookbook, 2nd edition - O'Reilly."
+390,m._print_ll() -- Print log-likelihood (scoring) matrix
+391,"Get information about shares which feed the application.
+
+        :param str token: API auth token
+        :param str prot: https [DEFAULT] or http
+         (use it only for dev and tracking needs)."
+392,:param dir_entries: list of os.DirEntry() instances
+393,":param cfg: An angr CFG object
+        :returns:    a dictionary of function addresses to tuples of attributes"
+394,"If this async is in within another async set that async id as the
+        parent."
+395,"Convert paths into b-splines.
+
+        Parameters
+        -----------
+        path_indexes : (n) int
+          List of indexes of self.paths to convert
+        smooth : float
+          How much the spline should smooth the curve
+
+        Returns
+        ------------
+        simplified: Path2D object"
+396,"Retrieves an alphabetical list of all the categories that have no parents.
+
+    Syntax::
+
+        {% get_top_level_categories [using ""app.Model""] as categories %}
+
+    Returns an list of categories [<category>, <category>, <category, ...]"
+397,"Syllabify the given word, whether simplex or complex."
+398,JSON decoder for BaseNodes
+399,"Compute k-means clustering.
+
+        Parameters
+        ----------
+        Z : ArrayRDD or DictRDD containing array-like or sparse matrix
+            Train data.
+
+        Returns
+        -------
+        self"
+400,"Splits a (possibly versioned) name into unversioned name and version.
+
+       Returns a tuple ``(unversioned_name, version)``, where ``version`` may
+       be ``None``."
+401,Create a video object from a video embed
+402,"Returns a modified version of properties with all values of the
+        given feature replaced by the given value.
+        If 'value' is None the feature will be removed."
+403,Displays a tooltip over any cell in a certain column
+404,prevent the main loop spinning too fast
+405,Create new element whose tag name is ``tag``.
+406,Utility function to get the number of deployments a given project has
+407,"Bind a copy of the collection to the class, modified per our class' settings.
+		
+		The given target (and eventual collection returned) must be safe within the context the document sublcass
+		being bound is constructed within. E.g. at the module scope this binding must be thread-safe."
+408,"Returns a boolean of whether the raw_password was correct. Handles
+        hashing formats behind the scenes."
+409,View function which handles a registration request.
+410,Transition the SCTP association to a new state.
+411,Entry point to plug the LiveReload feature.
+412,"Replace %xx escapes by their single-character equivalent. The optional
+    encoding and errors parameters specify how to decode percent-encoded
+    sequences into Unicode characters, as accepted by the bytes.decode()
+    method.
+    By default, percent-encoded sequences are decoded with UTF-8, and invalid
+    sequences are replaced by a placeholder character.
+
+    unquote('abc%20def') -> 'abc def'."
+413,The list of spans representing ``words`` layer elements.
+414,Return a dictionnary of current tables
+415,"This function allows the user to set a large variety of options for individual plots.  
+    
+    Parameters:
+        name : str 
+            Name of the tplot variable
+        option : str
+            The name of the option.  See section below  
+        value : str/int/float/list
+            The value of the option.  See section below.  
+            
+    Options:
+        ============        ==========   =====
+        Options             Value type   Notes
+        ============        ==========   =====
+        Color               str/list     Red, Orange, Yellow, Green, Blue, etc.
+        Colormap            str/list     https://matplotlib.org/examples/color/colormaps_reference.html.
+        Spec                int          1 sets the Tplot Variable to spectrogram mode, 0 reverts.
+        Alt                 int          1 sets the Tplot Variable to altitude plot mode, 0 reverts.
+        Map                 int          1 sets the Tplot Variable to latitude/longitude mode, 0 reverts.
+        link                list         Allows a user to reference one tplot variable to another.
+        ylog                int          1 sets the y axis to log scale, 0 reverts.
+        zlog                int          1 sets the z axis to log scale, 0 reverts (spectrograms only).
+        legend_names        list         A list of strings that will be used to identify the lines.
+        xlog_interactive    bool         Sets x axis on interactive plot to log scale if True.
+        ylog                bool         Set y axis on main plot window to log scale if True.
+        ylog_interactive    bool         Sets y axis on interactive plot to log scale if True.
+        zlog                bool         Sets z axis on main plot window to log scale if True.
+        line_style          str          solid_line, dot, dash, dash_dot, dash_dot_dot_dot, long_dash.
+        char_size           int          Defines character size for plot labels, etc.
+        name                str          The title of the plot.
+        panel_size          flt          Number between (0,1], representing the percent size of the plot.
+        basemap             str          Full path and name of a background image for ""Map"" plots.
+        alpha               flt          Number between [0,1], gives the transparancy of the plot lines.
+        thick               flt          Sets plot line width.
+        yrange              flt list     Two numbers that give the y axis range of the plot.
+        zrange              flt list     Two numbers that give the z axis range of the plot.
+        xrange_interactive  flt list     Two numberes that give the x axis range of interactive plots.
+        yrange_interactive  flt list     Two numberes that give the y axis range of interactive plots.
+        ytitle              str          Title shown on the y axis.
+        ztitle              str          Title shown on the z axis.  Spec plots only.
+        plotter             str          Allows a user to implement their own plotting script in place of the ones
+                                         herein.
+        crosshair_x         str          Title for x-axis crosshair.
+        crosshair_y         str          Title for y-axis crosshair.
+        crosshair_z         str          Title for z-axis crosshair.
+        static              str          Datetime string that gives desired time to plot y and z values from a spec
+                                         plot.
+        static_tavg         str          Datetime string that gives desired time-averaged y and z values to plot
+                                         from a spec plot.
+        t_average           int          Seconds around which the cursor is averaged when hovering over spectrogram
+                                         plots.
+    Returns:
+        None
+    
+    Examples:
+        >>> # Change the y range of Variable1 
+        >>> import pytplot
+        >>> x_data = [1,2,3,4,5]
+        >>> y_data = [1,2,3,4,5]
+        >>> pytplot.store_data(""Variable1"", data={'x':x_data, 'y':y_data})
+        >>> pytplot.options('Variable1', 'yrange', [2,4])
+        
+        >>> # Change Variable1 to use a log scale
+        >>> pytplot.options('Variable1', 'ylog', 1)"
+416,Loads lint config from a ini-style config file
+417,"A simple generator that yields a File or Folder object based on
+        the arguments."
+418,"linestarts is expected to be a *list) of (offset, line number)
+    where both offset and line number are in increasing order.
+    Return the closes line number at or below the offset.
+    If offset is less than the first line number given in linestarts,
+    return line number 0."
+419,"This drives the periodicfeatures collection for a list of periodfinding
+    pickles.
+
+    Parameters
+    ----------
+
+    pfpkl_list : list of str
+        The list of period-finding pickles to use.
+
+    lcbasedir : str
+        The base directory where the associated light curves are located.
+
+    outdir : str
+        The directory where the results will be written.
+
+    starfeaturesdir : str or None
+        The directory containing the `starfeatures-<objectid>.pkl` files for
+        each object to use calculate neighbor proximity light curve features.
+
+    fourierorder : int
+        The Fourier order to use to generate sinusoidal function and fit that to
+        the phased light curve.
+
+    transitparams : list of floats
+        The transit depth, duration, and ingress duration to use to generate a
+        trapezoid planet transit model fit to the phased light curve. The period
+        used is the one provided in `period`, while the epoch is automatically
+        obtained from a spline fit to the phased light curve.
+
+    ebparams : list of floats
+        The primary eclipse depth, eclipse duration, the primary-secondary depth
+        ratio, and the phase of the secondary eclipse to use to generate an
+        eclipsing binary model fit to the phased light curve. The period used is
+        the one provided in `period`, while the epoch is automatically obtained
+        from a spline fit to the phased light curve.
+
+    pdiff_threshold : float
+        This is the max difference between periods to consider them the same.
+
+    sidereal_threshold : float
+        This is the max difference between any of the 'best' periods and the
+        sidereal day periods to consider them the same.
+
+    sampling_peak_multiplier : float
+        This is the minimum multiplicative factor of a 'best' period's
+        normalized periodogram peak over the sampling periodogram peak at the
+        same period required to accept the 'best' period as possibly real.
+
+    sampling_startp, sampling_endp : float
+        If the `pgramlist` doesn't have a time-sampling Lomb-Scargle
+        periodogram, it will be obtained automatically. Use these kwargs to
+        control the minimum and maximum period interval to be searched when
+        generating this periodogram.
+
+    timecols : list of str or None
+        The timecol keys to use from the lcdict in calculating the features.
+
+    magcols : list of str or None
+        The magcol keys to use from the lcdict in calculating the features.
+
+    errcols : list of str or None
+        The errcol keys to use from the lcdict in calculating the features.
+
+    lcformat : str
+        This is the `formatkey` associated with your light curve format, which
+        you previously passed in to the `lcproc.register_lcformat`
+        function. This will be used to look up how to find and read the light
+        curves specified in `basedir` or `use_list_of_filenames`.
+
+    lcformatdir : str or None
+        If this is provided, gives the path to a directory when you've stored
+        your lcformat description JSONs, other than the usual directories lcproc
+        knows to search for them in. Use this along with `lcformat` to specify
+        an LC format JSON file that's not currently registered with lcproc.
+
+    sigclip : float or int or sequence of two floats/ints or None
+        If a single float or int, a symmetric sigma-clip will be performed using
+        the number provided as the sigma-multiplier to cut out from the input
+        time-series.
+
+        If a list of two ints/floats is provided, the function will perform an
+        'asymmetric' sigma-clip. The first element in this list is the sigma
+        value to use for fainter flux/mag values; the second element in this
+        list is the sigma value to use for brighter flux/mag values. For
+        example, `sigclip=[10., 3.]`, will sigclip out greater than 10-sigma
+        dimmings and greater than 3-sigma brightenings. Here the meaning of
+        ""dimming"" and ""brightening"" is set by *physics* (not the magnitude
+        system), which is why the `magsarefluxes` kwarg must be correctly set.
+
+        If `sigclip` is None, no sigma-clipping will be performed, and the
+        time-series (with non-finite elems removed) will be passed through to
+        the output.
+
+    verbose : bool
+        If True, will indicate progress while working.
+
+    maxobjects : int
+        The total number of objects to process from `pfpkl_list`.
+
+    Returns
+    -------
+
+    Nothing."
+420,"The action text, with any hyperlinked related entities."
+421,"Function which updates the thumbnail for a particular video object with a locally saved image.
+
+    :param api_key: <string> JWPlatform api-key
+    :param api_secret: <string> JWPlatform shared-secret
+    :param video_key: <string> Video's object ID. Can be found within JWPlayer Dashboard.
+    :param local_video_image_path: <string> Local system path to an image.
+    :param api_format: <string> REQUIRED Acceptable values include 'py','xml','json',and 'php'
+    :param kwargs: Arguments conforming to standards found @ https://developer.jwplayer.com/jw-platform/reference/v1/methods/videos/thumbnails/update.html
+    :return: <dict> Dict which represents the JSON response."
+422,"Extracts database dump from given database URL and outputs sanitized
+    copy of it into given stream.
+
+    :param url: URL to the database which is to be sanitized.
+    :type url: str
+
+    :param output: Stream where sanitized copy of the database dump will be
+                   written into.
+    :type output: file
+
+    :param config: Optional sanitizer configuration to be used for sanitation
+                   of the values stored in the database.
+    :type config: database_sanitizer.config.Configuration|None"
+423,"Return the Noise Power Spectrum (NPS).
+
+    The NPS is given by the squared magnitude of the Fourier transform of the
+    noise.
+
+    Parameters
+    ----------
+    data : `DiscreteLpElement` or `array-like`
+        Input data to compare to the ground truth. If not a
+        `DiscreteLpElement`, a default space with cell size 1 will be assumed.
+    ground_truth : `array-like`
+        Reference to which ``data`` should be compared.
+    radial : bool
+        If ``True``, compute the radial NPS.
+    radial_binning_factor : positive float, optional
+        Reduce the number of radial bins by this factor. Increasing this
+        number can help reducing fluctuations due to the variance of points
+        that fall in a particular annulus.
+        A binning factor of ``1`` corresponds to a bin size equal to
+        image pixel size for images with square pixels, otherwise ::
+
+            max(norm2(c)) / norm2(shape)
+
+        where the maximum is taken over all corners of the image domain.
+
+    Returns
+    -------
+    noise_power_spectrum : `DiscreteLp`-element
+        The space is the Fourier space corresponding to ``space``, and
+        hence the axes indicate frequency.
+        If ``radial`` is ``True``, an average over concentric annuli is
+        taken. The result is an element of a one-dimensional space with
+        domain ``[0, rmax]``, where ``rmax`` is the radius of the smallest
+        ball containing ``space.domain``. Its shape is ``(N,)`` with ::
+
+            N = int(sqrt(sum(n ** 2 for n in image.shape)) / binning_factor)"
+424,"Plot accuracy and loss from a panda's dataframe.
+
+    Args:
+        data: Panda dataframe in the format of the Keras CSV log.
+        output_dir_path: The path to the directory where the resultings plots
+            should end up."
+425,"Matplotlib patch object for this region (`matplotlib.patches.Polygon`).
+
+        Parameters:
+        -----------
+        origin : array_like, optional
+            The ``(x, y)`` pixel position of the origin of the displayed image.
+            Default is (0, 0).
+        kwargs : `dict`
+            All keywords that a `~matplotlib.patches.Polygon` object accepts
+
+        Returns
+        -------
+        patch : `~matplotlib.patches.Polygon`
+            Matplotlib polygon patch"
+426,"Returns all fixations that are on this image.
+        A precondition for this to work is that a fixmat 
+        is associated with this Image object."
+427,Simple function that adds fixed colors depending on the class
+428,"Generate a ``tuple`` object for each leaf category in this
+        collection, containing the leaf category followed by its ""parent""
+        categories, e.g. ``('San Francisco', 'CA', 'USA'). Each tuple will be
+        the same length as the number of levels (excepting certain edge
+        cases which I believe always indicate a chart construction error)."
+429,"Sends the url with parameters to the requested url, validating them
+        to make sure that they are what we expect to have passed to us
+
+        :param method: a string, the request method you want to make
+        :param params: a dict, the parameters used for the API request
+        :param valid_parameters: a list, the list of valid parameters
+        :param needs_api_key: a boolean, whether or not your request needs an api key injected
+
+        :returns: a dict parsed from the JSON response"
+430,Read points from istream and output to ostream.
+431,"Set/create link with specified rel, set href and any other attributes.
+
+        Any link element must have both rel and href values, the specification
+        also defines the type attributes and others are permitted also. See
+        description of allowed formats in
+
+        http://www.openarchives.org/rs/resourcesync.html#DocumentFormats
+
+        Be aware that adding links to a Resource object will
+        significantly increase the size of the object."
+432,"Sets the type of this AggregatedQuotaUsageReport.
+        Type of quota usage entry.
+
+        :param type: The type of this AggregatedQuotaUsageReport.
+        :type: str"
+433,"Transforms one or multiple columns into rows.
+    Unlike melt function, two value columns can be returned by
+    the function (e.g. an evolution column and a price column)
+
+    ---
+
+    ### Parameters
+
+    *mandatory :*
+    - `first_value_vars` (*list of str*): name of the columns corresponding to the first returned value column
+    - `second_value_vars` (*list of str*): name of the columns corresponding to the second returned value column
+    - `var_name` (*str*): name of the column containing values in first_value_vars
+    - `value_name` (*str*): suffix of the two value columns (suffix_first / suffix_second)
+    ---
+
+    ### Example
+
+    **Input**
+
+    |    Region |      avg |       total |  evo_avg |   evo_total |
+    |:---------:|:--------:|:-----------:|:--------:|:-----------:|
+    |         A |        50|         100 |        1 |           4 |
+    |         B |       40 |         250 |        2 |           5 |
+
+
+    ```cson
+    two_values_melt:
+      first_value_vars: [""avg"", ""total""]
+      second_value_vars: [""evo_avg"", ""evo_total""]
+      var_name: ""type""
+      value_name: ""value""
+    ```
+
+    **Output**
+
+    |    Region |     type |  value_first |  value_second |
+    |:---------:|:--------:|:------------:|:-------------:|
+    |         A |       avg|           50 |             1 |
+    |         A |     total|          100 |             4 |
+    |         B |       avg|           40 |             2 |
+    |         B |       avg|          250 |             5 |"
+434,"Construct an ArrayList instance from an existing base dataset
+
+        Parameters
+        ----------
+        %(ArrayList.from_dataset.parameters)s
+        main: Project
+            The main project that this project corresponds to
+
+        Other Parameters
+        ----------------
+        %(ArrayList.from_dataset.other_parameters)s
+
+        Returns
+        -------
+        Project
+            The newly created project instance"
+435,Set the attack strength for the given policies.
+436,Return the script as a string for the specific os
+437,"Sets the authentication service
+        :param auth_service: BaseAuthService Authentication service
+        :raises: TypeError If the auth_service object is not a subclass of rinzler.auth.BaseAuthService
+        :rtype: Rinzler"
+438,"D.listdir() -> List of items in this directory.
+
+        Use D.files() or D.dirs() instead if you want a listing
+        of just files or just subdirectories.
+
+        The elements of the list are path objects.
+
+        With the optional 'pattern' argument, this only lists
+        items whose names match the given pattern."
+439,"Builds and returns the WHERE portion of the sql
+
+        :return: the WHERE portion of the sql
+        :rtype: str"
+440,"Set or create a :class:`Content <pages.models.Content>` for a
+        particular page and language.
+
+        :param page: the concerned page object.
+        :param language: the wanted language.
+        :param ctype: the content type.
+        :param body: the content of the Content object."
+441,"Open a file, downloading it first if it does not yet exist.
+
+        Unlike when you call a loader directly like ``my_loader()``,
+        this ``my_loader.open()`` method does not attempt to parse or
+        interpret the file; it simply returns an open file object.
+
+        The ``url`` can be either an external URL, or else the path to a
+        file on the current filesystem.  A relative path will be assumed
+        to be relative to the base directory of this loader object.
+
+        If a URL was provided and the ``reload`` parameter is true, then
+        any existing file will be removed before the download starts.
+
+        The ``filename`` parameter lets you specify an alternative local
+        filename instead of having the filename extracted from the final
+        component of the URL."
+442,Checks to see if this module uses Python's built-in logging.
+443,scalar  : INDENT scalar_group DEDENT
+444,"Compute metrics in the overview section for enriched github issues
+    indexes.
+    Returns a dictionary. Each key in the dictionary is the name of
+    a metric, the value is the value of that metric. Value can be
+    a complex object (eg, a time series).
+
+    :param index: index object
+    :param start: date to apply the filters from
+    :param end: date to apply the filters upto
+    :return: dictionary with the value of the metrics"
+445,"Returns an integer that is equal to the margin of victory of the election profile.
+
+        :ivar Profile profile: A Profile object that represents an election profile."
+446,Reshapes x to the same shape as y.
+447,Make a trivial single-dispatch generic function
+448,"Creates a type converter for a T with 0..1 times
+        by using the type converter for one item of T.
+
+        :param converter: Type converter (function) for data type T.
+        :param pattern:  Regexp pattern for an item (=converter.pattern).
+        :return: type-converter for optional<T> (T or None)."
+449,Logs out user and redirects them to Nexus home
+450,calculate the sum of histogram intersection of texture
+451,https://developer.zendesk.com/rest_api/docs/core/ticket_skips#list-skips-for-the-current-account
+452,".. versionadded:: 2016.11.0
+
+    Used by :py:func:`file.get_managed <salt.modules.file.get_managed>` to
+    obtain the hash and hash type from the parameters specified below.
+
+    file_name
+        Optional file name being managed, for matching with
+        :py:func:`file.extract_hash <salt.modules.file.extract_hash>`.
+
+    source
+        Source file, as used in :py:mod:`file <salt.states.file>` and other
+        states. If ``source_hash`` refers to a file containing hashes, then
+        this filename will be used to match a filename in that file. If the
+        ``source_hash`` is a hash expression, then this argument will be
+        ignored.
+
+    source_hash
+        Hash file/expression, as used in :py:mod:`file <salt.states.file>` and
+        other states. If this value refers to a remote URL or absolute path to
+        a local file, it will be cached and :py:func:`file.extract_hash
+        <salt.modules.file.extract_hash>` will be used to obtain a hash from
+        it.
+
+    source_hash_name
+        Specific file name to look for when ``source_hash`` refers to a remote
+        file, used to disambiguate ambiguous matches.
+
+    saltenv : base
+        Salt fileserver environment from which to retrieve the source_hash. This
+        value will only be used when ``source_hash`` refers to a file on the
+        Salt fileserver (i.e. one beginning with ``salt://``).
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt '*' file.get_source_sum /tmp/foo.tar.gz source=http://mydomain.tld/foo.tar.gz source_hash=499ae16dcae71eeb7c3a30c75ea7a1a6
+        salt '*' file.get_source_sum /tmp/foo.tar.gz source=http://mydomain.tld/foo.tar.gz source_hash=https://mydomain.tld/hashes.md5
+        salt '*' file.get_source_sum /tmp/foo.tar.gz source=http://mydomain.tld/foo.tar.gz source_hash=https://mydomain.tld/hashes.md5 source_hash_name=./dir2/foo.tar.gz"
+453,"**Description**
+            Delete an existing image registry
+
+        **Arguments**
+            - registry: Full hostname/port of registry. Eg. myrepo.example.com:5000"
+454,"Fetch an item by namespace and key
+
+        Args:
+            ns (str): Namespace prefix
+            key (str): Item key
+
+        Returns:
+            :obj:`Configitem`: Returns config item object if found, else `None`"
+455,"Perform post MD5 skip on check
+        :param Uploader self: this
+        :param str key: md5 map key
+        :param bool md5_match: if MD5 matches"
+456,"Sets the log level.
+    Lower log levels log more.
+    if level is 8, nothing is logged. If level is 0, everything is logged."
+457,"Find elements in the current context.
+
+        Support:
+            Android iOS Web(WebView)
+
+        Args:
+            using(str): The element location strategy.
+            value(str): The value of the location strategy.
+
+        Returns:
+            Return a List<Element | None>, if no element matched, the list is empty.
+
+        Raises:
+            WebDriverException."
+458,"Switches the visible widget to the one named *display*
+
+        :param: the name of the desired display to show
+        :type: str"
+459,"Auxiliary function to rebin ndarray data.
+    Source : http://www.scipy.org/Cookbook/Rebinning
+        example usage:
+        >>> a=rand(6,4); b=rebin(a,(3,2))"
+460,"Load a file.
+
+    File format is inferred from url. File retrieval strategy is inferred from
+    URL. Returned object type is inferred from url extension.
+
+    Args:
+      url_or_handle: a (reachable) URL, or an already open file handle
+
+    Raises:
+      RuntimeError: If file extension or URL is not supported."
+461,"Takes a list of explored parameters and finds unique parameter combinations.
+
+    If parameter ranges are hashable operates in O(N), otherwise O(N**2).
+
+    :param explored_parameters:
+
+        List of **explored** parameters
+
+    :return:
+
+        List of tuples, first entry being the parameter values, second entry a list
+        containing the run position of the unique combination."
+462,Verify that the checks versions are in sync with the requirements-agent-release.txt file
+463,"Remove the specified kernel module
+
+    mod
+        Name of module to remove
+
+    persist
+        Also remove module from /boot/loader.conf
+
+    comment
+        If persist is set don't remove line from /boot/loader.conf but only
+        comment it
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt '*' kmod.remove vmm"
+464,"Gets Child Managed Object from UCS.
+
+		- in_mo, if provided, it acts as a parent for the present operation. (required if in_dn is None).
+		- in_dn, parent mo dn (required if in_mo is None)
+		- class_id of the managed object/s to get.(optional)
+		- in_hierarchical, Explores hierarchy if true, else returns managed objects at a single level.(optional)"
+465,"After mark_tokens() has been called, returns the (startpos, endpos) positions in source text
+    corresponding to the given node. Returns (0, 0) for nodes (like `Load`) that don't correspond
+    to any particular text."
+466,"Assign the primary unicode to the glyph.
+        This will be an integer or None.
+
+        Subclasses may override this method."
+467,Explicit Abode login.
+468,"Create a callable that will take the string value of a header and cast it
+    to the appropriate type.  This can involve:
+
+    - splitting a header of type 'array' by its delimeters.
+    - type casting the internal elements of the array."
+469,Returns True if given `ipv6_prefix` is a valid IPv6 prefix.
+470,"Parse /proc/mdstat.
+
+        File format:
+        The first line is the ""Personalities"" line.
+        It won't get parsed since it contains only string metrics.
+        The second to second-last lines contain raid array information.
+        The last line contains the unused devices.
+        It won't get parsed since it contains only string metrics.
+
+        :return: Parsed information
+        :rtype: dict"
+471,"Return a string representation of the actual |anntools.ANN| object
+        that is prefixed with the given string."
+472,"Read ``num`` number of bits from the stream
+
+        :num: number of bits to read
+        :returns: a list of ``num`` bits, or an empty list if EOF has been reached"
+473,"Serialize input expr into a parsable value.
+
+    :rtype: str"
+474,Returns the integer width of help lines that is used in TextWrap.
+475,"r""""""Eliminate diagonally dominance.
+
+    Helper function that eliminates diagonally dominant rows and cols from A
+    in the separate matrix C.  This is useful because it eliminates nodes in C
+    which we don't want coarsened.  These eliminated nodes in C just become
+    the rows and columns of the identity.
+
+    Parameters
+    ----------
+    A : {csr_matrix, bsr_matrix}
+        Sparse NxN matrix
+    C : {csr_matrix}
+        Sparse MxM matrix, where M is the number of nodes in A.  M=N if A
+        is CSR or is BSR with blocksize 1.  Otherwise M = N/blocksize.
+    theta : {float}
+        determines diagonal dominance threshhold
+
+    Returns
+    -------
+    C : {csr_matrix}
+        C updated such that the rows and columns corresponding to diagonally
+        dominant rows in A have been eliminated and replaced with rows and
+        columns of the identity.
+
+    Notes
+    -----
+    Diagonal dominance is defined as
+    :math:`\| (e_i, A) - a_{ii} \|_1  <  \\theta a_{ii}`
+    that is, the 1-norm of the off diagonal elements in row i must be less than
+    theta times the diagonal element.
+
+    Examples
+    --------
+    >>> from pyamg.gallery import poisson
+    >>> from pyamg.util.utils import eliminate_diag_dom_nodes
+    >>> A = poisson( (4,), format='csr' )
+    >>> C = eliminate_diag_dom_nodes(A, A.copy(), 1.1)
+    >>> C.todense()
+    matrix([[ 1.,  0.,  0.,  0.],
+            [ 0.,  2., -1.,  0.],
+            [ 0., -1.,  2.,  0.],
+            [ 0.,  0.,  0.,  1.]])"
+476,"Parameters:
+     - db_name
+     - tbl_name
+     - part_vals
+     - max_parts
+     - user_name
+     - group_names"
+477,"Checks if the student's query returned a result.
+    
+    Args:
+        incorrect_msg: If specified, this overrides the automatically generated feedback message
+                       in case the student's query did not return a result."
+478,"Send _message_ to Graphite Server and attempt reconnect on failure.
+
+        If _autoreconnect_ was specified, attempt to reconnect if first send
+        fails.
+
+        :raises AttributeError: When the socket has not been set.
+        :raises socket.error: When the socket connection is no longer valid."
+479,"Register a custom randering function with libtcod.
+
+    Note:
+        This callback will only be called by the SDL renderer.
+
+    The callack will receive a :any:`CData <ffi-cdata>` void* to an
+    SDL_Surface* struct.
+
+    The callback is called on every call to :any:`tcod.console_flush`.
+
+    Args:
+        callback Callable[[CData], None]:
+            A function which takes a single argument."
+480,"Load a config for a hostname or url.
+
+        This method calls :func:`ftr_get_config` and :meth`append`
+        internally. Refer to their docs for details on parameters."
+481,decode the contents of the PDU and put them into the NPDU.
+482,"Shows the URL of the current cloud server or throws an error if no cloud
+    server is selected"
+483,"Takes a list of rows and a column and returns the max of the values under that column in
+        those rows."
+484,Load the contents of the resource file ~/.uDMXrc
+485,"Get the source of a column function.
+
+    If a column is a registered Series and not a function then all that is
+    returned is {'type': 'series'}.
+
+    If the column is a registered function then the JSON returned has keys
+    ""type"", ""filename"", ""lineno"", ""text"", and ""html"". ""text"" is the raw
+    text of the function, ""html"" has been marked up by Pygments."
+486,annotation_comment : ANNOTATION_COMMENT TEXT
+487,"Get current search or search from session, reset page if search is changed"
+488,":type aws_access_key_id: string
+    :param aws_access_key_id: Your AWS Access Key ID
+
+    :type aws_secret_access_key: string
+    :param aws_secret_access_key: Your AWS Secret Access Key
+
+    :rtype: :class:`boto.dns.Route53Connection`
+    :return: A connection to Amazon's Route53 DNS Service"
+489,return earth frame gyro vector
+490,Generate experiemnt URLs and print them to the console.
+491,"restarts a dedicated process
+    :return:"
+492,Same as wait_for_partial_link_text() - returns the element
+493,Absolute system path to the node
+494,The main script
+495,Start a new kernel.
+496,"Args:
+            settings (dict): Dict to pop applicable fields from"
+497,"Get the balance of an account for a particular token
+    Returns an int"
+498,Determine whether this range overlaps with another.
+499,"Converts sequence to list of elements.
+
+        >>> type(seq([]).to_list())
+        list
+
+        >>> type(seq([]))
+        functional.pipeline.Sequence
+
+        >>> seq([1, 2, 3]).to_list()
+        [1, 2, 3]
+
+        :param n: Take n elements of sequence if not None
+        :return: list of elements in sequence"
+500,"a helper function to construct a full prior covariance matrix using
+    a mixture of geostastical structures and parameter bounds information.
+    The covariance of parameters associated with geostatistical structures is defined
+    as a mixture of GeoStruct and bounds.  That is, the GeoStruct is used to construct a
+    pyemu.Cov, then the entire pyemu.Cov is scaled by the uncertainty implied by the bounds and
+    sigma_range. Sounds complicated...
+
+    Parameters
+    ----------
+    pst : pyemu.Pst
+        a control file (or the name of control file)
+    struct_dict : dict
+        a python dict of GeoStruct (or structure file), and list of pp tpl files pairs
+        If the values in the dict are pd.DataFrames, then they must have an
+        'x','y', and 'parnme' column.  If the filename ends in '.csv',
+        then a pd.DataFrame is loaded, otherwise a pilot points file is loaded.
+    sigma_range : float
+        a float representing the number of standard deviations implied by parameter bounds.
+        Default is 4.0, which implies 95% confidence parameter bounds.
+    par_knowledge_dict : dict
+        used to condition on existing knowledge about parameters.  This functionality is
+        currently in dev - don't use it.
+    verbose : bool
+        stdout flag
+    Returns
+    -------
+    Cov : pyemu.Cov
+        a covariance matrix that includes all adjustable parameters in the control
+        file.
+
+    Example
+    -------
+    ``>>>import pyemu``
+
+    ``>>>pst = pyemu.Pst(""pest.pst"")``
+
+    ``>>>sd = {""struct.dat"":[""hkpp.dat.tpl"",""vka.dat.tpl""]}``
+
+    ``>>>cov = pyemu.helpers.geostatistical_prior_builder(pst,struct_dict=sd)``
+
+    ``>>>cov.to_ascii(""prior.cov"")``"

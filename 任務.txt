@@ -1,0 +1,5 @@
+1. 仔細閱讀2025 Generative Information Retrieval HW1.pdf
+2. 仔細閱讀作業一：Text-to-Code Retrieval實作計畫.md
+3. 按照作業一：Text-to-Code Retrieval實作計畫.md的步驟，在遵守2025 Generative Information Retrieval HW1.pdf中規定的前提下進行實作
+   實作時，在當前進度.txt中記錄當前的進度，避免丟失
+4. 完成Readme.md的撰寫
