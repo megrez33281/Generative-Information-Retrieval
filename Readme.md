@@ -24,7 +24,7 @@
 *   `preprocess.py`: 包含資料前處理的相關函式。
 *   `sparse_retrieval.py`: 實現了TF-IDF和BM25檢索模型。
 *   `dense_retrieval.py`: 實現了使用預訓練和微調後CodeBERT的密集檢索模型，並包含訓練與驗證流程。
-*   `self_evaluation.py`: 用於在 `train_queries.csv` 資料上對**稀疏模型**進行本地驗證。
+*   `self_evaluation.py`: 用於在`train_queries.csv`資料上對**稀疏模型**進行本地驗證。
 *   `generate_submissions.py`: 用於產生所有模型的最終 Kaggle 提交檔案。
 *   `requirements.txt`: 專案所需的Python套件。
 *   `Readme.md`: 本文件。
@@ -56,6 +56,9 @@ pip install -r requirements.txt
     此腳本會使用所有訓練好的模型，針對 `test_queries.csv` 產生所有四個提交檔案。
 
 ## 本地驗證與分析
+由於提供的資料中只有用於微調dense model的train_queries，沒有提供驗證資料用於本地的效能驗證
+因此此處用train_queries製作了用於本地驗證的驗證資料（用其中所有的code片段做語料庫，並嘗試用query查詢），用以對比Sparse檢索器的效能
+
 
 ### TF-IDF vs. BM25 性能分析
 在一個使用`train_queries.csv`作為語料庫和查詢集的本地驗證中，得到了以下結果：
@@ -76,7 +79,7 @@ pip install -r requirements.txt
     TF-IDF沒有需要調整的參數，因此不存在這個問題。
 
 ### BM25 參數調整
-為了嘗試提升 BM25 的性能，有嘗試對`k1`和`b`參數進行了調整。以下是實驗結果：
+為了嘗試提升BM25的性能，有嘗試對`k1`和`b`參數進行了調整。以下是實驗結果：
 | k1  | b    | Recall@10 |
 | --- | ---- | --------- |
 | 1.2 | 0.6  | 0.6580    |
@@ -107,7 +110,7 @@ pip install -r requirements.txt
 從結果來看，加入N-gram並沒有提升稀疏模型的性能，反而略有下降。
 這可能表示對於這個數據集，額外的上下文資訊並沒有帶來好處，甚至可能引入了噪音。
 
-### 查詢擴展 (Query Expansion) 實驗
+### 文字預處理優化：查詢擴展 (Query Expansion)
 嘗試了使用詞形還原（Lemmatization）來進行查詢擴展。
 當查詢進入時，將**原始查詢詞和其詞形還原後的詞**都納入考量，以期捕捉更多相關的程式碼片段，以下是本地驗證集上的結果：
 *   **Unigrams (無查詢擴展)**:
@@ -121,7 +124,20 @@ pip install -r requirements.txt
 TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
 這表明詞形還原在一定程度上幫助模型捕捉了更多的語義相關性。
 
-### 密集檢索模型實驗 (Dense Model Experiments)
+### TF-IDF 優化：次線性詞頻縮放 (Sublinear TF Scaling)
+將詞頻 (TF) 的計算方式從原本的 `tf` (原始次數) 修改為 `1 + log(tf)` 
+這種次線性縮放的策略旨在平滑化詞頻的影響，避免在長文件中頻繁出現的詞彙獲得過高的權重  
+
+改動後發現模型在本地驗證集有了顯著的性能提升：
+
+| 模型 | 原始 TF Recall@10 | 次線性 TF Recall@10 | 提升 |
+| --- | --- | --- | --- |
+| TF-IDF (基礎) | 0.7400 | **0.7660** | +2.6% |
+| TF-IDF (含查詢擴充) | 0.7480 | **0.7860** | +3.8% |
+這證明了收益遞減的詞頻計算方式更適合此資料集，它有效地降低了常見詞的噪音，讓模型的檢索結果更為精準  
+
+
+### 密集檢索模型優化實驗 (Dense Model Experiments)
 
 #### 嘗試一：使用驗證集分割策略
 最初嘗試將 `train_queries.csv` 的10%作為驗證集，並儲存驗證集上`Recall@10`分數最高的模型  

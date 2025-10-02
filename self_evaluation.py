@@ -17,7 +17,7 @@ def evaluate(retriever, df, query_expansion=False):
         query = row['query']
         true_code_id = row['code_id']
         
-        top_k_indices = retriever.retrieve(query, k=10, query_expansion=query_expansion)
+        top_k_indices, _ = retriever.retrieve(query, k=10, query_expansion=query_expansion)
         top_k_code_ids = retriever.documents.iloc[top_k_indices]['code_id'].tolist()
         
         if true_code_id in top_k_code_ids:

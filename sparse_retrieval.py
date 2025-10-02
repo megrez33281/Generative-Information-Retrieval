@@ -36,8 +36,8 @@ class TFIDFRetriever:
             tf = Counter(doc)
             for word, count in tf.items():
                 if word in self.vocab_map:
-                    # 將詞彙頻率放在對應位置（i代表第i個文件，self.vocab_map[word]是該詞彙在詞彙表中的索引）
-                    doc_vectors[i, self.vocab_map[word]] = count
+                    # 使用次線性詞頻縮放 (sublinear tf scaling): 1 + log(tf)
+                    doc_vectors[i, self.vocab_map[word]] = 1 + np.log(count)
         return doc_vectors * self.idf # 矩陣或向量中對應位置的元素進行乘法運算
 
     def retrieve(self, query, k=10, query_expansion=False):
@@ -53,7 +53,7 @@ class TFIDFRetriever:
         tf = Counter(query_tokens)
         for word, count in tf.items():
             if word in self.vocab_map:
-                query_vector[self.vocab_map[word]] = count
+                query_vector[self.vocab_map[word]] = 1 + np.log(count)
         # 計算query的TF-IDF
         query_vector = query_vector * self.idf
 
