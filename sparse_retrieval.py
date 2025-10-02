@@ -56,11 +56,20 @@ class TFIDFRetriever:
                 query_vector[self.vocab_map[word]] = count
         # 計算query的TF-IDF
         query_vector = query_vector * self.idf
-        
-        # 計算餘弦相似度（cosine公式）
-        # np.linalg.norm：計算範數（預設為L2）
-        scores = np.dot(self.doc_vectors, query_vector) / (np.linalg.norm(self.doc_vectors, axis=1) * np.linalg.norm(query_vector))
-        
+
+        # 計算查詢向量的範數(norm)
+        query_norm = np.linalg.norm(query_vector)
+
+        # 如果查詢向量的範數為0 (代表查詢詞皆不存在於語料庫中)，則所有分數為0
+        if query_norm == 0:
+            scores = np.zeros(self.num_docs)
+        else:
+            # 計算餘弦相似度（cosine公式）
+            doc_norms = np.linalg.norm(self.doc_vectors, axis=1)
+            scores = np.dot(self.doc_vectors, query_vector) / (doc_norms * query_norm)
+            # 將分母為0可能導致的 nan 值替換為 0，確保數值穩定性
+            scores = np.nan_to_num(scores)
+
         # 取得前k個結果
         top_k_indices = np.argsort(scores)[::-1][:k]
 
