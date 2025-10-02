@@ -1,4 +1,3 @@
-
 import pandas as pd
 import os
 from tqdm import tqdm
@@ -6,7 +5,7 @@ from sparse_retrieval import TFIDFRetriever, BM25Retriever
 from dense_retrieval import DenseRetriever
 from preprocess import load_code_snippets, preprocess
 
-def generate_submission(retriever, test_df, documents_df, output_path):
+def generate_submission(retriever, test_df, documents_df, output_path, query_expansion=False):
     """
     Generates a submission file for a given retriever.
     """
@@ -17,8 +16,12 @@ def generate_submission(retriever, test_df, documents_df, output_path):
         query_id = row['query_id']
         query = row['query']
         
-        # retrieve 方法返回的是索引，我們需要將它們映射回code_id
-        top_k_indices = retriever.retrieve(query, k=10)
+        # 根據檢索器類型決定是否使用查詢擴充
+        if isinstance(retriever, (TFIDFRetriever, BM25Retriever)):
+            top_k_indices = retriever.retrieve(query, k=10, query_expansion=query_expansion)
+        else:
+            top_k_indices = retriever.retrieve(query, k=10)
+
         top_k_code_ids = documents_df.iloc[top_k_indices]['code_id'].tolist()
         
         results.append({
@@ -37,16 +40,16 @@ if __name__ == '__main__':
     test_queries_df = pd.read_csv('test_queries.csv')
 
     # --- 稀疏模型 ---
-    print("\nInitializing sparse models...")
+    print("\nInitializing sparse models with best parameters...")
     processed_snippets_df = preprocess(code_snippets_df.copy())
     
-    # TF-IDF Retriever
+    # TF-IDF Retriever with Query Expansion
     tfidf_retriever = TFIDFRetriever(processed_snippets_df)
-    generate_submission(tfidf_retriever, test_queries_df, code_snippets_df, 'submission_tfidf.csv')
+    generate_submission(tfidf_retriever, test_queries_df, code_snippets_df, 'submission_tfidf.csv', query_expansion=True)
 
-    # BM25 Retriever
-    bm25_retriever = BM25Retriever(processed_snippets_df)
-    generate_submission(bm25_retriever, test_queries_df, code_snippets_df, 'submission_bm25.csv')
+    # BM25 Retriever with optimized parameters and Query Expansion
+    bm25_retriever = BM25Retriever(processed_snippets_df, k1=2.0, b=0.9)
+    generate_submission(bm25_retriever, test_queries_df, code_snippets_df, 'submission_bm25.csv', query_expansion=True)
 
     # --- 密集模型 ---
     # 檢查微調後的模型是否存在
@@ -58,8 +61,8 @@ if __name__ == '__main__':
     generate_submission(pretrained_retriever, test_queries_df, code_snippets_df, 'submission_pretrained.csv')
 
     if not os.path.exists(finetuned_model_path):
-        print(f"\n在指定位置找不到模型：'{finetuned_model_path}'.")
-        print("跳過微調模型的答案生產")
+        print(f"\nFine-tuned model not found at '{finetuned_model_path}'.")
+        print("Skipping submission generation for the fine-tuned model.")
     else:
         # 微調後的密集檢索器
         print("\nInitializing fine-tuned dense model...")

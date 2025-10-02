@@ -1,7 +1,6 @@
-
 # 文字到程式碼檢索實作
 
-本專案旨在實作一個文字到程式碼的檢索系統並比較不同的方法，其中包含了稀疏檢索（TF-IDF、BM25）和密集檢索（CodeBERT）兩種方法  
+本專案旨在實作一個文字到程式碼的檢索系統並比較不同的方法，其中包含了稀疏檢索（TF-IDF、BM25）和密集檢索（CodeBERT）兩種方法。
 
 ## 專案結構
 
@@ -13,20 +12,22 @@
 ├── preprocess.py
 ├── sparse_retrieval.py
 ├── dense_retrieval.py
-├── evaluation.py
+├── self_evaluation.py
+├── generate_submissions.py
 ├── requirements.txt
 └── Readme.md
 ```
 
-*   `code_snippets.csv`: 包含所有程式碼片段的語料庫
-*   `train_queries.csv`: 用於微調密集檢索模型的訓練資料
-*   `test_queries.csv`: 用於生成Kaggle提交檔案的測試查詢
-*   `preprocess.py`: 包含資料前處理的相關函式
-*   `sparse_retrieval.py`: 實現了TF-IDF和BM25檢索模型
-*   `dense_retrieval.py`: 實現了使用預訓練和微調後CodeBERT的密集檢索模型
-*   `evaluation.py`: 用於評估模型和生成提交檔案
-*   `requirements.txt`: 專案所需的Python套件
-*   `Readme.md`: 本文件
+*   `code_snippets.csv`: 包含所有程式碼片段的語料庫。
+*   `train_queries.csv`: 用於微調密集檢索模型的訓練資料。
+*   `test_queries.csv`: 用於生成Kaggle提交檔案的測試查詢。
+*   `preprocess.py`: 包含資料前處理的相關函式。
+*   `sparse_retrieval.py`: 實現了TF-IDF和BM25檢索模型。
+*   `dense_retrieval.py`: 實現了使用預訓練和微調後CodeBERT的密集檢索模型，並包含訓練與驗證流程。
+*   `self_evaluation.py`: 用於在 `train_queries.csv` 資料上對**稀疏模型**進行本地驗證。
+*   `generate_submissions.py`: 用於產生所有模型的最終 Kaggle 提交檔案。
+*   `requirements.txt`: 專案所需的Python套件。
+*   `Readme.md`: 本文件。
 
 ## 安裝相依套件
 
@@ -34,25 +35,47 @@
 pip install -r requirements.txt
 ```
 
-## TF-IDF vs. BM25 性能分析
-在一個使用`train_queries.csv`自建的驗證集上，得到了以下結果：  
-*   **TF-IDF Recall@10: 0.7380**
+## 執行流程
+
+1.  **（可選）本地驗證稀疏模型**:
+    ```bash
+    python self_evaluation.py
+    ```
+    此腳本會使用 `train_queries.csv` 的資料來評估 TF-IDF 和 BM25 的效能。
+
+2.  **訓練並驗證密集模型**:
+    ```bash
+    python dense_retrieval.py
+    ```
+    此腳本會載入預訓練的 CodeBERT，在驗證集上進行評估，然後進行微調，並儲存驗證集上表現最好的模型到 `./fine_tuned_codebert`。
+
+3.  **產生最終提交檔案**:
+    ```bash
+    python generate_submissions.py
+    ```
+    此腳本會使用所有訓練好的模型，針對 `test_queries.csv` 產生所有四個提交檔案。
+
+## 本地驗證與分析
+
+### TF-IDF vs. BM25 性能分析
+在一個使用`train_queries.csv`作為語料庫和查詢集的本地驗證中，得到了以下結果：
+*   **TF-IDF Recall@10: 0.7400**
 *   **BM25 Recall@10: 0.6680**
-這個結果顯示，在這個特定的數據集上，TF-IDF的表現優於BM25。   
-這與一般的預期可能有所不同，可能的原因如下：  
+
+這個結果顯示，在這個特定的數據集上，TF-IDF的表現優於BM25。
+這與一般的預期可能有所不同，可能的原因如下：
 1.  **文件長度相對一致**
-    BM25的文件長度正規化對於文件長度差異較大的語料庫特別有效  
-    如果`train_queries.csv`中的程式碼片段長度都差不多，那麼BM25的這個優勢就無法發揮，甚至可能因為不當的懲罰而導致性能下降  
+    BM25的文件長度正規化對於文件長度差異較大的語料庫特別有效。
+    如果`train_queries.csv`中的程式碼片段長度都差不多，那麼BM25的這個優勢就無法發揮，甚至可能因為不當的懲罰而導致性能下降。
 2.  **查詢較短或關鍵字單一**
-    BM25的詞頻飽和度機制對於較長的查詢更有幫助  
-    如果查詢本身很短，或者只包含少數幾個關鍵字，那麼詞頻的影響可能不是主要因素，TF-IDF的簡單加權方式可能反而更有效  
+    BM25的詞頻飽和度機制對於較長的查詢更有幫助。
+    如果查詢本身很短，或者只包含少數幾個關鍵字，那麼詞頻的影響可能不是主要因素，TF-IDF的簡單加權方式可能反而更有效。
 3.  **預設參數非最佳化**
-    BM25有兩個可調參數`k1`和`b`，此處使用的是通用的預設值（k1=1.5, b=0.75）    
-    這些參數可能不是這個特定數據集的最佳選擇  
-    TF-IDF沒有需要調整的參數，因此不存在這個問題  
+    BM25有兩個可調參數`k1`和`b`，此處使用的是通用的預設值（k1=1.5, b=0.75）。
+    這些參數可能不是這個特定數據集的最佳選擇。
+    TF-IDF沒有需要調整的參數，因此不存在這個問題。
 
-
-## BM25 參數調整
+### BM25 參數調整
 為了嘗試提升 BM25 的性能，有嘗試對`k1`和`b`參數進行了調整。以下是實驗結果：
 | k1  | b    | Recall@10 |
 | --- | ---- | --------- |
@@ -64,31 +87,13 @@ pip install -r requirements.txt
 | 1.5 | 0.9  | 0.6680    |
 | 2.0 | 0.6  | 0.6700    |
 | 2.0 | 0.75 | 0.6740    |
-| 2.0 | 0.9  | 0.6780    | 
+| 2.0 | 0.9  | 0.6780    |
 
-最佳結果是在`k1=2.0`和`b=0.9`時，Recall@10達到了 **0.6780**  
-雖然比預設參數的0.6680 有所提升，但仍然低於TF-IDF的 0.7380  
-這進一步證實了，在這個特定的自建驗證集上，TF-IDF 是表現最好的稀疏檢索模型  
+最佳結果是在`k1=2.0`和`b=0.9`時，Recall@10達到了 **0.6780**。
+雖然比預設參數的0.6680 有所提升，但仍然低於TF-IDF的 0.7400。
+這進一步證實了，在這個特定的自建驗證集上，TF-IDF 是表現最好的稀疏檢索模型。
 
-## 執行專案
-1.  **資料前處理**：
-    ```bash
-    python preprocess.py
-    ```
-2.  **稀疏檢索**：
-    ```bash
-    python sparse_retrieval.py
-    ```
-3.  **密集檢索**：
-    ```bash
-    python dense_retrieval.py
-    ```
-4.  **評估與提交**：
-    ```bash
-    python evaluation.py
-    ```
-
-## N-gram 實驗
+### N-gram 實驗
 嘗試在斷詞時加入N-gram(bigrams 和 trigrams)來捕捉更多的上下文資訊。以下是自建驗證集上的結果：
 *   **Unigrams (1-gram)**:
     *   TF-IDF Recall@10: 0.7380
@@ -99,19 +104,32 @@ pip install -r requirements.txt
 *   **Trigrams (1-gram + 2-gram + 3-gram)**:
     *   TF-IDF Recall@10: 0.7320
     *   BM25 Recall@10: 0.6700
-從結果來看，加入N-gram並沒有提升稀疏模型的性能，反而略有下降
-這可能表示對於這個數據集，額外的上下文資訊並沒有帶來好處，甚至可能引入了噪音
+從結果來看，加入N-gram並沒有提升稀疏模型的性能，反而略有下降。
+這可能表示對於這個數據集，額外的上下文資訊並沒有帶來好處，甚至可能引入了噪音。
 
-
-## 查詢擴展 (Query Expansion) 實驗
-嘗試了使用詞形還原（Lemmatization）來進行查詢擴展   
-當查詢進入時，將**原始查詢詞和其詞形還原後的詞**都納入考量，以期捕捉更多相關的程式碼片段，以下是自建驗證集上的結果：  
+### 查詢擴展 (Query Expansion) 實驗
+嘗試了使用詞形還原（Lemmatization）來進行查詢擴展。
+當查詢進入時，將**原始查詢詞和其詞形還原後的詞**都納入考量，以期捕捉更多相關的程式碼片段，以下是本地驗證集上的結果：
 *   **Unigrams (無查詢擴展)**:
-    *   TF-IDF Recall@10: 0.7380
+    *   TF-IDF Recall@10: 0.7400
     *   BM25 Recall@10: 0.6680
 *   **Unigrams (有查詢擴展)**:
-    *   TF-IDF Recall@10: 0.7460
+    *   TF-IDF Recall@10: 0.7480
     *   BM25 Recall@10: 0.6720
-從結果來看，查詢擴展對TF-IDF和BM25的性能都有輕微的提升  
-TF-IDF從0.7380提升到0.7460，BM25從0.6680提升到0.6720  
-這表明詞形還原在一定程度上幫助模型捕捉了更多的語義相關性  
+
+從結果來看，查詢擴展對TF-IDF和BM25的性能都有輕微的提升。
+TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
+這表明詞形還原在一定程度上幫助模型捕捉了更多的語義相關性。
+
+### 密集檢索模型 (Dense Models) 性能分析
+
+此處使用 `train_queries.csv` 的 10% 作為驗證集，對模型進行3個週期的訓練。
+
+| 模型 | Validation Recall@10 |
+| --- | --- |
+| 預訓練 CodeBERT | 0.2600 |
+| **微調後 CodeBERT (Epoch 1)** | **1.0000** |
+
+**分析**:
+*   原始的 CodeBERT 對於此特定任務的理解有限。
+*   經過三元組損失 (Triplet Loss) 微調後，模型效能得到巨大提升，在第一個訓練週期結束時即在驗證集上達到完美表現，顯示其強大的學習與適應能力。
