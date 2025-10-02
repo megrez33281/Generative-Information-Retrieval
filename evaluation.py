@@ -30,7 +30,7 @@ def evaluate(retriever, queries_df, code_snippets_df):
     return recall_at_10 / len(queries_df)
 
 if __name__ == '__main__':
-    # Load data
+    # 載入資料
     code_snippets_df = load_code_snippets('code_snippets.csv')
     processed_df = preprocess(code_snippets_df)
     train_queries_df = pd.read_csv('train_queries.csv')
