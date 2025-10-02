@@ -182,7 +182,7 @@ TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
 ### 嘗試三：更換基底Bi-Encoder模型
 為了尋找更強大的基底模型，對不同的預訓練模型進行評估（經過微調），並以它們在Kaggle上的公開分數作為指標
 
-| 模型 | Kaggle Score |
+| 模型（經過微調） | Kaggle Score |
 | --- | --- |
 | `microsoft/codebert-base` |  |
 | `microsoft/graphcodebert-base` ||
@@ -190,7 +190,7 @@ TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
 | `microsoft/unixcoder-base` | |
 
 此處嘗試藉由切割驗證集作為本地評分依據：  
-| 模型（經過微調） | Kaggle Score |
+| 模型（經過微調） | Locale Score |
 | --- | --- |
 | `microsoft/codebert-base` | 0.7800 |
 | `microsoft/graphcodebert-base` |  |
