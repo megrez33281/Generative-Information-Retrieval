@@ -189,6 +189,13 @@ TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
 | `Salesforce/codet5p-220m` | *等待提繳* |
 | `microsoft/unixcoder-base` | *等待提繳* |
 
+此處嘗試藉由切割驗證集作為本地評分依據：  
+| 模型（經過微調） | Kaggle Score |
+| --- | --- |
+| `microsoft/codebert-base` | 0.7800 |
+| `microsoft/graphcodebert-base` |  |
+| `Salesforce/codet5p-220m` | |
+| `microsoft/unixcoder-base` | |
 
 ### 混合檢索(Hybrid Retrieval)
 為了結合稀疏模型的關鍵字匹配能力和密集模型的語義理解能力，實作了混合檢索模型  

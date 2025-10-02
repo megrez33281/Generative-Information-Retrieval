@@ -2,7 +2,7 @@ import pandas as pd
 import os
 from tqdm import tqdm
 from sparse_retrieval import TFIDFRetriever, BM25Retriever
-from dense_retrieval import DenseRetriever
+from fine_tune_model import DenseRetriever
 from preprocess import load_code_snippets, preprocess
 
 def generate_submission(retriever, test_df, output_path, query_expansion=False):
