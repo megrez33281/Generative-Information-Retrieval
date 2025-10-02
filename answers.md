@@ -52,3 +52,9 @@ Therefore, the `submission_finetuned.csv` is expected to have a much higher Reca
 *   **Hybrid Retrieval**: This approach combines the scores from both sparse and dense retrieval models. A simple way is to take a weighted average of the BM25 score and the cosine similarity score from the dense model. This can be very effective as it leverages the strengths of both keyword matching and semantic understanding.
 
 *   **Better Negative Mining**: In the fine-tuning process, instead of using random negative samples, one could use "hard negatives". These are negative samples that are semantically similar to the query but are incorrect. For example, for a query about adding two numbers, a hard negative might be a function that subtracts two numbers. Using hard negatives forces the model to learn finer-grained distinctions.
+
+
+
+
+baseline 部分（TF-IDF / BM25）→ 完全用 numpy 計算
+額外實驗部分 → 加上 query expansion (lemmatization) 觀察效果
