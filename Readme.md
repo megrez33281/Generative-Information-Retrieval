@@ -180,14 +180,14 @@ TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
     這代表模型正成功地將「相關的 (查詢, 程式碼) 對」在向量空間中拉近，並將「不相關的」推遠。
 
 ### 嘗試三：更換基底Bi-Encoder模型
-為了尋找更強大的基底模型，對不同的預訓練模型進行評估（不經過微調），並以它們在Kaggle上的公開分數作為指標
+為了尋找更強大的基底模型，對不同的預訓練模型進行評估（經過微調），並以它們在Kaggle上的公開分數作為指標
 
 | 模型 | Kaggle Score |
 | --- | --- |
-| `microsoft/codebert-base` | 0.05600 |
-| `microsoft/graphcodebert-base` | 0.07600 |
-| `Salesforce/codet5p-220m` | *等待提繳* |
-| `microsoft/unixcoder-base` | *等待提繳* |
+| `microsoft/codebert-base` |  |
+| `microsoft/graphcodebert-base` ||
+| `Salesforce/codet5p-220m` | |
+| `microsoft/unixcoder-base` | |
 
 此處嘗試藉由切割驗證集作為本地評分依據：  
 | 模型（經過微調） | Kaggle Score |
