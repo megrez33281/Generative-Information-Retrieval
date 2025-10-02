@@ -72,13 +72,14 @@ class TFIDFRetriever:
 
         # 取得前k個結果
         top_k_indices = np.argsort(scores)[::-1][:k]
+        top_k_scores = scores[top_k_indices]
 
         """
         TF衡量詞在文件內的重要性
         IDF衡量詞在整個語料庫中的稀有程度（越稀有越重要）
         TF×IDF = 詞在文件中的加權重要性 → 形成TF-IDF向量，高分的詞通常是該文件獨有且重要的詞，在計算相似度時的貢獻也更大
         """
-        return top_k_indices
+        return top_k_indices, top_k_scores
 
 
 class BM25Retriever:
@@ -132,7 +133,8 @@ class BM25Retriever:
             
         # 取得前k個結果
         top_k_indices = np.argsort(scores)[::-1][:k]
-        return top_k_indices
+        top_k_scores = scores[top_k_indices]
+        return top_k_indices, top_k_scores
 
 if __name__ == '__main__':
     # 載入並預處理資料

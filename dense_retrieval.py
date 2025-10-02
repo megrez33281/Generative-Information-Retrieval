@@ -186,9 +186,9 @@ class DenseRetriever:
         query_embedding = get_embedding(self.model, self.tokenizer, query).cpu().numpy()
         # 計算餘弦相似度
         scores = np.dot(self.doc_embeddings, query_embedding.T).flatten()
-        # 取得前 k 個結果
         top_k_indices = np.argsort(scores)[::-1][:k]
-        return top_k_indices
+        top_k_scores = scores[top_k_indices]
+        return top_k_indices, top_k_scores
 
 if __name__ == '__main__':
     # ---載入資料---
