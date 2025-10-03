@@ -106,7 +106,7 @@ def evaluate_recall(model, tokenizer, val_df, corpus_df, cached_corpus_embedding
     model.eval()
     #  先計算全部的語料庫特徵
     if cached_corpus_embeddings is None:
-        print("\nCreating cached embeddings for the corpus (code_snippets.csv)...")
+        print("\nCreating cached embeddings for the corpus...")
         all_codes = list(corpus_df['code'])
         corpus_embeddings = []
         batch_size = 32
@@ -170,13 +170,22 @@ class DenseRetriever:
                 mean_last_layers = torch.mean(stacked_layers, dim=0)
                 batch_embeddings = mean_last_layers.mean(dim=1)
             embeddings.append(batch_embeddings.cpu().numpy())
-        return np.vstack(embeddings)
+        
+        embeddings = np.vstack(embeddings)
+        # 對所有文件嵌入向量進行 L2 正規化
+        norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+        embeddings = embeddings / norms
+        return embeddings
 
     def retrieve(self, query, k=10):
         """根據查詢檢索文件"""
         # 對單一 query 編碼
         query_embedding = get_embedding(self.model, self.tokenizer, query).cpu().numpy()
-        # 計算餘弦相似度
+        # 對查詢嵌入向量進行 L2 正規化
+        query_norm = np.linalg.norm(query_embedding)
+        query_embedding = query_embedding / query_norm
+
+        # 計算餘弦相似度 (經過正規化後點積等同於餘弦相似度)
         scores = np.dot(self.doc_embeddings, query_embedding.T).flatten()
         top_k_indices = np.argsort(scores)[::-1][:k]
         top_k_scores = scores[top_k_indices]
