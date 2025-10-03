@@ -16,39 +16,41 @@ num_layers = 4 # 選擇要用最後幾層的Output平均作為特徵
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
+# 【新設定】每個正樣本要搭配的困難負樣本數量
+NUM_NEGATIVES_PER_POSITIVE = 4 # 每個正樣本要搭配的困難負樣本數量
+
 class TripletDataset(Dataset):
-    """
-    三元組數據集，用於微調密集檢索模型
-    """
-    def __init__(self, data, code_id_to_code_map, tokenizer, max_length=512):
-        """
-        初始化數據集。
-        :param data: 從 train_data_with_negatives.json 載入的列表。
-        :param code_id_to_code_map: 從 code_id 到 code 內容的映射字典。
-        :param tokenizer: HuggingFace 的 tokenizer。
-        """
-        self.data = data
-        # 注意：這裡改成用 code_snippets.csv 作為負樣本來源，讓模型盡可能學習到真實情境
-        self.code_id_to_code_map = code_id_to_code_map
-        self.tokenizer = tokenizer
-        self.max_length = max_length
+    """三元組數據集，用於微調密集檢索模型"""
+    def __init__(self, train_data_with_negatives, code_id_to_code_map):
+        """初始化數據集，並在此處完成數據增強（分層抽樣）"""
+        self.triplets = []
+        print("\nCreating training triplets with STRATIFIED negatives...")
+        for item in tqdm(train_data_with_negatives):
+            query = item['query']
+            positive_code = item['positive_code']
+            
+            if item['hard_negative_ids']:
+                stratum_size = 10
+                for i in range(NUM_NEGATIVES_PER_POSITIVE):
+                    stratum_start = i * stratum_size
+                    stratum_end = stratum_start + stratum_size
+                    
+                    # 定義該層的候選池
+                    stratum_pool = item['hard_negative_ids'][stratum_start:stratum_end]
+                    
+                    # 如果該層有候選者，就從中抽樣
+                    if stratum_pool:
+                        neg_id = random.choice(stratum_pool)
+                        negative_code = code_id_to_code_map[neg_id]
+                        self.triplets.append([query, positive_code, negative_code])
 
     def __len__(self):
-        return len(self.data)
+        """返回數據集的大小"""
+        return len(self.triplets)
 
     def __getitem__(self, idx):
-        """
-        獲取一個數據樣本，包含一個查詢、一個正樣本和一個困難負樣本。
-        """
-        item = self.data[idx]
-        anchor_text = item['query'] # 錨點(anchor)是查詢
-        positive_code = item['positive_code'] # 正樣本(positive)是與查詢對應的正確程式碼
-
-        # 從預先計算的困難負樣本列表中隨機選擇一個
-        hard_negative_id = random.choice(item['hard_negative_ids'])
-        negative_code = self.code_id_to_code_map[hard_negative_id]
-
-        return anchor_text, positive_code, negative_code
+        """獲取一個數據樣本 (一個三元組)"""
+        return self.triplets[idx]
 
 def collate_fn(batch, tokenizer, max_length=512):
     """將 batch 的文字一次性 tokenizer，提高效率"""
@@ -202,34 +204,36 @@ def split_data(train_queries_df):
     return train_df, val_df
 
 
-def fine_tune_with_hard_negatives(model, tokenizer, train_data, code_id_to_code_map, epochs=3, lr=2e-5, batch_size=8):
-    """微調預訓練模型，使用困難負樣本。"""
+def fine_tune_model(model, tokenizer, train_data_with_negatives, code_id_to_code_map, epochs=3, lr=2e-5, batch_size=8):
+    """微調預訓練模型"""
     model.to(DEVICE)
 
     # 這是對訓練資料的準備，會產生每個樣本的anchor/positive/negative張量
-    dataset = TripletDataset(train_data, code_id_to_code_map, tokenizer)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, collate_fn=lambda x: collate_fn(x, tokenizer))
-
+    dataset = TripletDataset(train_data_with_negatives, code_id_to_code_map)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True,
+                            collate_fn=lambda x: collate_fn(x, tokenizer))  # 使用 collate_fn 做 batch tokenizer
+    
     # 設定優化器和損失函數
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr) # 標準Transformer訓練用優化器
     loss_fn = torch.nn.TripletMarginLoss(margin=1.0) # 三元組損失，目標是讓anchor（查詢）與positive（正確答案之間的距離小於anchor與negative（錯誤答案）之間的距離，至少相差一個margin
 
     # 訓練模型
     for epoch in range(epochs):
-        model.train()
+        model.train() # 切換到訓練模式
         total_loss = 0
         for batch in tqdm(dataloader, desc=f"Epoch {epoch + 1}/{epochs}"):
-            optimizer.zero_grad()
-
+            optimizer.zero_grad() # 清除上一步梯度
+            
             anchor_embeddings = get_layerwise_embeddings(model, batch['anchor'])
             positive_embeddings = get_layerwise_embeddings(model, batch['positive'])
             negative_embeddings = get_layerwise_embeddings(model, batch['negative'])
 
+            # 計算損失
             loss = loss_fn(anchor_embeddings, positive_embeddings, negative_embeddings)
-            loss.backward()
-            optimizer.step()
+            loss.backward()  # 計算梯度
+            optimizer.step()  # 更新參數
             total_loss += loss.item()
-
+        
         avg_loss = total_loss / len(dataloader)
         print(f"Epoch: {epoch+1}, Average Loss: {avg_loss:.4f}")
 
@@ -237,33 +241,30 @@ def fine_tune_with_hard_negatives(model, tokenizer, train_data, code_id_to_code_
 
 if __name__ == '__main__':
     # --- 1. 準備資料 ---
-    print("--- Preparing Data for Hard Negative Mining ---")
-
+    print("--- Preparing Data for Fine-tuning ---")
+    
     with open('train_data_with_negatives.json', 'r', encoding='utf-8') as f:
-        train_data = json.load(f)
-
+        train_data_with_negatives = json.load(f)
+    
     code_snippets_df = pd.read_csv('code_snippets.csv')
     code_id_to_code_map = pd.Series(code_snippets_df.code.values, index=code_snippets_df.code_id).to_dict()
 
-    print(f"Training on {len(train_data)} samples with pre-computed hard negatives.")
-
     # --- 2. 初始化模型 ---
     print("\n--- Initializing Model ---")
-    model_name = PRE_TRAINED_MODEL_NAME
+    model_name = 'microsoft/unixcoder-base' 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModel.from_pretrained(model_name)
 
     # --- 3. 微調模型 ---
-    print("\n--- Fine-tuning model with Hard Negative Mining ---")
-    # 注意：這裡的 fine_tune_model 函數名為了清晰，我稍微修改了
-    fine_tuned_model = fine_tune_with_hard_negatives(model, tokenizer, train_data, code_id_to_code_map, epochs=3, lr=2e-5, batch_size=8)
+    print("\n--- Fine-tuning model with Multi-Negative Strategy ---")
+    fine_tuned_model = fine_tune_model(model, tokenizer, train_data_with_negatives, code_id_to_code_map, epochs=3, lr=2e-5, batch_size=8)
 
     # --- 4. 儲存模型 ---
-    output_dir = FINE_TUNED_MODEL_PATH
+    output_dir = './fine_tuned_unixcoder_stratified_neg' # 新資料夾以區分模型
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     print(f"\nSaving the final model to {output_dir}...")
     fine_tuned_model.save_pretrained(output_dir)
     tokenizer.save_pretrained(output_dir)
 
-    print("\n--- Model training with hard negatives complete. ---")
+    print("\n--- Model training complete. ---")
