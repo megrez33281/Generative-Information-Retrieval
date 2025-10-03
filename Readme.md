@@ -180,22 +180,21 @@ TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
     這代表模型正成功地將「相關的 (查詢, 程式碼) 對」在向量空間中拉近，並將「不相關的」推遠。
 
 ### 嘗試三：更換基底Bi-Encoder模型
-為了尋找更強大的基底模型，對不同的預訓練模型進行評估（經過微調），並以它們在Kaggle上的公開分數作為指標
-
-| 模型（經過微調） | Kaggle Score |
-| --- | --- |
-| `microsoft/codebert-base` |0.65200|
-| `microsoft/graphcodebert-base` |0.75200|
-| `Salesforce/codet5p-220m` |0.60800|
-| `microsoft/unixcoder-base` |0.85200|
-
-此處嘗試藉由切割驗證集作為本地評分依據：  
-| 模型（經過微調） | Local Score |
-| --- | --- |
-| `microsoft/codebert-base` |0.78000|
-| `microsoft/graphcodebert-base` |0.80000|
-| `Salesforce/codet5p-220m` |0.70000|
-| `microsoft/unixcoder-base` |0.88000|
+為了尋找更強大的基底模型，並驗證本地評估機制，對不同的預訓練模型進行了微調，並以嘗試以**本地驗證集**和**Kaggle 公開分數**的表現作為雙重指標進行評估
+| 模型 (Model) | 本地分數 (Local Score) | Kaggle 分數 (Kaggle Score) | 排名 (Kaggle/本地) |
+| :--- | :--- | :--- | :--- |
+| **`microsoft/unixcoder-base`** | **0.88000** | **0.85200** | **1 / 1** |
+| `microsoft/graphcodebert-base` | 0.80000 | 0.75200 | 2 / 2 |
+| `microsoft/codebert-base` | 0.78000 | 0.65200 | 3 / 3 |
+| `Salesforce/codet5p-220m` | 0.70000 | 0.60800 | 4 / 4 |
+#### 實驗結論與分析
+1.  **模型選擇**
+    實驗結果非常明確，`microsoft/unixcoder-base`無論在本地還是 Kaggle 評分中都表現最佳，是當前任務的首選基底模型。後續的進階實驗應圍繞此模型展開
+2.  **本地驗證機制的有效性**
+    更重要的是，本次實驗成功驗證了**本地驗證機制的可靠性**  
+    四個模型在本地的性能排名與在Kaggle 上的排名**完全一致**，呈現了完美的排名相關性(Rank Correlation)  
+    這表明，本地驗證的結果是具有一定參考度的，能用來指導模型選擇和參數調整，從而大幅減少提交到Kaggle的次數、加快迭代速度  
+    
 
 ### 混合檢索(Hybrid Retrieval)
 為了結合稀疏模型的關鍵字匹配能力和密集模型的語義理解能力，實作了混合檢索模型  
