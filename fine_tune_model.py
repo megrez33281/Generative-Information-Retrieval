@@ -88,6 +88,7 @@ def evaluate_recall(model, tokenizer, val_df, corpus_df, cached_corpus_embedding
     """在驗證集上評估 Recall@10，使用 code_snippets.csv 作為語料庫"""
     model.eval() # 切換到評估模式
     
+    # 先計算全部的語料庫特徵
     if cached_corpus_embeddings is None:
         print("\nCreating cached embeddings for the corpus (code_snippets.csv)...")
         all_codes = list(corpus_df['code'])
@@ -160,9 +161,7 @@ def fine_tune_model(model, tokenizer, train_df, val_df, negative_corpus_df, epoc
         avg_loss = total_loss / len(dataloader)
         print(f"Epoch: {epoch+1}, Average Loss: {avg_loss:.4f}")
 
-        # 在驗證集上評估，此處的分數僅供參考，不作為選擇模型的依據
-        recall, cached_corpus_embeddings = evaluate_recall(model, tokenizer, val_df, negative_corpus_df, cached_corpus_embeddings)
-        print(f"Epoch: {epoch+1}, Validation Recall@10 (for reference only): {recall:.4f}")
+
 
     return model
 
@@ -225,7 +224,7 @@ if __name__ == '__main__':
     # 載入最終檢索語料庫（code_snippets.csv），作為負樣本來源
     code_snippets_df = pd.read_csv('code_snippets.csv')
 
-    train_df, val_df = split_data
+    train_df, val_df = split_data(train_queries_df)
 
     print(f"Training on {len(train_df)} samples, validating on {len(val_df)} samples.")
 
