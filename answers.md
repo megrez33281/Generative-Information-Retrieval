@@ -1,60 +1,92 @@
+# 專案問題回答
 
-# Answers to the Three Questions
-
-## Question 1: Sparse Retrieval (TF-IDF vs. BM25)
-
-**In Sparse Retrieval methods, compare the retrieval performance of TF-IDF and BM25. Which method performs better in this assignment? Analyze the possible reasons behind the difference (e.g., term frequency handling, document length normalization).**
-
-In most text retrieval tasks, **BM25 is expected to outperform TF-IDF**. While I was unable to get a definitive Recall@10 score on a validation set for this specific task, the reasons for BM25's typical superiority are:
-
-*   **Term Frequency (TF) Saturation**: TF-IDF's scoring increases linearly with the term frequency. This means a word appearing 100 times has 10 times the impact of a word appearing 10 times. BM25, on the other hand, incorporates a term frequency saturation component (controlled by the `k1` parameter). This means that after a certain point, the increase in term frequency has a diminishing return on the score. This is more aligned with how humans judge relevance; the difference between a word appearing 50 times and 100 times is less significant than the difference between 1 and 5 appearances.
-
-*   **Document Length Normalization**: TF-IDF's normalization can be overly simplistic, sometimes over-penalizing longer documents. BM25 uses a more sophisticated normalization method (controlled by the `b` parameter) that takes into account the average document length of the entire corpus. This allows for a more nuanced normalization that is less biased against longer documents that are naturally more verbose.
-
-Given these two major advantages, it is highly probable that the `submission_bm25.csv` will achieve a higher score on the Kaggle leaderboard than `submission_tfidf.csv`.
-
-## Question 2: Dense Retrieval (Pre-trained vs. Fine-tuned)
-
-**In Dense Retrieval methods, compare the performance of using a pre-trained model directly versus fine-tuning with training data. Which approach performs better? Explain the possible reasons for the difference.**
-
-**The fine-tuned model is expected to perform significantly better** than the pre-trained model. The reasons are:
-
-*   **Task-Specific Adaptation**: The pre-trained CodeBERT model is trained on a massive corpus of code and natural language, giving it a general understanding of code and its semantics. However, it is not specifically trained for the task of matching natural language queries to code snippets. Fine-tuning on the `train_queries.csv` dataset adapts the model to this specific task. The model learns to produce embeddings where the query and its corresponding correct code snippet are closer together in the vector space.
-
-*   **Triplet Loss**: The use of Triplet Loss during fine-tuning is crucial. This loss function explicitly trains the model to distinguish between positive (correct) and negative (incorrect) code snippets for a given query. It pushes the embeddings of the query and the positive snippet closer together, while pushing the embeddings of the query and the negative snippets further apart. This results in a more discriminative embedding space that is optimized for retrieval.
-
-Therefore, the `submission_finetuned.csv` is expected to have a much higher Recall@10 score than `submission_pretrained.csv`.
-
-## Question 3: Sparse vs. Dense Retrieval and Further Improvements
-
-**In the Text-to-Code Retrieval task, compare the differences and performance between Sparse Retrieval and Dense Retrieval. Beyond these approaches, what other methods (e.g., Retrieve-and-Re-rank) could further improve retrieval performance?**
-
-**Differences and Performance**:
-
-*   **Sparse Retrieval (TF-IDF, BM25)**:
-    *   **How it works**: Based on keyword matching. It represents documents and queries as high-dimensional, sparse vectors where most elements are zero.
-    *   **Strengths**: Efficient, easy to implement, and works well when the query contains the exact keywords present in the document.
-    *   **Weaknesses**: Fails to capture semantic meaning. For example, it would not understand that "add" and "sum" are related unless explicitly told to. It also struggles with synonyms and different ways of expressing the same concept.
-
-*   **Dense Retrieval (CodeBERT)**:
-    *   **How it works**: Based on semantic similarity. It uses deep learning models to create low-dimensional, dense vectors (embeddings) that capture the meaning of the text.
-    *   **Strengths**: Can understand the semantic meaning of queries and code, even if they don't share the same keywords. It can handle synonyms and more abstract queries.
-    *   **Weaknesses**: More computationally expensive to set up and run. Requires a large amount of training data for fine-tuning to achieve good performance.
-
-**Performance Comparison**: In general, for text-to-code retrieval, **dense retrieval models, especially when fine-tuned, are expected to significantly outperform sparse retrieval models**. This is because understanding the user's intent and the semantics of the code is crucial, and this is where dense models excel.
-
-**Further Improvements**:
-
-*   **Retrieve-and-Re-rank**: This is a powerful and common technique to improve retrieval performance. It involves a two-stage process:
-    1.  **Retrieve**: Use a fast but less accurate retrieval model (like BM25) to quickly retrieve a large number of candidate documents (e.g., top 100).
-    2.  **Re-rank**: Use a more powerful but slower model (like a fine-tuned CodeBERT) to re-rank the candidate documents and produce the final top-10 list. This approach combines the speed of sparse models with the accuracy of dense models.
-
-*   **Hybrid Retrieval**: This approach combines the scores from both sparse and dense retrieval models. A simple way is to take a weighted average of the BM25 score and the cosine similarity score from the dense model. This can be very effective as it leverages the strengths of both keyword matching and semantic understanding.
-
-*   **Better Negative Mining**: In the fine-tuning process, instead of using random negative samples, one could use "hard negatives". These are negative samples that are semantically similar to the query but are incorrect. For example, for a query about adding two numbers, a hard negative might be a function that subtracts two numbers. Using hard negatives forces the model to learn finer-grained distinctions.
+## 問題一：稀疏檢索(TF-IDF vs. BM25)
+**在稀疏檢索方法中，比較 TF-IDF 和 BM25 的檢索性能。在此次作業中，哪種方法表現更好？並分析造成差異的可能原因（例如：詞頻處理、文件長度正規化）。**
+在此次作業的實驗中，經過多輪優化的**TF-IDF表現顯著優於BM25**  
+在自建的本地驗證集上，基準TF-IDF的`Recall@10`分數為`0.7400`，而BM25僅為 `0.6720`  
+即使在對BM25的`k1`和`b`參數進行多輪調整後，其最高分也只達到`0.6780`，仍未超過 TF-IDF  
+最終經由對TF-IDF進行次線性詞頻縮放 (Sublinear TF Scaling)和查詢擴展 (Query Expansion)兩項優化，使其本地驗證分數達到了 `0.7860`，在Kaggle上取得了 **`0.73600`** 的成績，成功超越了Strong Baseline  
 
 
+造成此差異（TF-IDF優於BM25）的原因與理論預期相反，分析主要有以下幾點：
+1.  **文件長度相對一致**
+    BM25的核心優勢之一是其精細的「文件長度正規化」，它在處理長度差異懸殊的文件時特別有效  
+    然而，本次作業的程式碼片段長度可能相對平均，這使得BM25的該項優勢無法發揮，甚至可能因不當的懲罰而降低了性能
+
+2.  **查詢詞與文件詞頻特性**
+    BM25的另一個優勢是詞頻飽和度機制，即一個詞在文件中出現次數的邊際效益會遞減  
+    但在本次實驗中發現對TF-IDF採用類似的次線性詞頻縮放 (`1 + log(tf)`)策略後，性能得到了巨大提升  
+    這表明，雖然詞頻飽和度的思想是正確的，但TF-IDF配合簡單的對數縮放，其組合效果在本資料集上恰好優於BM25更複雜的正規化公式  
+3.  **參數敏感度**  
+    BM25的表現高度依賴 `k1`和`b`兩個參數，儘管進行了調整但可能仍未找到全局最優解  
+    而TF-IDF沒有這麼敏感的超參數（特別是經過對數縮放後），使其表現更為穩健  
+
+總結來說，雖然BM25在理論上更先進，但在本次特定的資料集和任務上，一個經過優化（特別是詞頻處理）的TF-IDF模型展現了更強的實用性和性能  
 
 
-baseline 部分（TF-IDF / BM25）→ 完全用 numpy 計算
-額外實驗部分 → 加上 query expansion (lemmatization) 觀察效果
+## 問題二：密集檢索(預訓練 vs. 微調)  
+**在密集檢索方法中，比較直接使用預訓練模型與使用訓練資料進行微調後的性能。哪種方法表現更好？並解釋造成差異的可能原因。**  
+
+**使用訓練資料進行微調後的模型，其性能遠遠優於直接使用的預訓練模型。**
+多次的實驗清晰地證明了這一點  
+在實驗初期，直接使用預訓練的CodeBERT在本地驗證集上的`Recall@10`僅有`0.2600`  
+然而，在更換為性能更強的`microsoft/unixcoder-base`模型，並採用了**困難負樣本挖掘 (Hard Negative Mining)**策略進行微調後，模型在Kaggle上的分數達上升到了**`0.87200`**  
+
+造成這種巨大差異的原因如下：
+1.  **任務適應性 (Task-Specific Adaptation)**
+    預訓練模型（如 Unixcoder）雖然從海量程式碼中學到了通用的語法和語義結構，但它並不理解我們這個特定的檢索任務  
+    它不知道要如何將一句自然語言查詢，精準地映射到解決該問題的程式碼片段上  
+    **微調的核心目的，就是讓模型去學習這個特定的映射關係**
+
+2.  **優化向量空間**
+    在微調中使用了三元組損失(Triplet Loss)  
+    這個損失函數的目標非常明確：在向量空間中，將「查詢向量」與「正確的程式碼向量（正樣本）」的距離拉近，同時將其與「錯誤的程式碼向量（負樣本）」的距離推遠  
+    這使得最終生成的**向量空間**是為檢索此語料庫量身打造的，極大地提升了區分相似程式碼的能力  
+
+3.  **高質量的訓練信號**
+    為了提高模型表現，不僅進行了微調，還採用了困難負樣本挖掘策略  
+    相比於隨機找一個負樣本，使用TF-IDF預先找出那些與查詢在相似度高但實際是錯誤的程式碼作為負樣本
+    用這種高質量的「難題」去訓練模型，強迫它去學習更深層次、更細微的語義差別，從而使其在面對模稜兩可的查詢時，具備更強的判斷力  
+    這也是分數能從`0.85200`進一步提升到`0.87200`的關鍵  
+
+因此，微調不僅是有效的，而且微調的「策略」也至關重要，它直接決定了模型性能的上限  
+
+
+## 問題三：稀疏 vs. 密集檢索及未來改進
+**在文字到程式碼檢索任務中，比較稀疏檢索和密集檢索的差異與性能。除了這些方法，還有哪些方法（例如：Retrieve-and-Re-rank）可以進一步提升檢索性能？**
+
+**性能與差異比較**：
+在此次作業中，**密集檢索的性能全面且顯著地超越了稀疏檢索**  
+*   最強的**稀疏模型**（TF-IDF 優化版）在 Kaggle 上的分數為 **`0.73600`**  
+*   最強的**密集模型**（Unixcoder + 困難負樣本挖掘）在 Kaggle 上的分數達到了 **`0.87200`**  
+
+兩者的核心差異在於：
+*   **稀疏檢索 (TF-IDF)**
+    基於「關鍵字匹配」  
+    它快速、高效、可解釋性強，但無法理解語義  
+    如果查詢中的詞彙（如 "add"）沒有出現在目標程式碼中（用了 "sum"），它就可能失敗  
+
+*   **密集檢索 (Unixcoder)**
+    基於「語義理解」  
+    通過深度學習模型將查詢和程式碼映射到同一個語義空間，即使沒有共享的關鍵字，只要語義相關，就能成功檢索  
+    這是其性能遠超稀疏模型的根本原因  
+
+**未來可嘗試的改進方法**：
+
+1.  **混合檢索 (Hybrid Retrieval)**
+    這是在實驗中嘗試過的方法  
+    理論上，它可以結合稀疏模型的「精準匹配」能力和密集模型的「語義理解」能力  
+    實驗中嘗試使用了更穩健的RRF演算法進行融合，但在本地驗證集上，混合後的結果(`0.8400`)反而低於單獨的密集模型(`0.9600`)  
+    經過分析得到的結論是：**當其中一個模型（密集模型）的性能過於強大時，另一個較弱模型（稀疏模型）的貢獻會成為「噪音」而非「補充」，從而導致性能下降**  
+
+
+2.  **檢索再排序 (Retrieve-and-Re-rank)**
+    這是目前業界最主流、最高效的頂級性能方案，它分為兩階段：  
+    *   **第一階段：召回 (Retrieve)**
+        使用一個**快速**的模型（如TF-IDF）從數百萬的文檔庫中，快速篩選出一個較大的候選集（例如 Top 100） 
+        這個階段追求「快」和「全」，目標是確保正確答案大概率在這個候選集裡  
+    *   **第二階段：精排 (Re-rank)**
+        使用一個**強大但緩慢**的**Cross-Encoder**模型，對這100個候選者進行精細的二次排序  
+        Cross-Encoder會將 `(查詢, 候選程式碼)`對同時輸入模型，進行深度的注意力交互後輸出兩者是否是同一類的分數，其排序精度遠高於目前使用的Bi-Encoder（分開編碼查詢和程式碼）  
+        最終從這100個中選出Top 10作為最終答案  
+

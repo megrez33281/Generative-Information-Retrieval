@@ -109,5 +109,47 @@ if __name__ == '__main__':
 
     # --- 2. Kaggle 預測模式 ---
     else:
-        # (此處省略，與前一版本相同)
-        pass # 保持原有的預測邏輯不變
+        print("--- Running in Prediction Mode ---")
+        
+        # 載入資料
+        print("Loading data for prediction...")
+        code_snippets_df = load_code_snippets('code_snippets.csv')
+        test_queries_df = pd.read_csv('test_queries.csv')
+
+        # 初始化檢索器 (使用 code_snippets 作為語料庫)
+        print("\nInitializing retrievers for prediction...")
+        processed_snippets_df = preprocess(code_snippets_df.copy())
+        tfidf_retriever = TFIDFRetriever(processed_snippets_df)
+        
+        finetuned_model_path = FINE_TUNED_MODEL_PATH
+        print(f"Loading dense model from: {finetuned_model_path}")
+        dense_retriever = DenseRetriever(code_snippets_df, model_name_or_path=finetuned_model_path)
+
+        #  執行RRF混合檢索
+        top_n_candidates = 100
+        final_results = []
+
+        print(f"\nGenerating hybrid retrieval submission with RRF (top_n={top_n_candidates})...")
+        for _, row in tqdm(test_queries_df.iterrows(), total=test_queries_df.shape[0]):
+            query_id = row['query_id']
+            query = row['query']
+
+            tfidf_indices, _ = tfidf_retriever.retrieve(query, k=top_n_candidates, query_expansion=True)
+            tfidf_ranked_ids = code_snippets_df.iloc[tfidf_indices]['code_id'].tolist()
+
+            dense_indices, _ = dense_retriever.retrieve(query, k=top_n_candidates)
+            dense_ranked_ids = code_snippets_df.iloc[dense_indices]['code_id'].tolist()
+
+            fused_ranked_list = reciprocal_rank_fusion([tfidf_ranked_ids, dense_ranked_ids])
+            top_10_code_ids = fused_ranked_list[:10]
+
+            final_results.append({
+                'query_id': query_id,
+                'code_id': ' '.join(map(str, top_10_code_ids))
+            })
+
+        # 儲存提交檔案
+        submission_df = pd.DataFrame(final_results)
+        output_path = 'submission_hybrid_rrf.csv'
+        submission_df.to_csv(output_path, index=False)
+        print(f"\nHybrid RRF submission file saved to {output_path}")

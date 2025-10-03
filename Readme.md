@@ -6,28 +6,35 @@
 
 ```
 .
-├── code_snippets.csv
-├── train_queries.csv
-├── test_queries.csv
 ├── preprocess.py
 ├── sparse_retrieval.py
 ├── dense_retrieval.py
+├── fine_tune_model.py
+├── prepare_hard_negatives.py
+├── hybrid_retrieval.py
 ├── self_evaluation.py
 ├── generate_submissions.py
+├── answers.md
+├── 強化策略.md
 ├── requirements.txt
 └── Readme.md
 ```
 
-*   `code_snippets.csv`: 包含所有程式碼片段的語料庫。
-*   `train_queries.csv`: 用於微調密集檢索模型的訓練資料。
-*   `test_queries.csv`: 用於生成Kaggle提交檔案的測試查詢。
-*   `preprocess.py`: 包含資料前處理的相關函式。
-*   `sparse_retrieval.py`: 實現了TF-IDF和BM25檢索模型。
-*   `dense_retrieval.py`: 實現了使用預訓練和微調後CodeBERT的密集檢索模型，並包含訓練與驗證流程。
-*   `self_evaluation.py`: 用於在`train_queries.csv`資料上對**稀疏模型**進行本地驗證。
-*   `generate_submissions.py`: 用於產生所有模型的最終 Kaggle 提交檔案。
-*   `requirements.txt`: 專案所需的Python套件。
-*   `Readme.md`: 本文件。
+*   `code_snippets.csv`: 包含所有程式碼片段的語料庫  
+*   `train_queries.csv`: 用於微調密集檢索模型的訓練資料（此次亦用於檢索器性能的驗證）  
+*   `test_queries.csv`: 用於生成Kaggle提交檔案的測試查詢  
+*   `preprocess.py`: 包含資料前處理的相關函式  
+*   `sparse_retrieval.py`: 實現了 TF-IDF 和 BM25 稀疏檢索模型  
+*   `dense_retrieval.py`: 主要用於**評估**密集檢索模型（原始與微調後）的腳本。可以載入不同的模型，並在本地驗證集上測試其性能  
+*   `fine_tune_model.py`: 核心的**模型訓練**腳本。實現了使用「困難負樣本挖掘」策略對 `unixcoder-base` 模型進行微調的完整流程  
+*   `prepare_hard_negatives.py`: 用於生成困難負樣本的預處理腳本。它會使用 TF-IDF 為訓練集中的每個查詢，從主語料庫中找出最相似的 Top-50 樣本  
+*   `hybrid_retrieval.py`: 實現了 RRF (Reciprocal Rank Fusion) 混合檢索策略的腳本。包含**本地驗證**和**生成提交檔案**兩種模式  
+*   `self_evaluation.py`: 用於在`train_queries.csv`資料上對**稀疏模型**進行本地驗證  
+*   `generate_submissions.py`: 用於產生所有模型（除hybrid外）的最終Kaggle提交檔案  
+*   `answers.md`: 針對作業要求的三個問題的詳細回答  
+*   `強化策略.md`: 記錄了專案優化過程中不同強化策略的規劃與思考  
+*   `requirements.txt`: 專案所需的Python套件  
+*   `Readme.md`: 本文件  
 
 ## 安裝相依套件
 
