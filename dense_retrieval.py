@@ -5,8 +5,8 @@ from fine_tune_model import evaluate_recall, split_data
 
 # 組態設定
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-PRE_TRAINED_MODEL_NAME = 'microsoft/codebert-base'
-FINE_TUNED_MODEL_PATH = './fine_tuned_codebert_robust'
+PRE_TRAINED_MODEL_NAME = 'microsoft/unixcoder-base'
+FINE_TUNED_MODEL_PATH = './' + PRE_TRAINED_MODEL_NAME.replace("/", "-")
 
 # 選擇要測試的model
 try_prtrained_model = False

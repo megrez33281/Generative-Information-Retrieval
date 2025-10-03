@@ -6,34 +6,49 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 import os
+import json
+import random
+
+PRE_TRAINED_MODEL_NAME = 'microsoft/unixcoder-base'
+FINE_TUNED_MODEL_PATH = './' + PRE_TRAINED_MODEL_NAME.replace("/", "-")
 
 num_layers = 4 # 選擇要用最後幾層的Output平均作為特徵
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
 class TripletDataset(Dataset):
-    """三元組數據集，用於微調密集檢索模型"""
-    # 用於把資料變成模型的輸入格式
-    def __init__(self, queries_df, negative_corpus_df, tokenizer, max_length=512):
-        """初始化數據集"""
-        self.queries_df = queries_df
+    """
+    三元組數據集，用於微調密集檢索模型
+    """
+    def __init__(self, data, code_id_to_code_map, tokenizer, max_length=512):
+        """
+        初始化數據集。
+        :param data: 從 train_data_with_negatives.json 載入的列表。
+        :param code_id_to_code_map: 從 code_id 到 code 內容的映射字典。
+        :param tokenizer: HuggingFace 的 tokenizer。
+        """
+        self.data = data
         # 注意：這裡改成用 code_snippets.csv 作為負樣本來源，讓模型盡可能學習到真實情境
-        self.corpus_df = negative_corpus_df  
+        self.code_id_to_code_map = code_id_to_code_map
         self.tokenizer = tokenizer
         self.max_length = max_length
 
     def __len__(self):
-        """返回數據集的大小"""
-        return len(self.queries_df)
+        return len(self.data)
 
     def __getitem__(self, idx):
-        """獲取一個數據樣本 (只回傳 raw text，tokenizer 在 collate_fn 中做batch化)"""
-        anchor_text = self.queries_df.iloc[idx]['query']  # 錨點(anchor)是查詢
-        positive_code = self.queries_df.iloc[idx]['code']  # 正樣本(positive)是與查詢對應的正確程式碼
-        negative_candidates = self.corpus_df[self.corpus_df['code'] != positive_code]  # 從最終語料庫code_snippets中選負樣本
-        negative_code = negative_candidates.sample(1)['code'].values[0]
+        """
+        獲取一個數據樣本，包含一個查詢、一個正樣本和一個困難負樣本。
+        """
+        item = self.data[idx]
+        anchor_text = item['query'] # 錨點(anchor)是查詢
+        positive_code = item['positive_code'] # 正樣本(positive)是與查詢對應的正確程式碼
+
+        # 從預先計算的困難負樣本列表中隨機選擇一個
+        hard_negative_id = random.choice(item['hard_negative_ids'])
+        negative_code = self.code_id_to_code_map[hard_negative_id]
 
         return anchor_text, positive_code, negative_code
-
 
 def collate_fn(batch, tokenizer, max_length=512):
     """將 batch 的文字一次性 tokenizer，提高效率"""
@@ -49,7 +64,6 @@ def collate_fn(batch, tokenizer, max_length=512):
         'negative': {key: val.to(DEVICE) for key, val in negative_inputs.items()}
     }
 
-
 def get_embedding(model, tokenizer, text, max_length=512):
     """輔助函式，用於獲取單個文本的嵌入向量"""
     inputs = tokenizer(text, return_tensors='pt', truncation=True, padding='max_length', max_length=max_length).to(DEVICE)
@@ -63,8 +77,7 @@ def get_embedding(model, tokenizer, text, max_length=512):
         stacked_layers = torch.stack(hidden_states[-num_layers:])
         mean_last_layers = torch.mean(stacked_layers, dim=0)
         embedding = mean_last_layers.mean(dim=1)
-    return embedding
-
+    return embedding.cpu()
 
 # 將anchor、positive、negative的token輸入模型，取多層hidden_state做平均
 def get_layerwise_embeddings(model, batch_inputs, num_layers=num_layers):
@@ -72,7 +85,12 @@ def get_layerwise_embeddings(model, batch_inputs, num_layers=num_layers):
     batch_inputs: batch['anchor'] / batch['positive'] / batch['negative']
     num_layers: 取最後幾層做平均（作為文字的特徵）
     """
-    outputs = model(**batch_inputs, output_hidden_states=True)
+    # Check if the model has an encoder (i.e., is an encoder-decoder model)
+    if hasattr(model, 'get_encoder'):
+        outputs = model.get_encoder()(input_ids=batch_inputs['input_ids'],attention_mask=batch_inputs['attention_mask'], output_hidden_states=True)
+    else:
+        outputs = model(**batch_inputs, output_hidden_states=True)
+
     hidden_states = outputs.hidden_states  # tuple of all layers
 
     # 取最後 num_layers 層平均
@@ -85,10 +103,8 @@ def get_layerwise_embeddings(model, batch_inputs, num_layers=num_layers):
 
 
 def evaluate_recall(model, tokenizer, val_df, corpus_df, cached_corpus_embeddings=None):
-    """在驗證集上評估 Recall@10，使用 code_snippets.csv 作為語料庫"""
-    model.eval() # 切換到評估模式
-    
-    # 先計算全部的語料庫特徵
+    model.eval()
+    #  先計算全部的語料庫特徵
     if cached_corpus_embeddings is None:
         print("\nCreating cached embeddings for the corpus (code_snippets.csv)...")
         all_codes = list(corpus_df['code'])
@@ -104,7 +120,7 @@ def evaluate_recall(model, tokenizer, val_df, corpus_df, cached_corpus_embedding
                 mean_last_layers = torch.mean(stacked_layers, dim=0)
                 embeddings = mean_last_layers.mean(dim=1)
             corpus_embeddings.append(embeddings.cpu())
-        corpus_embeddings = torch.cat(corpus_embeddings, dim=0).to(DEVICE)
+        corpus_embeddings = torch.cat(corpus_embeddings, dim=0)
     else:
         corpus_embeddings = cached_corpus_embeddings
 
@@ -112,59 +128,15 @@ def evaluate_recall(model, tokenizer, val_df, corpus_df, cached_corpus_embedding
     for _, row in tqdm(val_df.iterrows(), total=val_df.shape[0], desc="Evaluating Recall@10"):
         query = row['query']
         true_code_string = row['code']
-        
         query_embedding = get_embedding(model, tokenizer, query)
-        
+
         # 計算餘弦相似度
         scores = torch.nn.functional.cosine_similarity(query_embedding, corpus_embeddings)
         top_k_indices = torch.argsort(scores, descending=True)[:10]
         top_k_codes = corpus_df.iloc[top_k_indices]['code'].values
-        
         if true_code_string in top_k_codes:
             recall_at_10 += 1
-            
     return recall_at_10 / len(val_df), corpus_embeddings
-
-
-def fine_tune_model(model, tokenizer, train_df, val_df, negative_corpus_df, epochs=3, lr=2e-5, batch_size=8):
-    """微調預訓練模型"""
-    model.to(DEVICE)
-
-    # 這是對訓練資料的準備，會產生每個樣本的anchor/positive/negative張量
-    dataset = TripletDataset(train_df, negative_corpus_df, tokenizer)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True,
-                            collate_fn=lambda x: collate_fn(x, tokenizer))  # 使用 collate_fn 做 batch tokenizer
-    
-    # 設定優化器和損失函數
-    optimizer = torch.optim.AdamW(model.parameters(), lr=lr) # 標準Transformer訓練用優化器
-    loss_fn = torch.nn.TripletMarginLoss(margin=1.0) # 三元組損失，目標是讓anchor（查詢）與positive（正確答案之間的距離小於anchor與negative（錯誤答案）之間的距離，至少相差一個margin
-
-    cached_corpus_embeddings = None
-
-    # 訓練模型
-    for epoch in range(epochs):
-        model.train() # 切換到訓練模式
-        total_loss = 0
-        for batch in tqdm(dataloader, desc=f"Epoch {epoch + 1}/{epochs}"):
-            optimizer.zero_grad() # 清除上一步梯度
-            
-            anchor_embeddings = get_layerwise_embeddings(model, batch['anchor'])
-            positive_embeddings = get_layerwise_embeddings(model, batch['positive'])
-            negative_embeddings = get_layerwise_embeddings(model, batch['negative'])
-
-            # 計算損失
-            loss = loss_fn(anchor_embeddings, positive_embeddings, negative_embeddings)
-            loss.backward()  # 計算梯度
-            optimizer.step()  # 更新參數
-            total_loss += loss.item()
-        
-        avg_loss = total_loss / len(dataloader)
-        print(f"Epoch: {epoch+1}, Average Loss: {avg_loss:.4f}")
-
-
-
-    return model
-
 
 class DenseRetriever:
     """密集檢索器"""
@@ -188,7 +160,11 @@ class DenseRetriever:
             batch_codes = all_codes[i:i+self.batch_size]
             inputs = self.tokenizer(batch_codes, return_tensors='pt', truncation=True, padding='max_length', max_length=512).to(DEVICE)
             with torch.no_grad():
-                outputs = self.model(**inputs, output_hidden_states=True)
+                # Check if the model has an encoder (i.e., is an encoder-decoder model)
+                if hasattr(self.model, 'get_encoder'):
+                    outputs = self.model.get_encoder()(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'], output_hidden_states=True)
+                else:
+                     outputs = self.model(**inputs, output_hidden_states=True)
                 hidden_states = outputs.hidden_states
                 stacked_layers = torch.stack(hidden_states[-num_layers:])
                 mean_last_layers = torch.mean(stacked_layers, dim=0)
@@ -205,7 +181,7 @@ class DenseRetriever:
         top_k_indices = np.argsort(scores)[::-1][:k]
         top_k_scores = scores[top_k_indices]
         return top_k_indices, top_k_scores
-    
+
 def split_data(train_queries_df):
     # 90% 的code-query配對用於訓練，剩餘10%的query用於評估並對答案
     # 每個 code 是一個 group
@@ -216,34 +192,69 @@ def split_data(train_queries_df):
     val_df = train_queries_df.iloc[val_idx].reset_index(drop=True)
     return train_df, val_df
 
+
+def fine_tune_with_hard_negatives(model, tokenizer, train_data, code_id_to_code_map, epochs=3, lr=2e-5, batch_size=8):
+    """微調預訓練模型，使用困難負樣本。"""
+    model.to(DEVICE)
+
+    # 這是對訓練資料的準備，會產生每個樣本的anchor/positive/negative張量
+    dataset = TripletDataset(train_data, code_id_to_code_map, tokenizer)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, collate_fn=lambda x: collate_fn(x, tokenizer))
+
+    # 設定優化器和損失函數
+    optimizer = torch.optim.AdamW(model.parameters(), lr=lr) # 標準Transformer訓練用優化器
+    loss_fn = torch.nn.TripletMarginLoss(margin=1.0) # 三元組損失，目標是讓anchor（查詢）與positive（正確答案之間的距離小於anchor與negative（錯誤答案）之間的距離，至少相差一個margin
+
+    # 訓練模型
+    for epoch in range(epochs):
+        model.train()
+        total_loss = 0
+        for batch in tqdm(dataloader, desc=f"Epoch {epoch + 1}/{epochs}"):
+            optimizer.zero_grad()
+
+            anchor_embeddings = get_layerwise_embeddings(model, batch['anchor'])
+            positive_embeddings = get_layerwise_embeddings(model, batch['positive'])
+            negative_embeddings = get_layerwise_embeddings(model, batch['negative'])
+
+            loss = loss_fn(anchor_embeddings, positive_embeddings, negative_embeddings)
+            loss.backward()
+            optimizer.step()
+            total_loss += loss.item()
+
+        avg_loss = total_loss / len(dataloader)
+        print(f"Epoch: {epoch+1}, Average Loss: {avg_loss:.4f}")
+
+    return model
+
 if __name__ == '__main__':
     # --- 1. 準備資料 ---
-    print("--- Preparing Data ---")
-    # 載入所有用於訓練的查詢對
-    train_queries_df = pd.read_csv('train_queries.csv')
-    # 載入最終檢索語料庫（code_snippets.csv），作為負樣本來源
+    print("--- Preparing Data for Hard Negative Mining ---")
+
+    with open('train_data_with_negatives.json', 'r', encoding='utf-8') as f:
+        train_data = json.load(f)
+
     code_snippets_df = pd.read_csv('code_snippets.csv')
+    code_id_to_code_map = pd.Series(code_snippets_df.code.values, index=code_snippets_df.code_id).to_dict()
 
-    train_df, val_df = split_data(train_queries_df)
-
-    print(f"Training on {len(train_df)} samples, validating on {len(val_df)} samples.")
+    print(f"Training on {len(train_data)} samples with pre-computed hard negatives.")
 
     # --- 2. 初始化模型 ---
     print("\n--- Initializing Model ---")
-    model_name = 'microsoft/codebert-base'
+    model_name = PRE_TRAINED_MODEL_NAME
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModel.from_pretrained(model_name)
 
     # --- 3. 微調模型 ---
-    print("\n--- Fine-tuning model with robust validation ---")
-    fine_tuned_model = fine_tune_model(model, tokenizer, train_df, val_df, code_snippets_df, epochs=3)
+    print("\n--- Fine-tuning model with Hard Negative Mining ---")
+    # 注意：這裡的 fine_tune_model 函數名為了清晰，我稍微修改了
+    fine_tuned_model = fine_tune_with_hard_negatives(model, tokenizer, train_data, code_id_to_code_map, epochs=3, lr=2e-5, batch_size=8)
 
     # --- 4. 儲存模型 ---
-    output_dir = './fine_tuned_codebert_robust'
+    output_dir = FINE_TUNED_MODEL_PATH
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     print(f"\nSaving the final model to {output_dir}...")
     fine_tuned_model.save_pretrained(output_dir)
     tokenizer.save_pretrained(output_dir)
 
-    print("\n--- Model training complete. ---")
+    print("\n--- Model training with hard negatives complete. ---")

@@ -2,3 +2,4 @@ venv
 *.txt
 fine_tuned_codebert
 fine_tuned_codebert_robust
+microsoft-unixcoder-base
