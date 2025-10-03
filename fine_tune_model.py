@@ -140,7 +140,7 @@ def evaluate_recall(model, tokenizer, val_df, corpus_df, cached_corpus_embedding
 
 class DenseRetriever:
     """密集檢索器"""
-    def __init__(self, documents, model_name_or_path='microsoft/codebert-base', batch_size=32):
+    def __init__(self, documents, model_name_or_path, batch_size=32):
         """初始化密集檢索器"""
         self.documents = documents
         # 載入預訓練模型和斷詞器
