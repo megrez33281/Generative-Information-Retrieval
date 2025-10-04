@@ -267,6 +267,7 @@ if __name__ == '__main__':
     print("--- Preparing Data for Fine-tuning ---")
     
     with open('train_data_with_negatives.json', 'r', encoding='utf-8') as f:
+        #  這是事先根據train_queries以及code_snippests製作的每個query對應的code以及用TF-IDF挑選出的前50個負樣本ID
         train_data_with_negatives = json.load(f)
     
     code_snippets_df = pd.read_csv('code_snippets.csv')
