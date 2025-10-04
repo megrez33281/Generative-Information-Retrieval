@@ -293,3 +293,7 @@ TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
 考慮到這部分影響的只是本地驗證的效果，對於模型本身並無影響，且本身最後就是要訓練使用所有問題進行微調的模型，因此此處沒有對此嘗試進行修正  
 最終在`fine_tune_model.py`中訓練模型的腳本被我改成了可從Kaggle上分數最高的兩種負採樣策略選一種進行模型微調  
 
+
+### 模型
+以下為一些嘗試負採樣策略時留下的模型：  
+https://drive.google.com/drive/folders/1SdyvFwu7l25AYFYKbu90VvNF9YStlCaB?usp=drive_link
