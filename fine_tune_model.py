@@ -15,9 +15,6 @@ FINE_TUNED_MODEL_PATH = './' + PRE_TRAINED_MODEL_NAME.replace("/", "-")
 # 可選擇'top5_single'或'stratified_multi'，在Kaggle分數最高的前兩個策略
 STRATEGY = 'top5_single'
 
-
-
-
 num_layers = 4 # 選擇要用最後幾層的Output平均作為特徵
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
