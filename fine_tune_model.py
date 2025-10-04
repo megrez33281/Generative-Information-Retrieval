@@ -12,37 +12,60 @@ import random
 PRE_TRAINED_MODEL_NAME = 'microsoft/unixcoder-base'
 FINE_TUNED_MODEL_PATH = './' + PRE_TRAINED_MODEL_NAME.replace("/", "-")
 
+# 可選擇'top5_single'或'stratified_multi'，在Kaggle分數最高的前兩個策略
+STRATEGY = 'top5_single'
+
+
+
+
 num_layers = 4 # 選擇要用最後幾層的Output平均作為特徵
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-# 【新設定】每個正樣本要搭配的困難負樣本數量
+# 【每個正樣本要搭配的困難負樣本數量
 NUM_NEGATIVES_PER_POSITIVE = 4 # 每個正樣本要搭配的困難負樣本數量
 
 class TripletDataset(Dataset):
     """三元組數據集，用於微調密集檢索模型"""
-    def __init__(self, train_data_with_negatives, code_id_to_code_map):
+    def __init__(self, train_data_with_negatives, code_id_to_code_map, strategy = 'top5_single'):
         """初始化數據集，並在此處完成數據增強（分層抽樣）"""
         self.triplets = []
+        self.strategy = strategy
         print("\nCreating training triplets with STRATIFIED negatives...")
-        for item in tqdm(train_data_with_negatives):
-            query = item['query']
-            positive_code = item['positive_code']
-            
-            if item['hard_negative_ids']:
-                stratum_size = 10
-                for i in range(NUM_NEGATIVES_PER_POSITIVE):
-                    stratum_start = i * stratum_size
-                    stratum_end = stratum_start + stratum_size
-                    
-                    # 定義該層的候選池
-                    stratum_pool = item['hard_negative_ids'][stratum_start:stratum_end]
-                    
-                    # 如果該層有候選者，就從中抽樣
-                    if stratum_pool:
-                        neg_id = random.choice(stratum_pool)
-                        negative_code = code_id_to_code_map[neg_id]
-                        self.triplets.append([query, positive_code, negative_code])
+
+        # 此處挑選在Kaggle分數最高的前兩個策略
+        if self.strategy == 'top5_single':
+            print("\nCreating training triplets with Top-5 Single Negative strategy...")
+            for item in tqdm(train_data_with_negatives):
+                query = item['query']
+                positive_code = item['positive_code']
+                hard_negatives_pool = item['hard_negative_ids'][:5] # 只取前 5 個
+                if hard_negatives_pool:
+                    neg_id = random.choice(hard_negatives_pool)
+                    negative_code = code_id_to_code_map[neg_id]
+                    self.triplets.append([query, positive_code, negative_code])
+
+        elif self.strategy == 'stratified_multi':
+            print("\nCreating training triplets with Stratified Multi-Negative strategy...")
+            for item in tqdm(train_data_with_negatives):
+                query = item['query']
+                positive_code = item['positive_code']
+                hard_negatives_pool = item['hard_negative_ids'] # 使用全部 Top 50
+                
+                if hard_negatives_pool:
+                    # 實作分層抽樣
+                    # 層 1: Top 1-10
+                    # 層 2: Top 11-20
+                    # 層 3: Top 21-35
+                    # 層 4: Top 36-50
+                    strata = [hard_negatives_pool[0:10], hard_negatives_pool[10:20], hard_negatives_pool[20:35], hard_negatives_pool[35:50]]
+                    for stratum in strata:
+                        if stratum:
+                            neg_id = random.choice(stratum)
+                            negative_code = code_id_to_code_map[neg_id]
+                            self.triplets.append([query, positive_code, negative_code])
+        else:
+            raise ValueError("Invalid strategy specified. Choose 'top5_single' or 'stratified_multi'.")
 
     def __len__(self):
         """返回數據集的大小"""
@@ -204,12 +227,12 @@ def split_data(train_queries_df):
     return train_df, val_df
 
 
-def fine_tune_model(model, tokenizer, train_data_with_negatives, code_id_to_code_map, epochs=3, lr=2e-5, batch_size=8):
+def fine_tune_model(model, tokenizer, train_data_with_negatives, code_id_to_code_map, strategy, epochs=3, lr=2e-5, batch_size=8):
     """微調預訓練模型"""
     model.to(DEVICE)
 
     # 這是對訓練資料的準備，會產生每個樣本的anchor/positive/negative張量
-    dataset = TripletDataset(train_data_with_negatives, code_id_to_code_map)
+    dataset = TripletDataset(train_data_with_negatives, code_id_to_code_map, strategy)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True,
                             collate_fn=lambda x: collate_fn(x, tokenizer))  # 使用 collate_fn 做 batch tokenizer
     
@@ -251,16 +274,16 @@ if __name__ == '__main__':
 
     # --- 2. 初始化模型 ---
     print("\n--- Initializing Model ---")
-    model_name = 'microsoft/unixcoder-base' 
+    model_name = PRE_TRAINED_MODEL_NAME
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModel.from_pretrained(model_name)
 
     # --- 3. 微調模型 ---
     print("\n--- Fine-tuning model with Multi-Negative Strategy ---")
-    fine_tuned_model = fine_tune_model(model, tokenizer, train_data_with_negatives, code_id_to_code_map, epochs=3, lr=2e-5, batch_size=8)
+    fine_tuned_model = fine_tune_model(model, tokenizer, train_data_with_negatives, code_id_to_code_map, STRATEGY, epochs=3, lr=2e-5, batch_size=8)
 
     # --- 4. 儲存模型 ---
-    output_dir = './fine_tuned_unixcoder_stratified_neg' # 新資料夾以區分模型
+    output_dir = FINE_TUNED_MODEL_PATH
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     print(f"\nSaving the final model to {output_dir}...")
