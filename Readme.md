@@ -294,6 +294,29 @@ TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
 最終在`fine_tune_model.py`中訓練模型的腳本被我改成了可從Kaggle上分數最高的兩種負採樣策略選一種進行模型微調  
 
 
+### 補充
+後續為了繼續提高Kaggle分數，嘗試在相同架後下更換模型或參數  
+此處只記錄使用的模型與參數
+| 模型| epochs | lr | batch_size | Kaggle 分數 (Kaggle Score) |
+| :--- | :--- | :--- | :--- | :--- |
+| 'sentence-transformers/multi-qa-mpnet-base-dot-v1' | 3 | 2e-5 | 8 | 0.86400 | 
+| 'microsoft/unixcoder-base' | 5 | 2e-5 | 8 |**0.94400**| 
+| 'microsoft/unixcoder-base' | 5 | 2e-5 | 8 |0.92800| 
+| 'microsoft/unixcoder-base' | 3 | 5e-5 | 8 |0.92400| 
+| 'microsoft/unixcoder-base' | 3 | 2e-5 | 4 |0.92800| 
+
+後續嘗試：  
+epoch = 6、7  
+
+1. 同參數不同分數
+    數據中出現了同樣epoch=5、lr=2e-5、batch_size = 8，但分數不同的情形  
+    應該是模型訓練本身的隨機性或者負採樣時的隨機性造成
+    
+
+
+
 ### 模型
 以下為一些嘗試負採樣策略時留下的模型：  
 https://drive.google.com/drive/folders/1SdyvFwu7l25AYFYKbu90VvNF9YStlCaB?usp=drive_link
+
+

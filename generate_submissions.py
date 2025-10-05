@@ -5,6 +5,12 @@ from sparse_retrieval import TFIDFRetriever, BM25Retriever
 from fine_tune_model import DenseRetriever
 from preprocess import load_code_snippets, preprocess
 
+
+PRE_TRAINED_MODEL_NAME = 'microsoft/unixcoder-base'
+FINE_TUNED_MODEL_PATH = './' + PRE_TRAINED_MODEL_NAME.replace("/", "-")
+# 是否預訓練的密集檢索器
+Generate_Pretrained = False
+
 def generate_submission(retriever, test_df, output_path, query_expansion=False):
     """
     Generates a submission file for a given retriever.
@@ -54,12 +60,13 @@ if __name__ == '__main__':
 
     # --- 密集模型 ---
     # 檢查微調後的模型是否存在
-    finetuned_model_path = './fine_tuned_codebert'
+    finetuned_model_path = FINE_TUNED_MODEL_PATH
     
-    # 預訓練的密集檢索器
-    print("\nInitializing pre-trained dense model...")
-    pretrained_retriever = DenseRetriever(code_snippets_df, model_name_or_path='microsoft/codebert-base')
-    generate_submission(pretrained_retriever, test_queries_df, 'submission_pretrained.csv')
+    if Generate_Pretrained:
+        # 預訓練的密集檢索器
+        print("\nInitializing pre-trained dense model...")
+        pretrained_retriever = DenseRetriever(code_snippets_df, model_name_or_path= PRE_TRAINED_MODEL_NAME)
+        generate_submission(pretrained_retriever, test_queries_df, 'submission_pretrained.csv')
 
     if not os.path.exists(finetuned_model_path):
         print(f"\nFine-tuned model not found at '{finetuned_model_path}'.")
