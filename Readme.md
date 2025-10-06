@@ -315,9 +315,9 @@ TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
     選擇越多層會保留越多的細節特徵  
 2. 策略  
     top5_single：從Top5中的困難負樣本隨機選一個
-    stratified_multi：從1-10、11-20、21-30、31-40的困難負樣本中各層隨機取一個與正樣本組成一組data（共4組）
+    stratified_multi：從1-10、11-20、21-30、31-40的困難負樣本中各層隨機取一個與正樣本組成一組data（共4組） 
 
-####　Iterative Hard Negative Mining（迭代式困難負樣本挖掘）
+#### Iterative Hard Negative Mining（迭代式困難負樣本挖掘） 
 基於上方參數調整後得到的最佳參數組合：模型='microsoft/unixcoder-base'，num_layers = 1，lr = 2e-5，batch_size = 8，策略 = top5_single  
 嘗試對困難負樣本挖掘進行迭代  
 | 迭代次數 | Kaggle 分數 (Kaggle Score) |
