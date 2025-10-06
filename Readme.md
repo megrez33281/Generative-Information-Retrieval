@@ -297,22 +297,34 @@ TF-IDF從0.7400提升到0.7480，BM25從0.6680提升到0.6720。
 ### 補充
 後續為了繼續提高Kaggle分數，嘗試在相同架後下更換模型或參數  
 此處只記錄使用的模型與參數
-| 模型| epochs | lr | batch_size | Kaggle 分數 (Kaggle Score) |
-| :--- | :--- | :--- | :--- | :--- |
-| 'sentence-transformers/multi-qa-mpnet-base-dot-v1' | 3 | 2e-5 | 8 | 0.86400 | 
-| 'microsoft/unixcoder-base' | 5 | 2e-5 | 8 |**0.94400**| 
-| 'microsoft/unixcoder-base' | 5 | 2e-5 | 8 |0.92800| 
-| 'microsoft/unixcoder-base' | 3 | 5e-5 | 8 |0.92400| 
-| 'microsoft/unixcoder-base' | 3 | 2e-5 | 4 |0.92800| 
-
-後續嘗試：  
-epoch = 6、7  
-
-1. 同參數不同分數  
-    數據中出現了同樣epoch=5、lr=2e-5、batch_size = 8，但分數不同的情形  
-    應該是模型訓練本身的隨機性或者負採樣時的隨機性造成
+| 模型| epochs | num_layers | lr | batch_size | 策略 | Kaggle 分數 (Kaggle Score) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 'microsoft/unixcoder-base'| 4 | 5 | 2e-5 | 8 |top5_single | |0.92800| 
+| 'microsoft/unixcoder-base'| 4 | 3 | 5e-5 | 8 |top5_single |0.92400| 
+| 'microsoft/unixcoder-base'| 4 | 3 | 2e-5 | 4 |top5_single |0.92800| 
+| 'sentence-transformers/multi-qa-mpnet-base-dot-v1' | 4 | 3 | 2e-5 | 8 |top5_single | 0.86400 | 
+| 'microsoft/unixcoder-base'| 1 | 5 | 2e-5 | 8 |top5_single |**0.94400**| 
+| 'microsoft/unixcoder-base'| 1 | 6 | 2e-5 | 8 |top5_single |0.92000| 
+| 'microsoft/unixcoder-base'| 1 | 3 | 2e-5 | 8 |top5_single |0.93600| 
+| 'microsoft/unixcoder-base'| 1 | 5 | 2e-5 | 8 |stratified_multi|0.93200| 
 
 
+
+1. num_layers  
+    num_layers代表的是使用模型中最後幾層的輸出合成輸入文字的特徵向量  
+    選擇越多層會保留越多的細節特徵  
+2. 策略  
+    top5_single：從Top5中的困難負樣本隨機選一個
+    stratified_multi：從1-10、11-20、21-30、31-40的困難負樣本中各層隨機取一個與正樣本組成一組data（共4組）
+
+####　Iterative Hard Negative Mining（迭代式困難負樣本挖掘）
+基於上方參數調整後得到的最佳參數組合：模型='microsoft/unixcoder-base'，num_layers = 1，lr = 2e-5，batch_size = 8，策略 = top5_single  
+嘗試對困難負樣本挖掘進行迭代  
+| 迭代次數 | Kaggle 分數 (Kaggle Score) |
+| :--- | :--- |
+| 0（TF-IDF）|0.94400| 
+|1| 0.95200| 
+|2| 0.95200| 
 
 
 ### 模型
